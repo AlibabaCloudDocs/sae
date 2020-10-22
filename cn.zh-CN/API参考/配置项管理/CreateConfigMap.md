@@ -18,12 +18,12 @@ POST /pop/v1/sam/configmap/configMap HTTPS|HTTP
 
 ## 请求参数
 
-|名称|类型|位置|是否必选|示例值|描述|
-|--|--|--|----|---|--|
-|Data|String|Body|是|\{"k1":"v1", "k2":"v2"\}|ConfigMap实例数据。 |
-|Name|String|Query|是|name|ConfigMap实例名称。 |
-|NamespaceId|String|Query|是|cn-hangzhou|ConfigMap实例所在命名空间ID。 |
-|Description|String|Query|否|用于测试|描述信息。 |
+|名称|类型|是否必选|示例值|描述|
+|--|--|----|---|--|
+|Data|String|是|\{"k1":"v1", "k2":"v2"\}|ConfigMap实例数据。 |
+|Name|String|是|name|ConfigMap实例名称。 |
+|NamespaceId|String|是|cn-hangzhou|ConfigMap实例所在命名空间ID。 |
+|Description|String|否|用于测试|描述信息。 |
 
 ## 返回数据
 
@@ -97,7 +97,6 @@ POST /pop/v1/sam/configmap/configMap HTTP/1.1
 |400|InvalidParameter.Obviously|The specified parameter is invalid \{%s\}.|不合法的参数\{%s\}。|
 |400|InvalidParameter.WithMessage|The parameter is invalid \{%s\}: %s|不合法的参数\{%s\}：%s。|
 |400|Exceed.ConfigMap|Too many ConfigMap objects have been created in the namespace.|命名空间中创建的ConfigMap对象过多。|
-|500|OperationFailed.RPCError|Internal RPC request processing error.|内部RPC请求处理报错。|
 
 访问[错误中心](https://error-center.aliyun.com/status/product/sae)查看更多错误码。
 
