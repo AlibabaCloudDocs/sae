@@ -2,19 +2,23 @@
 
 SAE支持如Node.js、Python、PHP等多种编程语言开发的应用，如果您的Node.js应用、Python应用或者PHP应用等想要部署到SAE，那么您可以使用云效部署。本文介绍如何使用云效部署应用至SAE。
 
--   [注册阿里云账号](https://help.aliyun.com/document_detail/37195.html)。
--   [将业务代码上传至阿里云Code](https://help.aliyun.com/document_detail/57904.html)。
+-   [注册阿里云账号](https://help.aliyun.com/document_detail/37195.html)
+-   [将业务代码上传至阿里云Code](https://help.aliyun.com/document_detail/57904.html)
 
     **说明：** 业务代码中须包含应用的Dockerfile文件。
 
--   [将镜像文件上传至阿里镜像库](https://help.aliyun.com/document_detail/60997.html)。
--   [开通云效](https://rdc.aliyun.com)。
+-   [将镜像文件上传至阿里镜像库](https://help.aliyun.com/document_detail/60997.html)
+-   [开通云效](https://rdc.aliyun.com)
 
 ## 部署流程
 
 ![old_yunxiao_deploy_process_go](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/zh-CN/6028827951/p132388.png)
 
-\[/task/taskbody/section/ol \{"ol"\}\)\[/task/taskbody/section/ol/li \{"li"\}\)如果您的应用已经部署在SAE上，则无需创建新的应用。如果您是第一次部署应用到SAE，则需要在SAE控制台创建应用，以便云效将业务代码推送到该应用中。\(li\]\[/task/taskbody/section/ol/li \{"li"\}\)在SAE创建应用完成后，需要在云效创建对应的应用，应用的部署方式（如JAR、WAR和镜像）两边需要一致。\(li\]\[/task/taskbody/section/ol/li \{"li"\}\)在云效应用创建完成后，可以使用云效提供的流水线模板创建出应用集成发布的基础流水线。\(li\]\[/task/taskbody/section/ol/li \{"li"\}\)基础流水线创建完成，需要更改流水线中的构建任务。例如：如果您在SAE控制台创建的应用采用的是镜像方式，那么在该环节您需要将构建任务中的构建步骤配置为**Docker镜像构建上传**。整个流水线运行后，本环节的构建产物将供部署环节发布使用。\(li\]\[/task/taskbody/section/ol/li \{"li"\}\)构建任务配置完成后，需要指定上一环节（即构建任务环节）构建产物和应用的部署目的地，即应用在SAE上的区域和应用名称。整个流水线运行成功后，应用成功部署到SAE上。\(li\]\(ol\]
+1.  如果您的应用已经部署在SAE上，则无需创建新的应用。如果您是第一次部署应用到SAE，则需要在SAE控制台创建应用，以便云效将业务代码推送到该应用中。
+2.  在SAE创建应用完成后，需要在云效创建对应的应用，应用的部署方式（如JAR、WAR和镜像）两边需要一致。
+3.  在云效应用创建完成后，可以使用云效提供的流水线模板创建应用集成发布的基础流水线。
+4.  基础流水线创建完成，需要更改流水线中的构建任务。例如：如果您在SAE控制台创建的应用采用的是镜像方式，那么在该环节您需要将构建任务中的构建步骤配置为**Docker镜像构建上传**。整个流水线运行后，本环节的构建产物将供部署环节发布使用。
+5.  构建任务配置完成后，需要指定上一环节（即构建任务环节）构建产物和应用的部署目的地，即应用在SAE上的区域和应用名称。整个流水线运行成功后，应用成功部署到SAE上。
 
 ## 操作指导
 
