@@ -1,40 +1,36 @@
-# 产品集成
+---
+keyword: [SAE事件, Pod事件, K8s事件]
+---
 
-您在使用SAE过程中，如果遇到产品集成相关的问题，那么可以查看本文。
+# 查看应用事件
 
-## 在SAE中部署的应用可以访问RDS、Redis、MongoDB、消息队列MQ这些中间服务吗？
+SAE支持查看K8s原生应用的事件，帮助您了解应用运行时的状态，方便快速聚焦问题。
 
-可以。如果RDS、Redis、MongoDB、消息队列MQ在同一个VPC内，那么通过私网IP便可直接访问；如果不在同一个VPC内，需要配置NAT网关，详情请参见[部署在SAE上的应用如何访问公网](/cn.zh-CN/最佳实践/应用访问公网/部署在SAE上的应用如何访问公网.md)。
+## 操作步骤
 
-关于SAE应用如何访问RDS、Redis、MongoDB数据库，请参见[如何设置RDS白名单](/cn.zh-CN/最佳实践/应用访问阿里云数据库/如何设置RDS白名单.md)、[如何设置Redis白名单](/cn.zh-CN/最佳实践/应用访问阿里云数据库/如何设置Redis白名单.md)、[如何设置MongoDB白名单](/cn.zh-CN/最佳实践/应用访问阿里云数据库/如何设置MongoDB白名单.md)。
+1.  在应用详情页左侧导航栏中单击**应用事件**。
 
-## SAE可以不用NAT网关访问OSS吗？
+    ![SAE查看应用事件信息](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/8153649951/p65632.png)
 
-如果OSS不在同一VPC内，即需要出公网访问，那么需要NAT网关来访问；如果OSS和SAE上的应用在同一VPC内，则不需要配置NAT网关。
+2.  设置事件搜索过虑条件，并单击**搜索**。
 
-## SAE与云效如何结合，是否有操作文档？
+    搜索条件如下：
 
--   使用云效部署Java应用到SAE，请参见[部署Java应用至SAE](/cn.zh-CN/应用部署/CICD部署/使用云效2020部署应用至SAE/部署Java应用至SAE.md)。
--   使用云效部署Golang应用到SAE，请参见[部署Golang应用至SAE](/cn.zh-CN/应用部署/CICD部署/使用云效2020部署应用至SAE/部署Golang应用至SAE.md)。
--   使用云效部署NodeJS、Python、Php应用到SAE，请参见[部署Node.js应用至SAE](/cn.zh-CN/应用部署/CICD部署/使用云效2020部署应用至SAE/部署Node.js应用至SAE.md)。
+    -   **来源类型**：包括**应用实例（Pod）**、**SLB（Service）**、**应用（Deployment）**、**自动弹性（HorizontalPodAutoscaler）**。
+    -   **来源名**：输入事件的来源名，例如应用名称、应用实例名称。
+    -   **事件原因**：输入事件原因，例如Pod的FailedScheduling。
+    -   **事件等级**：包含Warning和Normal，Warning级别事件需要关注。
 
-## 如何在容器中安装一个ffmpeg命令？
+## 后续操作
 
-您可以获取一个ffmpeg镜像或平台提供社区的ffmpeg镜像，并部署到SAE。
+查看应用事件后，您可以依据具体的事件信息以及您的业务，进行相应的应用操作。
 
-## SAE支持kubectl管理吗？
+-   [管理应用生命周期](/cn.zh-CN/应用管理/管理应用生命周期.md)
+-   [查看变更记录](/cn.zh-CN/应用管理/查看变更记录.md)
+-   [变更实例规格](/cn.zh-CN/应用管理/变更实例规格.md)
+-   [使用 Webshell 诊断应用](/cn.zh-CN/应用管理/使用 Webshell 诊断应用.md)
 
-不支持，SAE属于多租模型。
+## 常见问题
 
-## SAE与EDAS应用间互通规则是什么？
-
-SAE与EDAS应用间互通需要满足如下要求。
-
--   使用同一个VPC。
--   在同一个命名空间下。
--   无安全组规则限制。
-
-## SAE可以和云监控结合使用配置报警吗？
-
-将2020年一月底前上线，支持应用监控的报警通知功能。
+部署在SAE上的应用处于运行状态时，出现的问题一般为Pod问题。关于Pod问题请参见[Pod问题](/cn.zh-CN/常见问题/应用实例/Pod问题.md)。
 
