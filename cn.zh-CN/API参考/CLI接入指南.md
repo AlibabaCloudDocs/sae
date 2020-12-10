@@ -9,7 +9,6 @@
 -   [在Windows上安装阿里云CLI]()
 -   [在Linux上安装阿里云CLI]()
 -   [在macOS上安装阿里云CLI]()
--   [通过下载安装包安装阿里云CLI]()
 
 ## 配置CLI
 
