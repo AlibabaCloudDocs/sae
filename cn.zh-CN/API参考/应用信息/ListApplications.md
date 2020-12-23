@@ -20,8 +20,8 @@ GET /pop/v1/sam/app/listApplications HTTPS|HTTP
 
 |名称|类型|位置|是否必选|示例值|描述|
 |--|--|--|----|---|--|
-|CurrentPage|Integer|Query|否|1|当前页数。 |
-|PageSize|Integer|Query|否|20|页面大小。 |
+|CurrentPage|Integer|Query|否|1|当前页数。取值从0开始。 |
+|PageSize|Integer|Query|否|20|页面大小。取值范围为\[0,200\]。 |
 |AppName|String|Query|否|demo-app|应用名称。 |
 |NamespaceId|String|Query|否|cn-beijing:demo|命名空间ID。 |
 |Tags|String|Query|否|\[\{"key":"key","value":"value"\}\]|标签列表，JSON字符串。 |
