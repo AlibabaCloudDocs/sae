@@ -195,7 +195,7 @@ Cloud Toolkit的更多信息，请参见[什么是Alibaba Cloud Toolkit]()。
     kind: AppPackage
     spec:
       packageType:  #应用部署包类型，支持**War**、**FatJar**、**Image**、**url**。您只有在该处配置了url，那么packageUrl才能生效。
-      imageUrl:     #镜像地址，**Image**包类型应用可填入。
+      imageUrl:     #镜像地址，**Image**包类型应用可设置。如果设置了spec.build.docker，使用本地构建的镜像部署，则不需要设置该参数。
       packageUrl:   #部署包地址，**War**、**FatJar**类型应用可填入。
       build:
         docker:
