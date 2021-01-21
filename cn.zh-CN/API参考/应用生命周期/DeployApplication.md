@@ -13,7 +13,7 @@
 ## 请求语法
 
 ```
-POST /pop/v1/sam/app/deployApplication HTTP|HTTPS
+POST /pop/v1/sam/app/deployApplication HTTP/1.1
 ```
 
 ## 请求参数
@@ -31,9 +31,19 @@ POST /pop/v1/sam/app/deployApplication HTTP|HTTPS
 |Envs|String|Query|否|\[\{"name":"envtmp","value":"0"\}\]|容器环境变量参数。例如：\[\{"name":"envtmp","value":"0"\}\] |
 |CustomHostAlias|String|Query|否|\[\{"hostName":"samplehost","ip":"127.0.0.1"\}\]|容器内自定义Host映射。例如： \[\{"hostName":"samplehost","ip":"127.0.0.1"\}\] |
 |JarStartOptions|String|Query|否|custom-option|JAR包启动应用选项。应用默认启动命令：$JAVA\_HOME/bin/java $JarStartOptions -jar $CATALINA\_OPTS "$package\_path" $JarStartArgs |
-|JarStartArgs|String|Query|否|custom-args|JAR包启动应用参数。应用默认启动命令：$JAVA\_HOME/bin/java $JarStartOptions -jar $CATALINA\_OPTS "$package\_path" $JarStartArgs |
-|Liveness|String|Query|否|\{"exec":\{"command":\["sleep","5s"\]\},"initialDelaySeconds":10,"timeoutSeconds":11\}|容器健康检查，健康检查失败的容器将被杀死并恢复。目前仅支持容器内下发命令的方式。例如：\{"exec":\{"command":\["sleep","5s"\]\},"initialDelaySeconds":10,"timeoutSeconds":11\} |
-|Readiness|String|Query|否|\{"exec":\{"command":\["sleep","6s"\]\},"initialDelaySeconds":15,"timeoutSeconds":12\}|应用启动状态检查，多次健康检查失败的容器将被杀死并重启。不通过健康检查的容器将不会有SLB流量进入。例如：\{"exec":\{"command":\["sleep","6s"\]\},"initialDelaySeconds":15,"timeoutSeconds":12\} |
+|JarStartArgs|String|Query|否|-Xms4G -Xmx4G|JAR包启动应用参数。应用默认启动命令：$JAVA\_HOME/bin/java $JarStartOptions -jar $CATALINA\_OPTS "$package\_path" $JarStartArgs |
+|Liveness|String|Query|否|\{"exec":\{"command":\["sleep","5s"\]\},"initialDelaySeconds":10,"timeoutSeconds":11\}|容器健康检查，健康检查失败的容器将被杀死并恢复。目前仅支持容器内下发命令的方式。例如：\{"exec":\{"command":\["sh","-c","cat /home/admin/start.sh"\]\},"initialDelaySeconds":30,"periodSeconds":30,"timeoutSeconds":2\}
+
+ -   **command**：设置健康检查命令。
+-   **initialDelaySeconds**：设置健康检查延迟检测时间，单位为秒。
+-   **periodSeconds**：设置健康检查周期，单位为秒。
+-   **timeoutSeconds**：设置健康检查超时等待时间，单位为秒。 |
+|Readiness|String|Query|否|\{"exec":\{"command":\["sleep","6s"\]\},"initialDelaySeconds":15,"timeoutSeconds":12\}|应用启动状态检查，多次健康检查失败的容器将被杀死并重启。不通过健康检查的容器将不会有SLB流量进入。例如：\{"exec":\{"command":\["sh","-c","cat /home/admin/start.sh"\]\},"initialDelaySeconds":30,"periodSeconds":30,"timeoutSeconds":2\}
+
+ -   **command**：设置健康检查命令。
+-   **initialDelaySeconds**：设置健康检查延迟检测时间，单位为秒。
+-   **periodSeconds**：设置健康检查周期，单位为秒。
+-   **timeoutSeconds**：设置健康检查超时等待时间，单位为秒。 |
 |MinReadyInstances|Integer|Query|否|1|最小可用实例数。任何变更都会保持设置的实例数，保证业务稳定性。 |
 |BatchWaitTime|Integer|Query|否|10|分批等待时间，单位秒。 |
 |EdasContainerVersion|String|Query|否|3.5.3|Pandora应用使用的运行环境。 |
@@ -42,7 +52,15 @@ POST /pop/v1/sam/app/deployApplication HTTP|HTTPS
  -   例1（灰度1台+后续分2批+自动分批+分批间隔1分钟）：\{"type":"GrayBatchUpdate","batchUpdate":\{"batch":2,"releaseType":"auto","batchWaitTime":1\},"grayUpdate":\{"gray":1\}\}
 -   例2（灰度1台+后续分2批+手动分批）：\{"type":"GrayBatchUpdate","batchUpdate":\{"batch":2,"releaseType":"manual"\},"grayUpdate":\{"gray":1\}\}
 -   例3（分2批+自动分批+分批间隔0分钟）：\{"type":"BatchUpdate","batchUpdate":\{"batch":2,"releaseType":"auto","batchWaitTime":0\}\} |
-|SlsConfigs|String|Query|否|\[\{"logDir":"/root/logs/spas/spas\_sdk.log"\},\{"logDir":"/root/logs/hsf/hsf.log"\}\]|日志收集目录配置。需配置日志文件的绝对路径，日志文件名支持通配，多个日志以数组形式排列。例如：\{"logDir":"/root/logs/spas/spas\_sdk.log"\},\{"logDir":"/root/logs/hsf/hsf.log"\}。多次部署时如果日志采集配置没有修改，可以不传入这个参数。当没有传入这个参数时，SAE将不使用SLS采集日志。 |
+|SlsConfigs|String|Query|否|\{"logDir":"/root/logs/hsf/hsf.log"\}\]|文件日志采集配置。
+
+ -   使用SAE自动创建的SLS资源：\[\{\\"logDir\\":\\"/root/logs/hsf.log\\"\}\]。
+-   使用自定义SLS资源：\[\{\\"logDir\\":\\"/tmp/readiness.txt\\",\\"logstoreName\\":\\"logstore\\",\\"projectName\\":\\"test-sls\\"\}\]。
+    -   **logDir**：配置收集日志文件的路径。
+    -   **logstoreName**：配置SLS上的Logstore名称。
+    -   **projectName**：配置SLS上的Project名称。
+
+ 多次部署时如果SLS采集配置没有变更，则您不需要设置该参数（即请求中无需包含**SlsConfigs**字段）；如果您不再需要使用SLS采集功能，您可以在请求中将该字段的值设置为空字符串（即请求中**SlsConfigs**字段的值为""）。 |
 |Timezone|String|Query|否|Asia/Shanghai|时区。 |
 |NasId|String|Query|否|10d3b4\*\*\*\*|NAS文件系统的ID。 |
 |MountHost|String|Query|否|10d3b4bc9\*\*\*\*.com|NAS在应用VPC内的挂载点。 |
@@ -106,7 +124,7 @@ GET /pop/v1/sam/app/describeApplicationConfig?RegionId=cn-beijing&AppId=7171a6ca
 
 正常返回示例
 
-`XML` 格式
+`XML`格式
 
 ```
 <DeployApplicationResponse>
@@ -122,7 +140,7 @@ GET /pop/v1/sam/app/describeApplicationConfig?RegionId=cn-beijing&AppId=7171a6ca
 </DeployApplicationResponse>
 ```
 
-`JSON` 格式
+`JSON`格式
 
 ```
 {
