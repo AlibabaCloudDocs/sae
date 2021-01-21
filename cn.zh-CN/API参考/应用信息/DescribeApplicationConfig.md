@@ -13,7 +13,7 @@
 ## 请求语法
 
 ```
-GET /pop/v1/sam/app/describeApplicationConfig HTTPS|HTTP
+GET /pop/v1/sam/app/describeApplicationConfig HTTP|HTTPS
 ```
 
 ## 请求参数
@@ -34,6 +34,7 @@ GET /pop/v1/sam/app/describeApplicationConfig HTTPS|HTTP
 -   4XX：请求错误。
 -   5XX：服务器错误。 |
 |Data|Struct| |应用信息。 |
+|AcrAssumeRoleArn|String|acs:ram::123456789012\*\*\*\*:role/adminrole|跨账号拉取镜像时所需的RAM角色的ARN。 |
 |AppDescription|String|示例应用|应用描述信息。 |
 |AppId|String|7171a6ca-d1cd-4928-8642-7d5cfe69\*\*\*\*|应用ID。 |
 |AppName|String|demo-app|应用名称。 |
@@ -103,11 +104,7 @@ GET /pop/v1/sam/app/describeApplicationConfig HTTPS|HTTP
 请求示例
 
 ```
-GET /pop/v1/sam/app/describeApplicationConfig HTTP/1.1
-公共请求头
-{
-"AppId": "7171a6ca-d1cd-4928-8642-7d5cfe69****"
-}
+GET /pop/v1/sam/app/describeApplicationConfig?RegionId=cn-beijing&AppId=7171a6ca-d1cd-4928-8642-7d5cfe69****
 ```
 
 正常返回示例
@@ -121,14 +118,15 @@ GET /pop/v1/sam/app/describeApplicationConfig HTTP/1.1
       <TraceId>ac1a0b2215622246421415014e****</TraceId>
       <Data>
             <Timezone>Asia/Shanghai</Timezone>
+            <PhpConfig>k1=v1</PhpConfig>
             <AppDescription>示例应用</AppDescription>
             <NasId>AKSN89**</NasId>
             <MountDesc>
                   <MountPath>/tmp</MountPath>
                   <NasPath>/</NasPath>
             </MountDesc>
-            <WarStartOptions>custom-option</WarStartOptions>
             <Liveness>{"exec":{"command":["curl http://localhost:8080"]},"initialDelaySeconds":20,"timeoutSeconds":3}</Liveness>
+            <WarStartOptions>custom-option</WarStartOptions>
             <Memory>2048</Memory>
             <WebContainer>apache-tomcat-7.0.91</WebContainer>
             <SlsConfigs>[{\"logDir\":\"/root/logs/hsf.log\"}]</SlsConfigs>
@@ -137,31 +135,44 @@ GET /pop/v1/sam/app/describeApplicationConfig HTTP/1.1
             <AppName>demo-app</AppName>
             <Jdk>Open JDK 8</Jdk>
             <JarStartArgs>start</JarStartArgs>
+            <Readiness>{"exec":{"command":["curl http://localhost:8080"]},"initialDelaySeconds":20,"timeoutSeconds":5}</Readiness>
             <PreStop>{"exec":{"command":["cat","/etc/group"]}}</PreStop>
             <MinReadyInstances>1</MinReadyInstances>
-            <Readiness>{"exec":{"command":["curl http://localhost:8080"]},"initialDelaySeconds":20,"timeoutSeconds":5}</Readiness>
+            <PhpArmsConfigLocation>/usr/local/etc/php/conf.d/arms.ini</PhpArmsConfigLocation>
             <PackageType>War</PackageType>
             <Tags>
                   <Value>v1</Value>
                   <Key>k1</Key>
             </Tags>
             <CommandArgs>["-c","echo 1234"]</CommandArgs>
-            <Envs>[{"name":"TEST_ENV_KEY","value":"TEST_ENV_VAR"}]</Envs>
+            <AcrAssumeRoleArn>acs:ram::123456789012****:role/adminrole</AcrAssumeRoleArn>
+            <TerminationGracePeriodSeconds>10</TerminationGracePeriodSeconds>
+            <SecurityGroupId>sg-wz969ngg2e49q5i4****</SecurityGroupId>
             <VSwitchId>vsw-2ze559r1z1bpwqxwp****</VSwitchId>
-            <PostStart>{"exec":{"command":["cat","/etc/group"]}}</PostStart>
+            <Envs>[{"name":"TEST_ENV_KEY","value":"TEST_ENV_VAR"}]</Envs>
             <ImageUrl>docker.io/library/nginx:1.14.2</ImageUrl>
-            <MountHost>example.com</MountHost>
+            <PostStart>{"exec":{"command":["cat","/etc/group"]}}</PostStart>
             <JarStartOptions>-Dtest=true</JarStartOptions>
+            <MountHost>example.com</MountHost>
             <Replicas>2</Replicas>
             <CustomHostAlias>[{"hostName":"test.host.name","ip":"0.0.0.0"}]</CustomHostAlias>
+            <ConfigMapMountDesc>
+                  <MountPath>/tmp</MountPath>
+                  <ConfigMapId>1</ConfigMapId>
+                  <ConfigMapName>test</ConfigMapName>
+               <Key>k1</Key>
+            </ConfigMapMountDesc>
             <VpcId>vpc-2ze0i263cnn311nvj****</VpcId>
             <AppId>7171a6ca-d1cd-4928-8642-7d5cfe69****</AppId>
-            <EdasContainerVersion>3.5.3</EdasContainerVersion>
             <Command>/bin/bash</Command>
+            <EdasContainerVersion>3.5.3</EdasContainerVersion>
             <PackageUrl>https://edas-bj.oss-cn-beijing.aliyuncs.com/apps/K8S_APP_ID/d4c97c37-aba3-403e-ae1e-6f7d8742****/hello-edas.war</PackageUrl>
+            <PhpConfigLocation>/usr/local/etc/php/php.ini</PhpConfigLocation>
             <BatchWaitTime>10</BatchWaitTime>
-            <RegionId>cn-beijing</RegionId>
             <NamespaceId>cn-beijing:test</NamespaceId>
+            <RegionId>cn-beijing</RegionId>
+            <EnableAhas>true</EnableAhas>
+            <TomcatConfig>{"useDefaultConfig":false,"contextInputType":"custom","contextPath":"hello","httpPort":8088,"maxThreads":400,"uriEncoding":"UTF-8","useBodyEncoding":true,"useAdvancedServerXml":false}</TomcatConfig>
       </Data>
       <Code>200</Code>
       <Success>true</Success>
@@ -177,14 +188,15 @@ GET /pop/v1/sam/app/describeApplicationConfig HTTP/1.1
     "TraceId": "ac1a0b2215622246421415014e****",
     "Data": {
         "Timezone": "Asia/Shanghai",
+        "PhpConfig": "k1=v1",
         "AppDescription": "示例应用",
         "NasId": "AKSN89**",
         "MountDesc": {
             "MountPath": "/tmp",
             "NasPath": "/"
         },
-        "WarStartOptions": "custom-option",
         "Liveness": "{\"exec\":{\"command\":[\"curl http://localhost:8080\"]},\"initialDelaySeconds\":20,\"timeoutSeconds\":3}",
+        "WarStartOptions": "custom-option",
         "Memory": 2048,
         "WebContainer": "apache-tomcat-7.0.91",
         "SlsConfigs": "[{\\\"logDir\\\":\\\"/root/logs/hsf.log\\\"}]",
@@ -193,31 +205,44 @@ GET /pop/v1/sam/app/describeApplicationConfig HTTP/1.1
         "AppName": "demo-app",
         "Jdk": "Open JDK 8",
         "JarStartArgs": "start",
+        "Readiness": "{\"exec\":{\"command\":[\"curl http://localhost:8080\"]},\"initialDelaySeconds\":20,\"timeoutSeconds\":5}",
         "PreStop": "{\"exec\":{\"command\":[\"cat\",\"/etc/group\"]}}",
         "MinReadyInstances": 1,
-        "Readiness": "{\"exec\":{\"command\":[\"curl http://localhost:8080\"]},\"initialDelaySeconds\":20,\"timeoutSeconds\":5}",
+        "PhpArmsConfigLocation": "/usr/local/etc/php/conf.d/arms.ini",
         "PackageType": "War",
         "Tags": {
             "Value": "v1",
             "Key": "k1"
         },
         "CommandArgs": "[\"-c\",\"echo 1234\"]",
-        "Envs": "[{\"name\":\"TEST_ENV_KEY\",\"value\":\"TEST_ENV_VAR\"}]",
+        "AcrAssumeRoleArn": "acs:ram::123456789012****:role/adminrole",
+        "TerminationGracePeriodSeconds": 10,
+        "SecurityGroupId": "sg-wz969ngg2e49q5i4****",
         "VSwitchId": "vsw-2ze559r1z1bpwqxwp****",
-        "PostStart": "{\"exec\":{\"command\":[\"cat\",\"/etc/group\"]}}",
+        "Envs": "[{\"name\":\"TEST_ENV_KEY\",\"value\":\"TEST_ENV_VAR\"}]",
         "ImageUrl": "docker.io/library/nginx:1.14.2",
-        "MountHost": "example.com",
+        "PostStart": "{\"exec\":{\"command\":[\"cat\",\"/etc/group\"]}}",
         "JarStartOptions": "-Dtest=true",
+        "MountHost": "example.com",
         "Replicas": 2,
         "CustomHostAlias": "[{\"hostName\":\"test.host.name\",\"ip\":\"0.0.0.0\"}]",
+        "ConfigMapMountDesc": {
+            "MountPath": "/tmp",
+            "ConfigMapId": 1,
+            "ConfigMapName": "test",
+            "Key": "k1"
+        },
         "VpcId": "vpc-2ze0i263cnn311nvj****",
         "AppId": "7171a6ca-d1cd-4928-8642-7d5cfe69****",
-        "EdasContainerVersion": "3.5.3",
         "Command": "/bin/bash",
+        "EdasContainerVersion": "3.5.3",
         "PackageUrl": "https://edas-bj.oss-cn-beijing.aliyuncs.com/apps/K8S_APP_ID/d4c97c37-aba3-403e-ae1e-6f7d8742****/hello-edas.war",
+        "PhpConfigLocation": "/usr/local/etc/php/php.ini",
         "BatchWaitTime": 10,
+        "NamespaceId": "cn-beijing:test",
         "RegionId": "cn-beijing",
-        "NamespaceId": "cn-beijing:test"
+        "EnableAhas": true,
+        "TomcatConfig": "{\"useDefaultConfig\":false,\"contextInputType\":\"custom\",\"contextPath\":\"hello\",\"httpPort\":8088,\"maxThreads\":400,\"uriEncoding\":\"UTF-8\",\"useBodyEncoding\":true,\"useAdvancedServerXml\":false}"
     },
     "Code": 200,
     "Success": true
@@ -228,8 +253,8 @@ GET /pop/v1/sam/app/describeApplicationConfig HTTP/1.1
 
 |HttpCode|错误码|错误信息|描述|
 |--------|---|----|--|
-|404|InvalidAppId.NotFound|The specified AppId does not exist.|指定的AppId不存在。|
 |400|InvalidApplication.NotFound|The current application does not exist.|找不到当前应用。|
+|404|InvalidAppId.NotFound|The specified AppId does not exist.|指定的AppId不存在。|
 
 访问[错误中心](https://error-center.aliyun.com/status/product/sae)查看更多错误码。
 
