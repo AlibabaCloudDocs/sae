@@ -1,93 +1,81 @@
-# DeleteNamespace {#doc_api_sae_DeleteNamespace .reference}
+# DeleteNamespace
 
-删除命名空间
+调用DeleteNamespace接口删除命名空间。
 
-## 调试 {#api_explorer .section}
+## 调试
 
 [您可以在OpenAPI Explorer中直接运行该接口，免去您计算签名的困扰。运行成功后，OpenAPI Explorer可以自动生成SDK代码示例。](https://api.aliyun.com/#product=sae&api=DeleteNamespace&type=ROA&version=2019-05-06)
 
-## 请求头 {#requestHeadList .section}
+## 请求头
 
 该接口使用公共请求头，无特殊请求头。请参见公共请求参数文档。
 
-## 请求语法 {#requestGrammer .section}
+## 请求语法
 
 ```
-DELETE /pop/v1/paas/namespace HTTP/1.1
+DELETE /pop/v1/paas/namespace HTTPS|HTTP
 ```
 
-## 请求参数 {#parameters .section}
+## 请求参数
 
-|名称|类型|是否必选|示例值|描述|
-|--|--|----|---|--|
-|NamespaceId|String|是|cn-beijing:test|命名空间ID
+|名称|类型|位置|是否必选|示例值|描述|
+|--|--|--|----|---|--|
+|NamespaceId|String|Query|是|cn-beijing:test|命名空间ID。 |
 
- |
-
-## 返回数据 {#resultMapping .section}
+## 返回数据
 
 |名称|类型|示例值|描述|
 |--|--|---|--|
-|Code|String|200|接口状态或 POP 错误码
+|Code|String|200|接口状态或POP错误码。取值说明如下：
 
- |
-|ErrorCode|String|success|错误码
+ -   2XX：成功。
+-   3XX：重定向。
+-   4XX：请求错误。
+-   5XX：服务器错误。 |
+|ErrorCode|String|InvalidNamespaceId.NotFound|错误码。 |
+|Message|String|success|调用结果的附加信息。 |
+|RequestId|String|91F93257-7A4A-4BD3-9A7E-2F6EAE6D\*\*\*\*|请求ID。 |
+|Success|Boolean|true|删除命名空间是否成功。取值说明如下：
 
- |
-|Message|String|success|附加信息
+ -   **true**：表示删除成功。
+-   **false**：表示删除失败。 |
+|TraceId|String|0a981dd515966966104121683d\*\*\*\*|调用链ID，用于精确查询调用信息。 |
 
- |
-|RequestId|String|00000000-0000-0000-0000-000000000000|请求ID
-
- |
-|Success|Boolean|true|是否成功
-
- |
-|TraceId|String|000000000000000000000000000000|调用链ID
-
- |
-
-## 示例 {#demo .section}
+## 示例
 
 请求示例
 
-``` {#request_demo}
-DELETE /pop/v1/paas/namespace HTTP/1.1
-公共请求头
-{
-  "NamespaceId": "cn-beijing:test"
-}
+```
+DELETE /pop/v1/paas/namespace?RegionId=cn-beijing&NamespaceId=cn-beijing%3Atest
 ```
 
 正常返回示例
 
 `XML` 格式
 
-``` {#xml_return_success_demo}
+```
 <DeleteNamespaceResponse>
-	  <Message>success</Message>
-	  <RequestId>00000000-0000-0000-0000-000000000000</RequestId>
-	  <TraceId>000000000000000000000000000000</TraceId>
-	  <ErrorCode>success</ErrorCode>
-	  <Success>true</Success>
-	  <Code>200</Code>
+      <Message>success</Message>
+      <RequestId>91F93257-7A4A-4BD3-9A7E-2F6EAE6D****</RequestId>
+      <TraceId>0a981dd515966966104121683d****</TraceId>
+      <Code>200</Code>
+      <Success>true</Success>
 </DeleteNamespaceResponse>
 ```
 
 `JSON` 格式
 
-``` {#json_return_success_demo}
+```
 {
-	"Message":"success",
-	"RequestId":"00000000-0000-0000-0000-000000000000",
-	"TraceId":"000000000000000000000000000000",
-	"Success":true,
-	"ErrorCode":"success",
-	"Code":200
+    "Message": "success",
+    "RequestId": "91F93257-7A4A-4BD3-9A7E-2F6EAE6D****",
+    "TraceId": "0a981dd515966966104121683d****",
+    "Code": 200,
+    "Success": true
 }
 ```
 
-## 错误码 { .section}
+## 错误码
 
 |HttpCode|错误码|错误信息|描述|
 |--------|---|----|--|
