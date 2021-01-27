@@ -13,20 +13,25 @@
 ## 请求语法
 
 ```
-GET /pop/v1/sam/configmap/configMap HTTPS|HTTP
+GET /pop/v1/sam/configmap/configMap HTTP/1.1
 ```
 
 ## 请求参数
 
-|名称|类型|是否必选|示例值|描述|
-|--|--|----|---|--|
-|ConfigMapId|Long|是|1|查询的ConfigMap实例ID。需要调用[ListNamespacedConfigMaps](~~176917~~)接口查看。 |
+|名称|类型|位置|是否必选|示例值|描述|
+|--|--|--|----|---|--|
+|ConfigMapId|Long|Query|是|1|查询的ConfigMap实例ID。需要调用[ListNamespacedConfigMaps](~~176917~~)接口查看。 |
 
 ## 返回数据
 
 |名称|类型|示例值|描述|
 |--|--|---|--|
-|Code|String|200|接口状态或POP错误码。 |
+|Code|String|200|接口状态或POP错误码。取值说明如下：
+
+ -   2XX：成功。
+-   3XX：重定向。
+-   4XX：请求错误。
+-   5XX：服务器错误。 |
 |Data|Struct| |返回结果。 |
 |ConfigMapId|Long|1|查询的ConfigMap实例ID。 |
 |CreateTime|Long|1593746835111|创建时间。 |
@@ -39,29 +44,25 @@ GET /pop/v1/sam/configmap/configMap HTTPS|HTTP
 |AppName|String|test-app|应用名称。 |
 |UpdateTime|Long|1593747274195|更新时间。 |
 |ErrorCode|String|success|错误码。 |
-|Message|String|success|附加信息。 |
+|Message|String|success|调用结果的附加信息。 |
 |RequestId|String|91F93257-7A4A-4BD3-9A7E-2F6EAE6D\*\*\*\*|请求ID。 |
 |Success|Boolean|true|查询ConfigMap实例详情是否成功。取值说明如下：
 
  -   **true**：表示查询成功。
 -   **false**：表示查询失败。 |
-|TraceId|String|0a98a02315955564772843261e\*\*\*\*|调用链ID。 |
+|TraceId|String|0a98a02315955564772843261e\*\*\*\*|调用链ID，用于精确查询调用信息。 |
 
 ## 示例
 
 请求示例
 
 ```
-GET /pop/v1/sam/configmap/configMap HTTP/1.1
-<公共请求头>
-{
-"ConfigMapId": "1"
-}
+GET /pop/v1/sam/configmap/configMap?RegionId=cn-hangzhou&ConfigMapId=1
 ```
 
 正常返回示例
 
-`XML` 格式
+`XML`格式
 
 ```
 <DescribeConfigMapResponse>
@@ -87,7 +88,7 @@ GET /pop/v1/sam/configmap/configMap HTTP/1.1
 </DescribeConfigMapResponse>
 ```
 
-`JSON` 格式
+`JSON`格式
 
 ```
 {
