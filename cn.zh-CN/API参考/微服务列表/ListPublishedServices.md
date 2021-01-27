@@ -13,7 +13,7 @@
 ## 请求语法
 
 ```
-GET /pop/v1/sam/service/listPublishedServices HTTPS|HTTP
+GET /pop/v1/sam/service/listPublishedServices HTTP/1.1
 ```
 
 ## 请求参数
@@ -26,7 +26,12 @@ GET /pop/v1/sam/service/listPublishedServices HTTPS|HTTP
 
 |名称|类型|示例值|描述|
 |--|--|---|--|
-|Code|String|200|接口状态或POP错误码。 |
+|Code|String|200|接口状态或POP错误码。取值说明如下：
+
+ -   2XX：成功。
+-   3XX：重定向。
+-   4XX：请求错误。
+-   5XX：服务器错误。 |
 |Data|Array of Data| |微服务列表信息。 |
 |AppId|String|b2a8a925-477a-4ed7-b825-d5e22500\*\*\*\*|应用ID。 |
 |Group2Ip|String|\{\}|保留字段，暂时无意义。 |
@@ -36,13 +41,13 @@ GET /pop/v1/sam/service/listPublishedServices HTTPS|HTTP
 |Type|String|RPC|发布的服务类型。 |
 |Version|String|1.0.0|发布的服务版本。 |
 |ErrorCode|String|success|错误码。 |
-|Message|String|success|附加信息。 |
+|Message|String|success|调用结果的附加信息。 |
 |RequestId|String|91F93257-7A4A-4BD3-9A7E-2F6EAE6D\*\*\*\*|请求ID。 |
 |Success|Boolean|true|获取发布的微服务列表是否成功。取值说明如下：
 
  -   **true**：表示获取成功。
 -   **false**：表示获取失败。 |
-|TraceId|String|0a98a02315955564772843261e\*\*\*\*|调用链ID。 |
+|TraceId|String|0a98a02315955564772843261e\*\*\*\*|调用链ID，用于精确查询调用信息。 |
 
 ## 示例
 
@@ -54,7 +59,7 @@ GET /pop/v1/sam/app/listApplications?RegionId=cn-beijing&AppId=b2a8a925-477a-4ed
 
 正常返回示例
 
-`XML` 格式
+`XML`格式
 
 ```
 <ListPublishedServicesResponse>
@@ -76,7 +81,7 @@ GET /pop/v1/sam/app/listApplications?RegionId=cn-beijing&AppId=b2a8a925-477a-4ed
 </ListPublishedServicesResponse>
 ```
 
-`JSON` 格式
+`JSON`格式
 
 ```
 {
