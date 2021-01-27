@@ -1,6 +1,6 @@
 # CreateConfigMap
 
-调用CreateConfigMap接口创建命名空间中的ConfigMap实例。
+调用CreateConfigMap接口创建命名空间中的ConfigMap实例。ConfigMap是一种用于存储应用所需配置信息的资源类型，它将配置和运行的镜像解耦，使得应用程序有更强的移植性。
 
 ## 调试
 
@@ -13,54 +13,56 @@
 ## 请求语法
 
 ```
-POST /pop/v1/sam/configmap/configMap HTTPS|HTTP
+POST /pop/v1/sam/configmap/configMap HTTP/1.1
 ```
 
 ## 请求参数
 
-|名称|类型|是否必选|示例值|描述|
-|--|--|----|---|--|
-|Data|String|是|\{"k1":"v1", "k2":"v2"\}|ConfigMap实例数据。 |
-|Name|String|是|name|ConfigMap实例名称。 |
-|NamespaceId|String|是|cn-hangzhou|ConfigMap实例所在命名空间ID。 |
-|Description|String|否|用于测试|描述信息。 |
+|名称|类型|位置|是否必选|示例值|描述|
+|--|--|--|----|---|--|
+|Data|String|Body|是|\{"k1":"v1", "k2":"v2"\}|ConfigMap实例数据。 |
+|Name|String|Query|是|name|ConfigMap实例名称。 |
+|NamespaceId|String|Query|是|cn-hangzhou|ConfigMap实例所在命名空间ID。 |
+|Description|String|Query|否|用于测试|描述信息。 |
 
 ## 返回数据
 
 |名称|类型|示例值|描述|
 |--|--|---|--|
-|Code|String|200|接口状态或POP错误码。 |
+|Code|String|200|接口状态或POP错误码。取值说明如下：
+
+ -   2XX：成功。
+-   3XX：重定向。
+-   4XX：请求错误。
+-   5XX：服务器错误。 |
 |Data|Struct| |返回结果。 |
 |ConfigMapId|Long|1|创建成功的ConfigMap实例ID。 |
 |ErrorCode|String|success|错误码。 |
-|Message|String|success|附加信息。 |
+|Message|String|success|调用结果的附加信息。 |
 |RequestId|String|91F93257-7A4A-4BD3-9A7E-2F6EAE6D\*\*\*\*|请求ID。 |
 |Success|Boolean|true|创建ConfigMap实例是否成功。取值说明如下：
 
  -   **true**：表示创建成功。
 -   **false**：表示创建失败。 |
-|TraceId|String|0a98a02315955564772843261e\*\*\*\*|调用链ID。 |
+|TraceId|String|0a98a02315955564772843261e\*\*\*\*|调用链ID，用于精确查询调用信息。 |
 
 ## 示例
 
 请求示例
 
 ```
-POST /pop/v1/sam/configmap/configMap HTTP/1.1
-<公共请求头>
+POST /pop/v1/v1/sam/configmap/configMap?RegionId=cn-hangzhou&Name=name&NamespaceId=cn-hangzhou
 {
 "Data": "{"k1":"v1", "k2":"v2"}",
-"Name": "name",
-"NamespaceId": "cn-hangzhou"
 }
 ```
 
 正常返回示例
 
-`XML` 格式
+`XML`格式
 
 ```
-<CreateConfigMappResponse>
+<CreateConfigMapResponse>
       <RequestId>91F93257-7A4A-4BD3-9A7E-2F6EAE6D****</RequestId>
       <Message>success</Message>
       <TraceId>0a98a02315955564772843261e****</TraceId>
@@ -70,10 +72,10 @@ POST /pop/v1/sam/configmap/configMap HTTP/1.1
       <ErrorCode>success</ErrorCode>
       <Code>200</Code>
       <Success>true</Success>
-</CreateConfigMappResponse>
+</CreateConfigMapResponse>
 ```
 
-`JSON` 格式
+`JSON`格式
 
 ```
 {
@@ -97,6 +99,7 @@ POST /pop/v1/sam/configmap/configMap HTTP/1.1
 |400|InvalidParameter.Obviously|The specified parameter is invalid \{%s\}.|不合法的参数\{%s\}。|
 |400|InvalidParameter.WithMessage|The parameter is invalid \{%s\}: %s|不合法的参数\{%s\}：%s。|
 |400|Exceed.ConfigMap|Too many ConfigMap objects have been created in the namespace.|命名空间中创建的ConfigMap对象过多。|
+|500|OperationFailed.RPCError|Internal RPC request processing error.|内部RPC请求处理报错。|
 
 访问[错误中心](https://error-center.aliyun.com/status/product/sae)查看更多错误码。
 
