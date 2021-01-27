@@ -1,117 +1,112 @@
-# QueryResourceStatics {#doc_api_sae_QueryResourceStatics .reference}
+# QueryResourceStatics
 
-获取应用的资源使用量
+调用QueryResourceStatics接口获取应用的资源使用量。
 
-## 调试 {#api_explorer .section}
+## 调试
 
 [您可以在OpenAPI Explorer中直接运行该接口，免去您计算签名的困扰。运行成功后，OpenAPI Explorer可以自动生成SDK代码示例。](https://api.aliyun.com/#product=sae&api=QueryResourceStatics&type=ROA&version=2019-05-06)
 
-## 请求头 {#requestHeadList .section}
+## 请求头
 
 该接口使用公共请求头，无特殊请求头。请参见公共请求参数文档。
 
-## 请求语法 {#requestGrammer .section}
+## 请求语法
 
 ```
-
+GET /pop/v1/paas/quota/queryResourceStatics HTTPS|HTTP
 ```
 
-## 请求参数 {#parameters .section}
+## 请求参数
 
-|名称|类型|是否必选|示例值|描述|
-|--|--|----|---|--|
-|AppId|String|是|7171a6ca-d1cd-4928-8642-7d5cfe69a26c|应用ID
+|名称|类型|位置|是否必选|示例值|描述|
+|--|--|--|----|---|--|
+|AppId|String|Query|是|7171a6ca-d1cd-4928-8642-7d5cfe69\*\*\*\*|应用ID。 |
 
- |
-
-## 返回数据 {#resultMapping .section}
+## 返回数据
 
 |名称|类型|示例值|描述|
 |--|--|---|--|
-|Code|String|200|接口状态
+|Code|String|200|接口状态或POP错误码。取值说明如下：
 
- |
-|Data| | |资源使用信息
+ -   2XX：成功。
+-   3XX：重定向。
+-   4XX：请求错误。
+-   5XX：服务器错误。 |
+|Data|Struct| |资源使用信息。 |
+|RealTimeRes|Struct| |实时资源使用量。 |
+|Cpu|Float|13|CPU使用量，单位：Core\*min。 |
+|Memory|Float|26|内存使用量，单位：GiB\*min。 |
+|Summary|Struct| |当月资源使用信息。 |
+|Cpu|Float|3354|CPU使用量，单位：Core\*min。 |
+|Memory|Float|6708|内存使用量，单位：GiB\*min。 |
+|ErrorCode|String|success|错误码。 |
+|Message|String|success|调用结果的附加信息。 |
+|RequestId|String|7CCF7092-72CA-4431-90D6-C7D98752\*\*\*\*|请求ID。 |
+|Success|Boolean|true|获取应用的资源使用量是否成功。取值说明如下：
 
- |
-|RealTimeRes| | |实时资源使用量
+ -   **true**：表示获取成功。
+-   **false**：表示获取失败。 |
+|TraceId|String|ac1a08a015623098794277264e\*\*\*\*|调用链ID，用于精确查询调用信息。 |
 
- |
-|Cpu|Integer|13|CPU使用量，单位 Core
-
- -   min
-
- |
-|Memory|Integer|26|内存使用量，单位 GiB
-
- -   min
-
- |
-|Summary| | |当月资源使用信息
-
- |
-|Cpu|Integer|3354|CPU使用量，单位 Core
-
- -   min
-
- |
-|Memory|Integer|6708|内存使用量，单位 GiB
-
- -   min
-
- |
-|ErrorCode|String|success|错误码
-
- |
-|Message|String|success|附加信息
-
- |
-|RequestId|String|7CCF7092-72CA-4431-90D6-C7D9875267AA|请求ID
-
- |
-|Success|Boolean|true|是否成功标识
-
- |
-|TraceId|String|ac1a08a015623098794277264e20c8|调用ID
-
- |
-
-## 示例 {#demo .section}
+## 示例
 
 请求示例
 
-``` {#request_demo}
-
-http(s)://[Endpoint]/?<公共请求参数>
-
+```
+GET /pop/v1/paas/quota/queryResourceStatics?RegionId=cn-beijing&AppId=7171a6ca-d1cd-4928-8642-7d5cfe69****
 ```
 
 正常返回示例
 
+`XML` 格式
+
+```
+<QueryResourceStaticsResponse>
+      <Message>success</Message>
+      <RequestId>7CCF7092-72CA-4431-90D6-C7D98752****</RequestId>
+      <TraceId>ac1a08a015623098794277264e****</TraceId>
+      <Data>
+            <Summary>
+                  <Memory>6708</Memory>
+                  <Cpu>3354</Cpu>
+            </Summary>
+            <RealTimeRes>
+                  <Memory>6708</Memory>
+                  <Cpu>3354</Cpu>
+            </RealTimeRes>
+      </Data>
+      <Code>200</Code>
+      <Success>true</Success>
+</QueryResourceStaticsResponse>
+```
+
 `JSON` 格式
 
-``` {#json_return_success_demo}
+```
 {
-	"Data":{
-		"RealTimeRes":{
-			"Cpu":13,
-			"Memory":26
-		},
-		"Summary":{
-			"Cpu":3354,
-			"Memory":6708
-		}
-	},
-	"Message":"success",
-	"RequestId":"7CCF7092-72CA-4431-90D6-C7D9875267AA",
-	"TraceId":"ac1a08a015623098794277264e20c8",
-	"Success":true,
-	"ErrorCode":"success",
-	"Code":200
+    "Message": "success",
+    "RequestId": "7CCF7092-72CA-4431-90D6-C7D98752****",
+    "TraceId": "ac1a08a015623098794277264e****",
+    "Data": {
+        "Summary": {
+            "Memory": 6708,
+            "Cpu": 3354
+        },
+        "RealTimeRes": {
+            "Memory": 6708,
+            "Cpu": 3354
+        }
+    },
+    "Code": 200,
+    "Success": true
 }
 ```
 
-## 错误码 { .section}
+## 错误码
+
+|HttpCode|错误码|错误信息|描述|
+|--------|---|----|--|
+|400|InvalidServerlessRegion.Unsupported|The current region is not supported: %s|不支持当前地域：%s。|
 
 访问[错误中心](https://error-center.aliyun.com/status/product/sae)查看更多错误码。
 
