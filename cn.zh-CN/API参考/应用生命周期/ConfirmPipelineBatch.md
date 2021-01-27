@@ -2,8 +2,6 @@
 
 调用ConfirmPipelineBatch接口确认是否开始下一批次。
 
-********\*
-
 ## 调试
 
 [您可以在OpenAPI Explorer中直接运行该接口，免去您计算签名的困扰。运行成功后，OpenAPI Explorer可以自动生成SDK代码示例。](https://api.aliyun.com/#product=sae&api=ConfirmPipelineBatch&type=ROA&version=2019-05-06)
@@ -15,7 +13,7 @@
 ## 请求语法
 
 ```
-GET /pop/v1/sam/changeorder/ConfirmPipelineBatch HTTPS|HTTP
+GET /pop/v1/sam/changeorder/ConfirmPipelineBatch HTTP/1.1
 ```
 
 ## 请求参数
@@ -59,7 +57,7 @@ GET /pop/v1/sam/changeorder/ConfirmPipelineBatch?RegionId=cn-beijing&PipelineId=
 
 正常返回示例
 
-`XML` 格式
+`XML`格式
 
 ```
 <ConfirmPipelineBatchResponse>
@@ -74,7 +72,7 @@ GET /pop/v1/sam/changeorder/ConfirmPipelineBatch?RegionId=cn-beijing&PipelineId=
 </ConfirmPipelineBatchResponse>
 ```
 
-`JSON` 格式
+`JSON`格式
 
 ```
 {
