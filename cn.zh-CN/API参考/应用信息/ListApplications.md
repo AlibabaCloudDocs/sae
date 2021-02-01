@@ -13,7 +13,7 @@
 ## 请求语法
 
 ```
-GET /pop/v1/sam/app/listApplications HTTPS|HTTP
+GET /pop/v1/sam/app/listApplications HTTP/1.1
 ```
 
 ## 请求参数
@@ -37,6 +37,7 @@ GET /pop/v1/sam/app/listApplications HTTPS|HTTP
 
  -   **true**：表示应用正在被删除。
 -   **false**：表示应用没有被删除。 |
+|AppDescription|String|description|应用描述信息。 |
 |AppId|String|f7730764-d88f-4b9a-8d8e-cd8efbfe\*\*\*\*|应用ID。 |
 |AppName|String|demo-app|应用名称。 |
 |Instances|Integer|2|应用实例个数。 |
@@ -67,38 +68,39 @@ GET /pop/v1/sam/app/listApplications?RegionId=cn-beijing&CurrentPage=1
 
 正常返回示例
 
-`XML` 格式
+`XML`格式
 
 ```
 <ListApplicationsResponse>
-    <Message>success</Message>
-    <RequestId>B4D805CA-926D-41B1-8E63-7AD0C1ED****</RequestId>
-    <Data>
-        <PageSize>20</PageSize>
-        <Applications>
-            <Instances>2</Instances>
-            <AppId>f7730764-d88f-4b9a-8d8e-cd8efbfe****</AppId>
-            <RunningInstances>2</RunningInstances>
-            <NamespaceId>cn-beijing:demo</NamespaceId>
-            <RegionId>cn-beijing</RegionId>
-            <AppDeletingStatus>false</AppDeletingStatus>
-            <AppName>demo-app</AppName>
-        </Applications>
-        <Applications>
-            <Tags>
-                <Value>value</Value>
-            <   Key>key</Key>
-            </Tags>
-        </Applications>
-        <CurrentPage>1</CurrentPage>
-        <TotalSize>2</TotalSize>
-    </Data>
-    <Code>200</Code>
-    <Success>true</Success>
+      <Message>success</Message>
+      <RequestId>B4D805CA-926D-41B1-8E63-7AD0C1ED****</RequestId>
+      <Data>
+            <PageSize>20</PageSize>
+            <Applications>
+                  <Instances>2</Instances>
+                  <AppDescription>description</AppDescription>
+                  <AppId>f7730764-d88f-4b9a-8d8e-cd8efbfe****</AppId>
+                  <RunningInstances>2</RunningInstances>
+                  <NamespaceId>cn-beijing:demo</NamespaceId>
+                  <RegionId>cn-beijing</RegionId>
+                  <AppDeletingStatus>false</AppDeletingStatus>
+                  <AppName>demo-app</AppName>
+            </Applications>
+            <Applications>
+                  <Tags>
+                        <Value>value</Value>
+                        <Key>key</Key>
+                  </Tags>
+            </Applications>
+            <CurrentPage>1</CurrentPage>
+            <TotalSize>2</TotalSize>
+      </Data>
+      <Code>200</Code>
+      <Success>true</Success>
 </ListApplicationsResponse>
 ```
 
-`JSON` 格式
+`JSON`格式
 
 ```
 {
@@ -109,6 +111,7 @@ GET /pop/v1/sam/app/listApplications?RegionId=cn-beijing&CurrentPage=1
         "Applications": [
             {
                 "Instances": 2,
+                "AppDescription": "description",
                 "AppId": "f7730764-d88f-4b9a-8d8e-cd8efbfe****",
                 "RunningInstances": 2,
                 "NamespaceId": "cn-beijing:demo",
