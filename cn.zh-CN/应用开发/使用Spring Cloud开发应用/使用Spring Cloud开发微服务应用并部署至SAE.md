@@ -386,7 +386,7 @@ SAE服务注册中心与Nacos、Eureka和Consul相比，具有以下优势：
 |接入点|spring.cloud.nacos.discovery.endpoint|UTF-8|地域的某个服务的入口域名。通过此域名可以动态地获取服务端地址，此配置在部署到EDAS时无需填写。|
 |是否集成Ribbon|ribbon.nacos.enabled|true|如果没有明确需求，不需要修改。|
 
-更多关于Spring Cloud Alibaba Nacos Discovery的信息请参见开源版本的[Nacos Discovery](https://github.com/spring-cloud-incubator/spring-cloud-alibaba/wiki/Nacos-discovery)。
+更多关于Spring Cloud Alibaba Nacos Discovery的信息，请参见开源版本的[Nacos Discovery](https://github.com/spring-cloud-incubator/spring-cloud-alibaba/wiki/Nacos-discovery)。
 
 ## 更多信息
 
