@@ -13,7 +13,7 @@
 ## 请求语法
 
 ```
-PUT /pop/v1/sam/app/stopApplication HTTPS|HTTP
+PUT /pop/v1/sam/app/stopApplication HTTP/1.1
 ```
 
 ## 请求参数
@@ -53,7 +53,7 @@ PUT /pop/v1/sam/app/stopApplication?RegionId=cn-beijing&AppId=0099b7be-5f5b-4512
 
 正常返回示例
 
-`XML` 格式
+`XML`格式
 
 ```
 <StopApplicationResponse>
@@ -69,7 +69,7 @@ PUT /pop/v1/sam/app/stopApplication?RegionId=cn-beijing&AppId=0099b7be-5f5b-4512
 </StopApplicationResponse>
 ```
 
-`JSON` 格式
+`JSON`格式
 
 ```
 {
