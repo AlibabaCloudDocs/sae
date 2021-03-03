@@ -13,7 +13,7 @@
 ## 请求语法
 
 ```
-GET /pop/v1/sam/ingress/IngressList HTTPS|HTTP
+GET /pop/v1/sam/ingress/IngressList HTTP/1.1
 ```
 
 ## 请求参数
@@ -61,7 +61,7 @@ GET /pop/v1/sam/ingress/IngressList?RegionId=cn-beijing&NamespaceId=cn-beijing
 
 正常返回示例
 
-`XML` 格式
+`XML`格式
 
 ```
 <ListIngressesResponse>
@@ -85,7 +85,7 @@ GET /pop/v1/sam/ingress/IngressList?RegionId=cn-beijing&NamespaceId=cn-beijing
 </ListIngressesResponse>
 ```
 
-`JSON` 格式
+`JSON`格式
 
 ```
 {
