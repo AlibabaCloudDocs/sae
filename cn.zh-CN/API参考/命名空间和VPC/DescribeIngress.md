@@ -13,7 +13,7 @@
 ## 请求语法
 
 ```
-GET /pop/v1/sam/ingress/Ingress HTTPS|HTTP
+GET /pop/v1/sam/ingress/Ingress HTTP/1.1
 ```
 
 ## 请求参数
@@ -70,7 +70,7 @@ GET /pop/v1/sam/ingress/Ingress?RegionId=cn-beijing&IngressId=87
 
 正常返回示例
 
-`XML` 格式
+`XML`格式
 
 ```
 <DescribeIngressResponse>
@@ -104,7 +104,7 @@ GET /pop/v1/sam/ingress/Ingress?RegionId=cn-beijing&IngressId=87
 </DescribeIngressResponse>
 ```
 
-`JSON` 格式
+`JSON`格式
 
 ```
 {
