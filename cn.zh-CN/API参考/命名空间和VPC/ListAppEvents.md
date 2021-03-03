@@ -13,7 +13,7 @@
 ## 请求语法
 
 ```
-GET /pop/v1/sam/app/listAppEvents HTTPS|HTTP
+GET /pop/v1/sam/app/listAppEvents HTTP/1.1
 ```
 
 ## 请求参数
@@ -72,7 +72,7 @@ GET /pop/v1/sam/app/listAppEvents?RegionId=cn-hangzhou&Namespace=cn-beijing&Curr
 
 正常返回示例
 
-`XML` 格式
+`XML`格式
 
 ```
 <ListAppEventsResponse>
@@ -97,7 +97,7 @@ GET /pop/v1/sam/app/listAppEvents?RegionId=cn-hangzhou&Namespace=cn-beijing&Curr
 </ListAppEventsResponse>
 ```
 
-`JSON` 格式
+`JSON`格式
 
 ```
 {
