@@ -13,7 +13,7 @@
 ## 请求语法
 
 ```
-GET /pop/v1/sam/resource/edasContainers HTTPS|HTTP
+GET /pop/v1/sam/resource/edasContainers HTTP/1.1
 ```
 
 ## 请求参数
@@ -54,7 +54,7 @@ GET /pop/v1/sam/resource/edasContainers HTTP/1.1
 
 正常返回示例
 
-`XML` 格式
+`XML`格式
 
 ```
 <DescribeEdasContainersResponse>
@@ -70,7 +70,7 @@ GET /pop/v1/sam/resource/edasContainers HTTP/1.1
 </DescribeEdasContainersResponse>
 ```
 
-`JSON` 格式
+`JSON`格式
 
 ```
 {
