@@ -13,7 +13,7 @@
 ## 请求语法
 
 ```
-GET /pop/v1/sam/instance/describeInstanceLog HTTPS|HTTP
+GET /pop/v1/sam/instance/describeInstanceLog HTTP/1.1
 ```
 
 ## 请求参数
@@ -52,7 +52,7 @@ GET /pop/v1/sam/instance/describeInstanceLog?RegionId=cn-beijing&InstanceId=****
 
 正常返回示例
 
-`XML` 格式
+`XML`格式
 
 ```
 <DescribeInstanceLogResponse>
@@ -66,7 +66,7 @@ GET /pop/v1/sam/instance/describeInstanceLog?RegionId=cn-beijing&InstanceId=****
 </DescribeInstanceLogResponse>
 ```
 
-`JSON` 格式
+`JSON`格式
 
 ```
 {
