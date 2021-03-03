@@ -13,7 +13,7 @@
 ## 请求语法
 
 ```
-DELETE /pop/v1/sam/app/deleteApplication HTTPS|HTTP
+DELETE /pop/v1/sam/app/deleteApplication HTTP/1.1
 ```
 
 ## 请求参数
@@ -53,7 +53,7 @@ DELETE /pop/v1/sam/app/deleteApplication?RegionId=cn-beijing&AppId=017f39b8-dfa4
 
 正常返回示例
 
-`XML` 格式
+`XML`格式
 
 ```
 <DeleteApplicationResponse>
@@ -68,7 +68,7 @@ DELETE /pop/v1/sam/app/deleteApplication?RegionId=cn-beijing&AppId=017f39b8-dfa4
 </DeleteApplicationResponse>
 ```
 
-`JSON` 格式
+`JSON`格式
 
 ```
 {
