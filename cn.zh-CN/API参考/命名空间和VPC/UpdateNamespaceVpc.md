@@ -13,7 +13,7 @@
 ## 请求语法
 
 ```
-POST /pop/v1/sam/namespace/updateNamespaceVpc HTTPS|HTTP
+POST /pop/v1/sam/namespace/updateNamespaceVpc HTTP/1.1
 ```
 
 ## 请求参数
@@ -52,7 +52,7 @@ POST /pop/v1/sam/namespace/updateNamespaceVpc?RegionId=cn-beijing&NamespaceId=cn
 
 正常返回示例
 
-`XML` 格式
+`XML`格式
 
 ```
 <UpdateNamespaceVpcResponse>.
@@ -64,7 +64,7 @@ POST /pop/v1/sam/namespace/updateNamespaceVpc?RegionId=cn-beijing&NamespaceId=cn
 </UpdateNamespaceVpcResponse>
 ```
 
-`JSON` 格式
+`JSON`格式
 
 ```
 {
