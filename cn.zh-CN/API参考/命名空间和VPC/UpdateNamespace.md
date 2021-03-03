@@ -13,7 +13,7 @@
 ## 请求语法
 
 ```
-PUT /pop/v1/paas/namespace HTTPS|HTTP
+PUT /pop/v1/paas/namespace HTTP/1.1
 ```
 
 ## 请求参数
@@ -58,7 +58,7 @@ PUT /pop/v1/paas/namespace?RegionId=cn-beijing&NamespaceId=cn-beijing%3Atest&Nam
 
 正常返回示例
 
-`XML` 格式
+`XML`格式
 
 ```
 <UpdateNamespaceResponse>
@@ -76,7 +76,7 @@ PUT /pop/v1/paas/namespace?RegionId=cn-beijing&NamespaceId=cn-beijing%3Atest&Nam
 </UpdateNamespaceResponse>
 ```
 
-`JSON` 格式
+`JSON`格式
 
 ```
 {
