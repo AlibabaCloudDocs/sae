@@ -13,7 +13,7 @@
 ## 请求语法
 
 ```
-GET /pop/v1/sam/changeorder/DescribeChangeOrder HTTP|HTTPS
+GET /pop/v1/sam/changeorder/DescribeChangeOrder HTTP/1.1
 ```
 
 ## 请求参数
@@ -94,7 +94,7 @@ GET pop/v1/sam/changeorder/DescribeChangeOrder?RegionId=cn-shanghai&ChangeOrderI
 
 正常返回示例
 
-`XML` 格式
+`XML`格式
 
 ```
 <DescribeChangeOrderResponse>
@@ -131,7 +131,7 @@ GET pop/v1/sam/changeorder/DescribeChangeOrder?RegionId=cn-shanghai&ChangeOrderI
 </DescribeChangeOrderResponse>
 ```
 
-`JSON` 格式
+`JSON`格式
 
 ```
 {
