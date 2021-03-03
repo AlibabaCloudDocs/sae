@@ -13,7 +13,7 @@
 ## 请求语法
 
 ```
-DELETE /pop/v1/paas/namespace HTTPS|HTTP
+DELETE /pop/v1/paas/namespace HTTP/1.1
 ```
 
 ## 请求参数
@@ -51,7 +51,7 @@ DELETE /pop/v1/paas/namespace?RegionId=cn-beijing&NamespaceId=cn-beijing%3Atest
 
 正常返回示例
 
-`XML` 格式
+`XML`格式
 
 ```
 <DeleteNamespaceResponse>
@@ -63,7 +63,7 @@ DELETE /pop/v1/paas/namespace?RegionId=cn-beijing&NamespaceId=cn-beijing%3Atest
 </DeleteNamespaceResponse>
 ```
 
-`JSON` 格式
+`JSON`格式
 
 ```
 {
