@@ -13,7 +13,7 @@
 ## 请求语法
 
 ```
-GET /pop/v1/paas/quota/queryResourceStatics HTTPS|HTTP
+GET /pop/v1/paas/quota/queryResourceStatics HTTP/1.1
 ```
 
 ## 请求参数
@@ -58,7 +58,7 @@ GET /pop/v1/paas/quota/queryResourceStatics?RegionId=cn-beijing&AppId=7171a6ca-d
 
 正常返回示例
 
-`XML` 格式
+`XML`格式
 
 ```
 <QueryResourceStaticsResponse>
@@ -80,7 +80,7 @@ GET /pop/v1/paas/quota/queryResourceStatics?RegionId=cn-beijing&AppId=7171a6ca-d
 </QueryResourceStaticsResponse>
 ```
 
-`JSON` 格式
+`JSON`格式
 
 ```
 {
