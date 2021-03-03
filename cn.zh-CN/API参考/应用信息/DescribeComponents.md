@@ -13,7 +13,7 @@
 ## 请求语法
 
 ```
-GET /pop/v1/sam/resource/components HTTPS|HTTP
+GET /pop/v1/sam/resource/components HTTP/1.1
 ```
 
 ## 请求参数
@@ -63,7 +63,7 @@ GET /pop/v1/sam/resource/components?RegionId=cn-beijing&Type=TOMCAT&AppId=d700e6
 
 正常返回示例
 
-`XML` 格式
+`XML`格式
 
 ```
 <DescribeComponentsResponse>
@@ -81,7 +81,7 @@ GET /pop/v1/sam/resource/components?RegionId=cn-beijing&Type=TOMCAT&AppId=d700e6
 </DescribeComponentsResponse>
 ```
 
-`JSON` 格式
+`JSON`格式
 
 ```
 {
