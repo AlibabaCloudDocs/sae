@@ -13,7 +13,7 @@
 ## 请求语法
 
 ```
-POST /pop/v1/sam/app/slb HTTP|HTTPS
+POST /pop/v1/sam/app/slb HTTP/1.1
 ```
 
 ## 请求参数
@@ -57,7 +57,7 @@ POST /pop/v1/sam/app/listApplications?RegionId=cn-beijing&AppId=0099b7be-5f5b-45
 
 正常返回示例
 
-`XML` 格式
+`XML`格式
 
 ```
 <BindSlbResponse>
@@ -72,7 +72,7 @@ POST /pop/v1/sam/app/listApplications?RegionId=cn-beijing&AppId=0099b7be-5f5b-45
 </BindSlbResponse>
 ```
 
-`JSON` 格式
+`JSON`格式
 
 ```
 {
