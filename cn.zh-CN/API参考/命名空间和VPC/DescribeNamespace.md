@@ -13,7 +13,7 @@
 ## 请求语法
 
 ```
-GET /pop/v1/paas/namespace HTTPS|HTTP
+GET /pop/v1/paas/namespace HTTP/1.1
 ```
 
 ## 请求参数
@@ -56,7 +56,7 @@ GET /pop/v1/paas/namespace?RegionId=cn-hangzhou&NamespaceId=cn-beijing%3Atest
 
 正常返回示例
 
-`XML` 格式
+`XML`格式
 
 ```
 <DescribeNamespaceResponse>
@@ -74,7 +74,7 @@ GET /pop/v1/paas/namespace?RegionId=cn-hangzhou&NamespaceId=cn-beijing%3Atest
 </DescribeNamespaceResponse>
 ```
 
-`JSON` 格式
+`JSON`格式
 
 ```
 {
