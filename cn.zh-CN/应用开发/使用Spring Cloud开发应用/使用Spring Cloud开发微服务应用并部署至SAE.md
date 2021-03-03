@@ -150,7 +150,7 @@ SAE服务注册中心与Nacos、Eureka和Consul相比，具有以下优势：
         spring.cloud.nacos.discovery.server-addr=127.0.0.1:8848               
     ```
 
-    其中`127.0.0.1`为Nacos Server的地址。如果您的Nacos Server部署在另外一台机器，则需要修改成对应的IP地址。如果有其它需求，可以在`application.properties`文件中增加配置。更多信息，请参见[\#d8e380](#d8e380)。
+    其中`127.0.0.1`为Nacos Server的地址。如果您的Nacos Server部署在另外一台机器，则需要修改成对应的IP地址。如果有其它需求，可以在`application.properties`文件中增加配置。更多信息，请参见[配置项参考](#section_gzh_f9t_afm)。
 
 7.  验证结果。
 
@@ -315,7 +315,7 @@ SAE服务注册中心与Nacos、Eureka和Consul相比，具有以下优势：
         spring.cloud.nacos.discovery.server-addr=127.0.0.1:8848
     ```
 
-    其中`127.0.0.1`为Nacos Server的地址。如果您的Nacos Server部署在另外一台机器，则需要修改成对应的IP地址。如果有其它需求，可以在`application.properties`文件中增加配置。更多信息，请参见[\#d8e380](#d8e380)。
+    其中`127.0.0.1`为Nacos Server的地址。如果您的Nacos Server部署在另外一台机器，则需要修改成对应的IP地址。如果有其它需求，可以在`application.properties`文件中增加配置。更多信息，请参见[配置项参考](#section_gzh_f9t_afm)。
 
 7.  验证结果。
 
