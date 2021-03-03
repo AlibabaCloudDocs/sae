@@ -13,7 +13,7 @@
 ## 请求语法
 
 ```
-POST /pop/v1/sam/app/rescaleApplicationVertically HTTPS|HTTP
+POST /pop/v1/sam/app/rescaleApplicationVertically HTTP/1.1
 ```
 
 ## 请求参数
@@ -55,7 +55,7 @@ POST /pop/v1/sam/app/rescaleApplicationVertically?RegionId=cn-beijing&AppId=0099
 
 正常返回示例
 
-`XML` 格式
+`XML`格式
 
 ```
 <RescaleApplicationVerticallyResponse>
@@ -71,7 +71,7 @@ POST /pop/v1/sam/app/rescaleApplicationVertically?RegionId=cn-beijing&AppId=0099
 </RescaleApplicationVerticallyResponse>
 ```
 
-`JSON` 格式
+`JSON`格式
 
 ```
 {
