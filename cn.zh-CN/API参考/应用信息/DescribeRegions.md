@@ -13,7 +13,7 @@
 ## 请求语法
 
 ```
-GET /pop/v1/paas/regionConfig HTTPS|HTTP
+GET /pop/v1/paas/regionConfig HTTP/1.1
 ```
 
 ## 请求参数
@@ -47,7 +47,7 @@ GET /pop/v1/paas/regionConfig HTTP/1.1
 
 正常返回示例
 
-`XML` 格式
+`XML`格式
 
 ```
 <DescribeRegionsResponse>
@@ -69,7 +69,7 @@ GET /pop/v1/paas/regionConfig HTTP/1.1
 </DescribeRegionsResponse>
 ```
 
-`JSON` 格式
+`JSON`格式
 
 ```
 {
