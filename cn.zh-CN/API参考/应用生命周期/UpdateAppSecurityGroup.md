@@ -13,7 +13,7 @@
 ## 请求语法
 
 ```
-PUT /pop/v1/sam/app/updateAppSecurityGroup HTTPS|HTTP
+PUT /pop/v1/sam/app/updateAppSecurityGroup HTTP/1.1
 ```
 
 ## 请求参数
@@ -52,7 +52,7 @@ PUT /pop/v1/sam/app/updateAppSecurityGroup?RegionId=cn-beijing&AppId=017f39b8-df
 
 正常返回示例
 
-`XML` 格式
+`XML`格式
 
 ```
 <UpdateAppSecurityGroupResponse>
@@ -64,7 +64,7 @@ PUT /pop/v1/sam/app/updateAppSecurityGroup?RegionId=cn-beijing&AppId=017f39b8-df
 </UpdateAppSecurityGroupResponse>
 ```
 
-`JSON` 格式
+`JSON`格式
 
 ```
 {
