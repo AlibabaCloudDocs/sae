@@ -13,7 +13,7 @@
 ## 请求语法
 
 ```
-GET /pop/v1/sam/container/describeApplicationImage HTTPS|HTTP
+GET /pop/v1/sam/container/describeApplicationImage HTTP/1.1
 ```
 
 ## 请求参数
@@ -61,7 +61,7 @@ GET /pop/v1/sam/container/describeApplicationImage?RegionId=cn-beijing&AppId=d70
 
 正常返回示例
 
-`XML` 格式
+`XML`格式
 
 ```
 <DescribeApplicationImageResponse>
@@ -80,7 +80,7 @@ GET /pop/v1/sam/container/describeApplicationImage?RegionId=cn-beijing&AppId=d70
 </DescribeApplicationImageResponse>
 ```
 
-`JSON` 格式
+`JSON`格式
 
 ```
 {
