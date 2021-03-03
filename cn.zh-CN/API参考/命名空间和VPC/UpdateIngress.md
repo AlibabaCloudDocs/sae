@@ -13,7 +13,7 @@
 ## 请求语法
 
 ```
-PUT /pop/v1/sam/ingress/Ingress HTTP|HTTPS
+PUT /pop/v1/sam/ingress/Ingress HTTP/1.1
 ```
 
 ## 请求参数
@@ -58,7 +58,7 @@ PUT /pop/v1/sam/ingress/Ingress?RegionId=cn-beijing&IngressId=87
 
 正常返回示例
 
-`XML` 格式
+`XML`格式
 
 ```
 <UpdateIngressResponse>
@@ -73,7 +73,7 @@ PUT /pop/v1/sam/ingress/Ingress?RegionId=cn-beijing&IngressId=87
 </UpdateIngressResponse>
 ```
 
-`JSON` 格式
+`JSON`格式
 
 ```
 {
