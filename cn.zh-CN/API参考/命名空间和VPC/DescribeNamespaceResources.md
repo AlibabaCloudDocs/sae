@@ -13,7 +13,7 @@
 ## 请求语法
 
 ```
-GET /pop/v1/sam/namespace/describeNamespaceResources HTTPS|HTTP
+GET /pop/v1/sam/namespace/describeNamespaceResources HTTP/1.1
 ```
 
 ## 请求参数
@@ -74,7 +74,7 @@ GET /pop/v1/sam/namespace/describeNamespaceResources?RegionId=cn-shanghai&Namesp
 
 正常返回示例
 
-`XML` 格式
+`XML`格式
 
 ```
 <DescribeNamespaceResourcesResponse>
@@ -104,7 +104,7 @@ GET /pop/v1/sam/namespace/describeNamespaceResources?RegionId=cn-shanghai&Namesp
 </DescribeNamespaceResourcesResponse>
 ```
 
-`JSON` 格式
+`JSON`格式
 
 ```
 {
