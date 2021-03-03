@@ -13,7 +13,7 @@
 ## 请求语法
 
 ```
-PUT /pop/v1/sam/app/restartInstances HTTPS|HTTP
+PUT /pop/v1/sam/app/restartInstances HTTP/1.1
 ```
 
 ## 请求参数
@@ -54,7 +54,7 @@ PUT /pop/v1/sam/app/slb?RegionId=cn-hangzhou&AppId=0099b7be-5f5b-4512-a7fc-56049
 
 正常返回示例
 
-`XML` 格式
+`XML`格式
 
 ```
 <RestartInstancesResponse>
@@ -70,7 +70,7 @@ PUT /pop/v1/sam/app/slb?RegionId=cn-hangzhou&AppId=0099b7be-5f5b-4512-a7fc-56049
 </RestartInstancesResponse>
 ```
 
-`JSON` 格式
+`JSON`格式
 
 ```
 {
