@@ -6,6 +6,10 @@ keyword: [应用引擎, EDAS Serverless, Serverless PaaS, 无服务器架构, �
 
 Serverless应用引擎SAE（Serverless App Engine）是面向应用的Serverless PaaS平台，能够帮助PaaS层用户免运维IaaS、按需使用、按量计费，做到低门槛微服务应用上云。相对于其他Serverless产品，它抽象了应用的概念，并提供了一整套微服务解决方案，支持Spring Cloud、Dubbo、HSF等主流的微服务开发框架，实现了Serverless架构和微服务架构的完美结合。
 
+## 核心功能
+
+
+
 ## 产品架构
 
 SAE产品架构图如下所示。
