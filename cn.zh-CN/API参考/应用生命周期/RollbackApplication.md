@@ -8,7 +8,7 @@
 
 ## 请求头
 
-该接口使用公共请求头，无特殊请求头。请参见公共请求参数文档。
+该接口使用公共请求头，无特殊请求头。更多信息，请参见[公共请求和返回头](~~126964~~)。
 
 ## 请求语法
 
@@ -29,34 +29,38 @@ PUT /pop/v1/sam/app/rollbackApplication HTTP/1.1
  -   示例1：灰度1台+后续分2批+自动分批+分批间隔1分钟。`{"type":"GrayBatchUpdate","batchUpdate":{"batch":2,"releaseType":"auto","batchWaitTime":1},"grayUpdate":{"gray":1}}`
 -   示例2：灰度1台+后续分2批+手动分批。`{"type":"GrayBatchUpdate","batchUpdate":{"batch":2,"releaseType":"manual"},"grayUpdate":{"gray":1}}`
 -   示例3：分2批+自动分批+分批间隔0分钟。`{"type":"BatchUpdate","batchUpdate":{"batch":2,"releaseType":"auto","batchWaitTime":0}}` |
+|AutoEnableApplicationScalingRule|String|Query|否|true|是否在应用部署后，自动开启弹性策略。取值说明如下：
+
+ -   **true**：默认值，部署后自动开启策略。
+-   **false**：部署后，禁用策略。 |
 
 ## 返回数据
 
 |名称|类型|示例值|描述|
 |--|--|---|--|
+|RequestId|String|91F93257-7A4A-4BD3-9A7E-2F6EAE6D5557|请求ID。 |
+|Message|String|success|附加信息。 |
+|TraceId|String|0a98a02315955564772843261e\*\*\*\*|调用链ID。 |
+|Data|object| |返回结果。 |
+|ChangeOrderId|String|01db03d3-3ee9-48b3-b3d0-dfce2d88\*\*\*\*|变更流程ID。 |
+|ErrorCode|String|Application.ChangerOrderRunning|错误码。 |
 |Code|String|200|接口状态，取值说明如下：
 
  -   2XX：成功。
 -   3XX：重定向。
 -   4XX：请求错误。
 -   5XX：服务器错误。 |
-|Data|Struct| |返回结果。 |
-|ChangeOrderId|String|01db03d3-3ee9-48b3-b3d0-dfce2d88\*\*\*\*|变更流程ID。 |
-|ErrorCode|String|Application.ChangerOrderRunning|错误码。 |
-|Message|String|success|附加信息。 |
-|RequestId|String|91F93257-7A4A-4BD3-9A7E-2F6EAE6D5557|请求ID。 |
 |Success|Boolean|true|回退历史版本是否成功。取值说明如下：
 
  -   **true**：表示回退历史版本成功。
 -   **false**：表示回退历史版本失败。 |
-|TraceId|String|0a98a02315955564772843261e\*\*\*\*|调用链ID。 |
 
 ## 示例
 
 请求示例
 
 ```
-PUT /pop/v1//sam/app/rollbackApplication?RegionId=cn-hangzhou&AppId=017f39b8-dfa4-4e16-a84b-1dcee4b1****&VersionId=0026ff7f-2b57-4127-bdd0-9bf202bb9****
+PUT /pop/v1/sam/app/rollbackApplication?RegionId=cn-hangzhou&AppId=017f39b8-dfa4-4e16-a84b-1dcee4b1****&VersionId=0026ff7f-2b57-4127-bdd0-9bf202bb9****
 ```
 
 正常返回示例
@@ -64,28 +68,34 @@ PUT /pop/v1//sam/app/rollbackApplication?RegionId=cn-hangzhou&AppId=017f39b8-dfa
 `XML`格式
 
 ```
+HTTP/1.1 200 OK
+Content-Type:application/xml
+
 <RollbackApplicationResponse>
-      <Message>success</Message>
-      <TraceId>0a98a02315955564772843261e****</TraceId>
-      <Data>
-            <ChangeOrderId>01db03d3-3ee9-48b3-b3d0-dfce2d88****</ChangeOrderId>
-      </Data>
-      <Code>200</Code>
-      <Success>true</Success>
+    <Message>success</Message>
+    <TraceId>0a98a02315955564772843261e****</TraceId>
+    <Data>
+        <ChangeOrderId>01db03d3-3ee9-48b3-b3d0-dfce2d88****</ChangeOrderId>
+    </Data>
+    <Code>200</Code>
+    <Success>true</Success>
 </RollbackApplicationResponse>
 ```
 
 `JSON`格式
 
 ```
+HTTP/1.1 200 OK
+Content-Type:application/json
+
 {
-    "Message": "success",
-    "TraceId": "0a98a02315955564772843261e****",
-    "Data": {
-        "ChangeOrderId": "01db03d3-3ee9-48b3-b3d0-dfce2d88****"
-    },
-    "Code": 200,
-    "Success": true
+  "Message" : "success",
+  "TraceId" : "0a98a02315955564772843261e****",
+  "Data" : {
+    "ChangeOrderId" : "01db03d3-3ee9-48b3-b3d0-dfce2d88****"
+  },
+  "Code" : 200,
+  "Success" : true
 }
 ```
 
@@ -99,7 +109,7 @@ PUT /pop/v1//sam/app/rollbackApplication?RegionId=cn-hangzhou&AppId=017f39b8-dfa
 |400|InvalidParameter.WithMessage|The parameter is invalid \{%s\}: %s|不合法的参数\{%s\}：%s。|
 |400|NoComputeResourceQuota.Exceed|Your compute resource is insufficient. Please submit a ticket to raise the quota.|计算资源不足，请提交工单增加计算资源额度。|
 |400|vswitch.not.exist|The specified VSwitch does not exist.|VSwitch不存在，请更换VSwitch。|
-|400|user.indebt|The user has an outstanding payment.|您处于欠费状态。|
+|400|user.indebt|The user has an outstanding payment.|当前用户处于欠费状态。|
 |400|NoComputeResourceQuota.App.Exceed|You can create %s instances for each application. Please submit a ticket to raise the quota.|每个应用只允许创建%s个实例，请提交工单增加计算资源额度。|
 |400|NoComputeResourceQuota.User.Exceed|Your account is limited to create %s instances. Please submit a ticket to raise the quota.|您的账户限额%s个实例，请提交工单增加计算资源额度。|
 |400|System.Upgrading|The system is being upgraded. Please try again later.|系统正在升级，请稍后操作。|
@@ -110,12 +120,11 @@ PUT /pop/v1//sam/app/rollbackApplication?RegionId=cn-hangzhou&AppId=017f39b8-dfa
 |400|Application.MissingJdk|Your application must at least contain a JDK component.|应用必须至少包含JDK组件。|
 |400|JarApplication.MissingJdk|A FatJar application must contain JDK.|FatJAR类型应用必须包含JDK。|
 |400|PandoraApplication.MissingJdk|The Pandora application is missing a JDK component.|Pandora应用缺少JDK组件。|
-|400|WarApplication.MissingJdkWebcontainer|A War application must contain JDK and Tomcat.|WAR类型应用必须包含JDK和Tomcat。|
+|400|WarApplication.MissingJdkWebcontainer|A War application must contain JDK and Tomcat.|War类型应用必须包含JDK和Tomcat。|
 |400|InvalidComponent.NotFound|The current component \(such as JDK, Tomcat, or EDASWebContainer\) does not exist.|找不到当前组件（JDK、Tomcat、EDASWebContainer等）。|
-|400|InvalidHostnameIp.Invalid|The hostname and/or IP is invalid: Hostname \[%s\], IP \[%s\].|主机名或IP不合法：主机名\[%s\]，IP\[%s\]。|
+|400|InvalidHostnameIp.Invalid|The hostname and/or IP is invalid: Hostname \[%s\], IP \[%s\].|主机名和/或IP不合法：主机名\[%s\]，IP\[%s\]。|
 |400|InvalidInstanceSpecification.Unsupported|The instance specification is not supported: CPU \[%s\], memory \[%s\].|不支持的实例规格。CPU\[%s\]，Memory\[%s\]。|
-|404|InvalidNamespaceId.NotFound|The specified NamespaceId does not exist.|指定的NamespaceId不存在。|
-|400|InvalidPackageType.NotFound|The package type must be War, FatJar, or Image.|包类型必须为WAR、FatJAR或Image。|
+|400|InvalidPackageType.NotFound|The package type must be War, FatJar, or Image.|包类型必须为War、Fatjar或Image。|
 |400|InvalidParameter.FileName|The application deployment package name is invalid. This name can contain only alphanumeric characters, hyphens \(-\), and underscores \(\_\). In addition, you can upload JAR files only if the selected deployment version supports JAR file. Otherwise, upload WAR files only.|应用部署程序包名称无效。名称只能包含字母、数字和特殊字符“-”“\_”。另外，仅当选择的部署版本支持JAR部署时方可上传JAR包，否则只能上传WAR包。|
 |400|LogService.ConfigQuotaExceed|The maximum number of Log Service configs is exceeded.|日志服务配置个数超过配额限制，请提工单解决。|
 |400|LogService.InternalError|An exception occurred while calling Log Service. Please submit a ticket to solve the problem.|调用日志服务异常，请提工单解决。|
@@ -131,6 +140,7 @@ PUT /pop/v1//sam/app/rollbackApplication?RegionId=cn-hangzhou&AppId=017f39b8-dfa
 |400|App.Package.Version.Exists|The package version of application already exists.|应用部署包版本号已经存在。|
 |400|Slb.Occupied|The SLB instance is occupied.|SLB实例被占用。|
 |400|Slb.Tag.Not.Qualified|The current SLB instance cannot be reused because it may have been occupied by %s.|SLB实例正在被%s使用，不建议复用。|
+|404|InvalidNamespaceId.NotFound|The specified NamespaceId does not exist.|指定的NamespaceId不存在。|
 
 访问[错误中心](https://error-center.aliyun.com/status/product/sae)查看更多错误码。
 
