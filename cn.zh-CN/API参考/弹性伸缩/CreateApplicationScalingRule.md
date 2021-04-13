@@ -30,13 +30,13 @@ POST /pop/v1/sam/scale/applicationScalingRule HTTP/1.1
 |AppId|String|Query|是|7171a6ca-d1cd-4928-8642-7d5cfe69\*\*\*\*|应用ID。 |
 |ScalingRuleName|String|Query|是|timer-0800-2100|自定义的弹性伸缩策略名。应用内，策略名称不可重复，必须以小写字母开头，仅可包含小写字母、数字及短划线（-），不超过32个字符。
 
-**说明：** 伸缩策略创建成功后，不可修改策略名。 |
+ **说明：** 伸缩策略创建成功后，不可修改策略名。 |
 |ScalingRuleType|String|Query|是|timing|弹性策略类型。取值说明如下：
 
--   **timing**：定时弹性 |
+ -   **timing**：定时弹性 |
 |ScalingRuleTimer|String|Query|否|\{"beginDate":null,"endDate":null,"period":"\* \* \*","schedules":\[\{"atTime":"08:00","targetReplicas":10\},\{"atTime":"20:00","targetReplicas":3\}\]\}|定时弹性策略的配置。参数说明如下：
 
--   **beginDate**：长期，适用于不需要指定执行定时弹性伸缩策略的结束日期时的场景。取值：**null**。
+ -   **beginDate**：长期，适用于不需要指定执行定时弹性伸缩策略的结束日期时的场景。取值：**null**。
 -   **endDate**：短期，适用于需要指定执行定时弹性伸缩策略的起止日期时的场景。取值示例：**2021-03-25**。
 -   **period**：执行定时弹性伸缩策略的周期。取值说明如下：
     -   **\* \* \***：每天指定时间执行定时策略。
@@ -49,7 +49,7 @@ POST /pop/v1/sam/scale/applicationScalingRule HTTP/1.1
         -   **Fri**：星期五
         -   **Sat**：星期六
     -   **1,2,3,28,31 \* \***：每月指定日期的指定时间执行定时策略。取值范围\[1, 31\]。若当月无31日，则跳过该日期执行定时策略。
--   **schedules**：弹性伸缩策略触发的时间，以及该时间段内需要保持的应用实例数。最多支持20个时间点。参数说明如下:
+-   **schedules**：弹性伸缩策略触发的时间，以及该时间段内需要保持的应用实例数。最多支持20个时间点。参数说明如下：
     -   **atTime**：触发时间点。支持格式**时:分**，例如**08:00**。
     -   **targetReplicas**：该参数可以指定应用的实例数，也可以是每次部署最小存活的实例数。取值范围\[1, 50\]。
 
@@ -74,11 +74,11 @@ POST /pop/v1/sam/scale/applicationScalingRule HTTP/1.1
 |CreateTime|Long|1616642248938|伸缩策略的创建时间。单位：毫秒。 |
 |ScaleRuleEnabled|Boolean|true|是否启用伸缩策略。取值说明如下：
 
--   **true**：启用状态
+ -   **true**：启用状态
 -   **false**：禁用状态 |
 |ScaleRuleType|String|timing|弹性伸缩策略的类型。取值说明如下：
 
--   **timing**：定时弹性 |
+ -   **timing**：定时弹性 |
 |ScaleRuleName|String|timer-0800-2100|弹性伸缩策略的名称。 |
 
 ## 示例
@@ -178,7 +178,7 @@ Content-Type:application/json
 |400|NoComputeResourceQuota.Exceed|Your compute resource is insufficient. Please submit a ticket to raise the quota.|计算资源不足，请提交工单增加计算资源额度。|
 |400|NoComputeResourceQuota.User.Exceed|Your account is limited to create %s instances. Please submit a ticket to raise the quota.|您的账户限额%s个实例，请提交工单增加计算资源额度。|
 |400|System.Upgrading|The system is being upgraded. Please try again later.|系统正在升级，请稍后操作。|
-|400|OperationDenied.SDKNotSupported|Metrics is not supported in SDK|SDK 未开放指标弹性规则|
+|400|OperationDenied.SDKNotSupported|Metrics is not supported in SDK|SDK未开放指标弹性规则。|
 
 访问[错误中心](https://error-center.aliyun.com/status/product/sae)查看更多错误码。
 
