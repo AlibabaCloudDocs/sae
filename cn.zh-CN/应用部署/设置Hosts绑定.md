@@ -1,6 +1,6 @@
 # 设置Hosts绑定
 
-SAE支持应用级别的实例，通过Host绑定对主机名进行解析，方便应用实例通过主机名进行访问。
+SAE支持应用级别的实例，通过Hosts绑定对主机名进行解析，方便应用实例通过主机名进行访问。
 
 ## 在应用创建过程中设置Hosts绑定
 
@@ -12,7 +12,7 @@ SAE支持应用级别的实例，通过Host绑定对主机名进行解析，方�
 
 4.  在**应用部署配置**页签，选择**技术栈语言**和**应用部署方式**，设置部署参数。
 
-5.  在**应用部署配置**页面，展开**Hosts绑定设置**区域，输入Host配置项。
+5.  在**应用部署配置**页面，展开**Hosts绑定设置**区域，输入Hosts配置项。
 
     ![Hosts](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/4483449161/p208108.png)
 
@@ -35,7 +35,7 @@ Hosts配置可以在创建应用过程中设置，也可以在应用部署完成
 
 3.  在应用详情页面的右上角，单击**部署应用**。
 
-4.  在**部署应用**页面，展开**Hosts绑定设置**区域，输入Host配置项。
+4.  在**部署应用**页面，展开**Hosts绑定设置**区域，输入Hosts配置项。
 
     ![Hosts](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/4483449161/p208108.png)
 
