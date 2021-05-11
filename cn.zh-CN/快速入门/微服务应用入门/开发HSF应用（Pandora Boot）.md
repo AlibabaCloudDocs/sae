@@ -90,7 +90,7 @@
 
         虽然HSF服务框架并不依赖于Web环境，但是在应用的生命周期过程中需要使用到Web相关的特性，所以需要添加`spring-boot-starter-web`的依赖。
 
-        `pandora-hsf-spring-boot-starter`实现了HSF配置的自动装配。`pandora-boot-maven-plugin`是Pandora Boot提供的maven打包插件，可以将Pandora Boot HSF工程编译为可执行的FatJar，并在EDAS Container中部署运行。
+        `pandora-hsf-spring-boot-starter`实现了HSF配置的自动装配。`pandora-boot-maven-plugin`是Pandora Boot提供的Maven打包插件，可以将Pandora Boot HSF工程编译为可执行的FatJar，并在EDAS Container中部署运行。
 
         `dependencyManagement`中包含了`spring-boot-dependencies`和`pandora-boot-starter-bom`两个依赖，分别负责Spring Boot和Pandora Boot相关依赖的版本管理，设置之后，您的工程无需将parent设置为`spring-boot-starter-parent`。
 
@@ -379,7 +379,7 @@
                 </plugin>
             ```
 
-        3.  添加完插件后，在工程的主目录下，执行maven命令`mvn clean package`进行打包，即可在Target目录下找到打包好的FatJar文件。
+        3.  添加完插件后，在工程的主目录下，执行Maven命令`mvn clean package`进行打包，即可在Target目录下找到打包好的FatJar文件。
         4.  通过Java命令启动应用。
 
             ```
