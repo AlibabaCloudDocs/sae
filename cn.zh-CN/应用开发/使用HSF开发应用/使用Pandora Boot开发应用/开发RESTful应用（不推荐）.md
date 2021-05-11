@@ -153,7 +153,7 @@ Demo源码下载：[sc-vip-server](http://edas-public.oss-cn-hangzhou.aliyuncs.c
     3.  与sc-vip-server相比，除了开启服务与注册外，还需要添加下面两项配置才能使用RestTemplate、AsyncRestTemplate、FeignClient这三个客户端。
 
         -   添加@LoadBalanced注解将RestTemplate和AsyncRestTemplate与服务发现结合。
-        -   使用@EnableFeignClients注解激活FeignClients。
+        -   使用@EnableFeignClients注解激活FeignClient。
 
             ```
             @SpringBootApplication
@@ -269,7 +269,7 @@ Demo源码下载：[sc-vip-server](http://edas-public.oss-cn-hangzhou.aliyuncs.c
                 </build>
                 ```
 
-            2.  添加完插件后，在工程的主目录下，使用maven命令mvn clean package进行打包，即可在target目录下找到打包好的FatJar文件。
+            2.  添加完插件后，在工程的主目录下，使用Maven命令`mvn clean package`进行打包，即可在target目录下找到打包好的FatJar文件。
             3.  通过Java命令启动应用。
 
                 ```
@@ -286,7 +286,7 @@ Demo源码下载：[sc-vip-server](http://edas-public.oss-cn-hangzhou.aliyuncs.c
 
     -   AsyncRestTemplate无法接入服务发现。
 
-        AsyncRestTemplate接入服务发现的时间比较晚，需要在Dalston之后的版本才能使用，具体详情参见此[pull request](https://github.com/spring-cloud/spring-cloud-commons/pull/149)
+        AsyncRestTemplate接入服务发现的时间比较晚，需要在Dalston之后的版本才能使用，相关内容，请参见[pull request](https://github.com/spring-cloud/spring-cloud-commons/pull/149)。
 
     -   FatJar打包插件冲突。
 
