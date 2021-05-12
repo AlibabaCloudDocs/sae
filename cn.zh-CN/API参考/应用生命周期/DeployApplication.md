@@ -97,6 +97,13 @@ POST /pop/v1/sam/app/deployApplication HTTP/1.1
 -   **uriEncoding**：Tomcat的编码格式，包括**UTF-8**、**ISO-8859-1**、**GBK和GB2312**。如果不设置则默认为**ISO-8859-1**。
 -   **useBodyEncoding**：是否使用**BodyEncoding for URL**。 |
 |AcrAssumeRoleArn|String|Query|否|acs:ram::123456789012\*\*\*\*:role/adminrole|跨账号拉取镜像时所需的RAM角色的ARN。 |
+|OssMountDescs|String|FormData|否|\[\{"bucketName": "oss-bucket", "bucketPath": "data/user.data", "mountPath": "/usr/data/user.data", "readOnly": true\}\]|OSS挂载描述信息。 |
+|OssAkId|String|FormData|否|xxxxxx|OSS读写的AccessKey ID。 |
+|OssAkSecret|String|FormData|否|xxxxxx|OSS读写的AccessKey Secret。 |
+|EnableGreyTagRoute|Boolean|Query|否|false|是否启用流量灰度规则。该规则仅适用于Spring Cloud和Dubbo框架的应用。取值如下：
+
+ -   **true**：启用灰度规则。
+-   **false**：禁用灰度规则。 |
 
 ## 返回数据
 
@@ -105,7 +112,7 @@ POST /pop/v1/sam/app/deployApplication HTTP/1.1
 |RequestId|String|01CF26C7-00A3-4AA6-BA76-7E95F2A3\*\*\*|请求ID。 |
 |Message|String|success|调用结果的附加信息。 |
 |TraceId|String|ac1a0b2215622246421415014e\*\*\*\*|调用链ID，用于精确查询调用信息。 |
-|Data|object| |返回结果。 |
+|Data|Object| |返回结果。 |
 |ChangeOrderId|String|01db03d3-3ee9-48b3-b3d0-dfce2d88\*\*\*\*|返回的发布单ID，用于查询任务执行状态。 |
 |AppId|String|7171a6ca-d1cd-4928-8642-7d5cfe69\*\*\*\*|应用ID。 |
 |ErrorCode|String|success|错误码。 |
@@ -125,11 +132,11 @@ POST /pop/v1/sam/app/deployApplication HTTP/1.1
 请求示例
 
 ```
-POST /pop/v1/sam/app/deployApplication?AppId=7171a6ca-d1cd-4928-8642-7d5cfe69****&Jdk=Open JDK 8&WebContainer=apache-tomcat-7.0.91&PackageVersion=1.0.1&PackageUrl=http://myoss.oss-cn-hangzhou.aliyuncs.com/my-buc/2019-06-30/sae-test.jar&ImageUrl=registry.cn-hangzhou.aliyuncs.com/sae_test/ali_sae_test:0.0.1&Command=sleep&CommandArgs=1d&Envs=[{"name":"envtmp","value":"0"}]&CustomHostAlias=[{"hostName":"samplehost","ip":"127.0.0.1"}]&JarStartOptions=custom-option&JarStartArgs=-Xms4G -Xmx4G&Liveness={"exec":{"command":["sleep","5s"]},"initialDelaySeconds":10,"timeoutSeconds":11}&Readiness={"exec":{"command":["sleep","6s"]},"initialDelaySeconds":15,"timeoutSeconds":12}&MinReadyInstances=1&BatchWaitTime=10&EdasContainerVersion=3.5.3&UpdateStrategy={"type":"GrayBatchUpdate","batchUpdate":{"batch":2,"releaseType":"auto","batchWaitTime":1},"grayUpdate":{"gray":1}}&SlsConfigs={"logDir":"/root/logs/hsf/hsf.log"}]&Timezone=Asia/Shanghai&NasId=10d3b4****&MountHost=10d3b4bc9****.com&MountDesc=[{MountPath: "/tmp", NasPath: "/"}]&PostStart=["/bin/sh","-c","echo hello"]&PreStop=["/bin/sh","-c","echo hello"]&ChangeOrderDesc=启动应用&AutoEnableApplicationScalingRule=true&WarStartOptions=-Dxxx=xxx&TerminationGracePeriodSeconds=10&EnableAhas=false&PhpArmsConfigLocation=/usr/local/etc/php/conf.d/arms.ini&PhpConfigLocation=/usr/local/etc/php/php.ini&TomcatConfig={"useDefaultConfig":false,"contextInputType":"custom","contextPath":"hello","httpPort":8088,"maxThreads":400,"uriEncoding":"UTF-8","useBodyEncoding":true,"useAdvancedServerXml":false}&AcrAssumeRoleArn=acs:ram::123456789012****:role/adminrole HTTP/1.1
+POST /pop/v1/sam/app/deployApplication?AppId=7171a6ca-d1cd-4928-8642-7d5cfe69****&Jdk=Open JDK 8&WebContainer=apache-tomcat-7.0.91&PackageVersion=1.0.1&PackageUrl=http://myoss.oss-cn-hangzhou.aliyuncs.com/my-buc/2019-06-30/sae-test.jar&ImageUrl=registry.cn-hangzhou.aliyuncs.com/sae_test/ali_sae_test:0.0.1&Command=sleep&CommandArgs=1d&Envs=[{"name":"envtmp","value":"0"}]&CustomHostAlias=[{"hostName":"samplehost","ip":"127.0.0.1"}]&JarStartOptions=custom-option&JarStartArgs=-Xms4G -Xmx4G&Liveness={"exec":{"command":["sleep","5s"]},"initialDelaySeconds":10,"timeoutSeconds":11}&Readiness={"exec":{"command":["sleep","6s"]},"initialDelaySeconds":15,"timeoutSeconds":12}&MinReadyInstances=1&BatchWaitTime=10&EdasContainerVersion=3.5.3&UpdateStrategy={"type":"GrayBatchUpdate","batchUpdate":{"batch":2,"releaseType":"auto","batchWaitTime":1},"grayUpdate":{"gray":1}}&SlsConfigs={"logDir":"/root/logs/hsf/hsf.log"}]&Timezone=Asia/Shanghai&NasId=10d3b4****&MountHost=10d3b4bc9****.com&MountDesc=[{MountPath: "/tmp", NasPath: "/"}]&PostStart=["/bin/sh","-c","echo hello"]&PreStop=["/bin/sh","-c","echo hello"]&ChangeOrderDesc=启动应用&WarStartOptions=-Dxxx=xxx&AutoEnableApplicationScalingRule=true&TerminationGracePeriodSeconds=10&EnableAhas=false&PhpArmsConfigLocation=/usr/local/etc/php/conf.d/arms.ini&PhpConfigLocation=/usr/local/etc/php/php.ini&TomcatConfig={"useDefaultConfig":false,"contextInputType":"custom","contextPath":"hello","httpPort":8088,"maxThreads":400,"uriEncoding":"UTF-8","useBodyEncoding":true,"useAdvancedServerXml":false}&AcrAssumeRoleArn=acs:ram::123456789012****:role/adminrole&EnableGreyTagRoute=false HTTP/1.1
 Host:sae.aliyuncs.com
 Content-Type:application/json
 
-ConfigMapMountDesc=[{"configMapId":16,"key":"test","mountPath":"/tmp"}]&PhpConfig=k1=v1
+ConfigMapMountDesc=[{"configMapId":16,"key":"test","mountPath":"/tmp"}]&PhpConfig=k1=v1&OssMountDescs=[{"bucketName": "oss-bucket", "bucketPath": "data/user.data", "mountPath": "/usr/data/user.data", "readOnly": true}]&OssAkId=xxxxxx&OssAkSecret=xxxxxx
 ```
 
 正常返回示例
@@ -141,16 +148,16 @@ HTTP/1.1 200 OK
 Content-Type:application/xml
 
 <DeployApplicationResponse>
-<RequestId>01CF26C7-00A3-4AA6-BA76-7E95F2A3***</RequestId>
-<Message>success</Message>
-<TraceId>ac1a0b2215622246421415014e****</TraceId>
-<Data>
-    <ChangeOrderId>01db03d3-3ee9-48b3-b3d0-dfce2d88****</ChangeOrderId>
-    <AppId>7171a6ca-d1cd-4928-8642-7d5cfe69****</AppId>
-</Data>
-<ErrorCode>success</ErrorCode>
-<Code>200</Code>
-<Success>true</Success>
+    <RequestId>01CF26C7-00A3-4AA6-BA76-7E95F2A3***</RequestId>
+    <Message>success</Message>
+    <TraceId>ac1a0b2215622246421415014e****</TraceId>
+    <Data>
+        <ChangeOrderId>01db03d3-3ee9-48b3-b3d0-dfce2d88****</ChangeOrderId>
+        <AppId>7171a6ca-d1cd-4928-8642-7d5cfe69****</AppId>
+    </Data>
+    <ErrorCode>success</ErrorCode>
+    <Code>200</Code>
+    <Success>true</Success>
 </DeployApplicationResponse>
 ```
 
