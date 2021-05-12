@@ -4,7 +4,7 @@ keyword: [应用引擎, EDAS Serverless, Serverless PaaS, 无服务器架构, �
 
 # 什么是Serverless应用引擎？
 
-Serverless应用引擎SAE（Serverless App Engine）是面向应用的Serverless PaaS平台，能够帮助PaaS层用户免运维IaaS、按需使用、按量计费，做到低门槛微服务应用上云。相对于其他Serverless产品，它抽象了应用的概念，并提供了一整套微服务解决方案，支持Spring Cloud、Dubbo、HSF等主流的微服务开发框架，实现了Serverless架构和微服务架构的完美结合。
+Serverless应用引擎SAE（Serverless App Engine）是面向应用的Serverless PaaS平台，能够帮助PaaS层用户免运维IaaS、按需使用、按量计费，做到低门槛微服务应用上云。相对于其他Serverless产品，它将应用的概念抽象化，并提供了一整套微服务解决方案，支持Spring Cloud、Dubbo、HSF等主流的微服务开发框架，实现了Serverless架构和微服务架构的完美结合。
 
 ## 核心功能
 
@@ -12,14 +12,14 @@ Serverless应用引擎SAE（Serverless App Engine）是面向应用的Serverless
 
 ## 产品架构
 
-SAE产品架构图如下所示。
+SAE产品架构如下所示：
 
-![SAE产品架构](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/2094709751/p70382.png)
+![SAE产品架构](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/0029959161/p70382.png)
 
 -   底层基于Kubernetes，实现了Serverless架构与微服务架构的完美结合。
 -   支持Spring Cloud、Dubbo、HSF多种微服务框架、多种部署渠道（UI、云效、插件等）、多种部署方式（WAR包、JAR包、镜像）。
 
-**说明：** 应用的源码管理与CI/CD集成暂不支持，敬请期待。
+**说明：** 应用的源码管理暂不支持，敬请期待。
 
 ## 多方式部署应用
 
