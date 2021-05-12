@@ -116,6 +116,11 @@ POST /pop/v1/sam/app/createApplication HTTP/1.1
 -   **uriEncoding**：Tomcat的编码格式，包括**UTF-8**、**ISO-8859-1**、**GB**K和**GB2312**。如果不设置则默认为**ISO-8859-1**。
 -   **useBodyEncoding**：是否使用**BodyEncoding for URL**。 |
 |AcrAssumeRoleArn|String|Query|否|acs:ram::123456789012\*\*\*\*:role/adminrole|跨账号拉取镜像时所需的RAM角色的ARN。 |
+|OssMountDescs|String|FormData|否|\[\{"bucketName": "oss-bucket", "bucketPath": "data/user.data", "mountPath": "/usr/data/user.data", "readOnly": true\}\]|OSS挂载描述信息。 |
+|OssAkId|String|FormData|否|xxxxxx|OSS读写的AccessKey ID。 |
+|OssAkSecret|String|FormData|否|xxxxxx|OSS读写的AccessKey Secret。 |
+
+**OssMountDescs**的详细描述，请参见[DescribeApplicationConfig](~~125723~~)。
 
 ## 返回数据
 
@@ -124,7 +129,7 @@ POST /pop/v1/sam/app/createApplication HTTP/1.1
 |RequestId|String|91F93257-7A4A-4BD3-9A7E-2F6EAE6D\*\*\*\*|请求ID。 |
 |Message|String|success|调用结果的附加信息。 |
 |TraceId|String|0a98a02315955564772843261e\*\*\*\*|调用链ID，用于精确查询调用信息。 |
-|Data|object| |返回结果。 |
+|Data|Object| |返回结果。 |
 |ChangeOrderId|String|01db03d3-3ee9-48b3-b3d0-dfce2d88\*\*\*\*|返回的发布单ID，用于查询任务执行状态。 |
 |AppId|String|017f39b8-dfa4-4e16-a84b-1dcee4b1\*\*\*\*|创建成功的应用ID。 |
 |ErrorCode|String|success|错误码。 |
@@ -148,7 +153,7 @@ POST /pop/v1/sam/app/createApplication?AppName=test&NamespaceId=cn-beijing:test&
 Host:sae.aliyuncs.com
 Content-Type:application/json
 
-ConfigMapMountDesc=[{"configMapId":16,"key":"test","mountPath":"/tmp"}]&PhpConfig=k1=v1
+ConfigMapMountDesc=[{"configMapId":16,"key":"test","mountPath":"/tmp"}]&PhpConfig=k1=v1&OssMountDescs=[{"bucketName": "oss-bucket", "bucketPath": "data/user.data", "mountPath": "/usr/data/user.data", "readOnly": true}]&OssAkId=xxxxxx&OssAkSecret=xxxxxx
 ```
 
 正常返回示例
