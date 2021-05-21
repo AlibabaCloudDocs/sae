@@ -8,7 +8,7 @@
 
 ## 请求头
 
-该接口使用公共请求头，无特殊请求头。请参见公共请求参数文档。
+该接口使用公共请求头，无特殊请求头。更多信息，请参见[公共请求和返回头](~~126964~~)。
 
 ## 请求语法
 
@@ -21,32 +21,32 @@ POST /pop/v1/paas/namespace HTTP/1.1
 |名称|类型|位置|是否必选|示例值|描述|
 |--|--|--|----|---|--|
 |NamespaceId|String|Query|是|cn-beijing:test|命名空间ID。仅允许小写英文字母和数字。 |
-|NamespaceName|String|Query|是|name|命名空间名称。 |
+|NamespaceName|String|Query|否|name|命名空间名称。 |
 |NamespaceDescription|String|Query|否|desc|命名空间描述信息。 |
 
 ## 返回数据
 
 |名称|类型|示例值|描述|
 |--|--|---|--|
+|RequestId|String|91F93257-7A4A-4BD3-9A7E-2F6EAE6D\*\*\*\*|请求ID。 |
+|Message|String|success|调用结果的附加信息。 |
+|TraceId|String|0a981dd515966966104121683d\*\*\*\*|调用链ID，用于精确查询调用信息。 |
+|Data|Object| |命名空间信息。 |
+|NamespaceDescription|String|desc|命名空间描述信息。 |
+|NamespaceId|String|cn-beijing:test|命名空间ID。 |
+|NamespaceName|String|name|命名空间名称。 |
+|RegionId|String|cn-beijing|命名空间所在地域。 |
+|ErrorCode|String|InstanceExist.NamespaceId|错误码。 |
 |Code|String|200|接口状态或POP错误码。取值说明如下：
 
  -   2XX：成功。
 -   3XX：重定向。
 -   4XX：请求错误。
 -   5XX：服务器错误。 |
-|Data|Struct| |命名空间信息。 |
-|NamespaceDescription|String|desc|命名空间描述信息。 |
-|NamespaceId|String|cn-beijing:test|命名空间ID。 |
-|NamespaceName|String|name|命名空间名称。 |
-|RegionId|String|cn-beijing|命名空间所在地域。 |
-|ErrorCode|String|InstanceExist.NamespaceId|错误码。 |
-|Message|String|success|调用结果的附加信息。 |
-|RequestId|String|91F93257-7A4A-4BD3-9A7E-2F6EAE6D\*\*\*\*|请求ID。 |
 |Success|Boolean|true|创建命名空间是否成功。取值说明如下：
 
  -   **true**：表示创建成功。
 -   **false**：表示创建失败。 |
-|TraceId|String|0a981dd515966966104121683d\*\*\*\*|调用链ID，用于精确查询调用信息。 |
 
 ## 示例
 
@@ -61,36 +61,44 @@ POST /pop/v1/paas/namespace?RegionId=cn-beijing&NamespaceId=cn-beijing%3Atest&Na
 `XML`格式
 
 ```
+HTTP/1.1 200 OK
+Content-Type:application/xml
+
 <CreateNamespaceResponse>
-      <Message>success</Message>
-      <RequestId>91F93257-7A4A-4BD3-9A7E-2F6EAE6D****</RequestId>
-      <TraceId>0a981dd515966966104121683d****</TraceId>
-      <Data>
-            <NamespaceName>name</NamespaceName>
-            <NamespaceId>cn-beijing:test</NamespaceId>
-            <RegionId>cn-beijing</RegionId>
-            <NamespaceDescription>desc</NamespaceDescription>
-      </Data>
-      <Code>200</Code>
-      <Success>true</Success>
+    <RequestId>91F93257-7A4A-4BD3-9A7E-2F6EAE6D****</RequestId>
+    <Message>success</Message>
+    <TraceId>0a981dd515966966104121683d****</TraceId>
+    <Data>
+        <NamespaceDescription>desc</NamespaceDescription>
+        <NamespaceId>cn-beijing:test</NamespaceId>
+        <NamespaceName>name</NamespaceName>
+        <RegionId>cn-beijing</RegionId>
+    </Data>
+    <ErrorCode>InstanceExist.NamespaceId</ErrorCode>
+    <Code>200</Code>
+    <Success>true</Success>
 </CreateNamespaceResponse>
 ```
 
 `JSON`格式
 
 ```
+HTTP/1.1 200 OK
+Content-Type:application/json
+
 {
-    "Message": "success",
-    "RequestId": "91F93257-7A4A-4BD3-9A7E-2F6EAE6D****",
-    "TraceId": "0a981dd515966966104121683d****",
-    "Data": {
-        "NamespaceName": "name",
-        "NamespaceId": "cn-beijing:test",
-        "RegionId": "cn-beijing",
-        "NamespaceDescription": "desc"
-    },
-    "Code": 200,
-    "Success": true
+  "RequestId" : "91F93257-7A4A-4BD3-9A7E-2F6EAE6D****",
+  "Message" : "success",
+  "TraceId" : "0a981dd515966966104121683d****",
+  "Data" : {
+    "NamespaceDescription" : "desc",
+    "NamespaceId" : "cn-beijing:test",
+    "NamespaceName" : "name",
+    "RegionId" : "cn-beijing"
+  },
+  "ErrorCode" : "InstanceExist.NamespaceId",
+  "Code" : "200",
+  "Success" : true
 }
 ```
 
@@ -105,6 +113,8 @@ POST /pop/v1/paas/namespace?RegionId=cn-beijing&NamespaceId=cn-beijing%3Atest&Na
 |400|InvalidNamespaceName.Format|The specified NamespaceName is invalid. The name of the namespace cannot exceed 63 characters in length.|指定的NamespaceName不合法。命名空间名称的长度不能超过63个字符。|
 |400|InvalidOperation.NamespaceClusterNotDeleted|The specified NamespaceId contains clusters.|指定的NamespaceId下还有集群。|
 |400|Namespace.AppExists|Please delete the application first.|请先删除应用。|
+|400|System.Upgrading|The system is being upgraded. Please try again later.|系统正在升级，请稍后操作。|
+|400|Exceed.Namespace|Too many namespaces have been created.|创建的命名空间过多。|
 
 访问[错误中心](https://error-center.aliyun.com/status/product/sae)查看更多错误码。
 
