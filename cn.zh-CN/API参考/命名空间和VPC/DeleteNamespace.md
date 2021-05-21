@@ -8,7 +8,7 @@
 
 ## 请求头
 
-该接口使用公共请求头，无特殊请求头。请参见公共请求参数文档。
+该接口使用公共请求头，无特殊请求头。更多信息，请参见[公共请求和返回头](~~126964~~)。
 
 ## 请求语法
 
@@ -26,27 +26,29 @@ DELETE /pop/v1/paas/namespace HTTP/1.1
 
 |名称|类型|示例值|描述|
 |--|--|---|--|
+|RequestId|String|91F93257-7A4A-4BD3-9A7E-2F6EAE6D\*\*\*\*|请求ID。 |
+|Message|String|success|调用结果的附加信息。 |
+|TraceId|String|0a981dd515966966104121683d\*\*\*\*|调用链ID，用于精确查询调用信息。 |
+|ErrorCode|String|InvalidNamespaceId.NotFound|错误码。 |
 |Code|String|200|接口状态或POP错误码。取值说明如下：
 
  -   2XX：成功。
 -   3XX：重定向。
 -   4XX：请求错误。
 -   5XX：服务器错误。 |
-|ErrorCode|String|InvalidNamespaceId.NotFound|错误码。 |
-|Message|String|success|调用结果的附加信息。 |
-|RequestId|String|91F93257-7A4A-4BD3-9A7E-2F6EAE6D\*\*\*\*|请求ID。 |
 |Success|Boolean|true|删除命名空间是否成功。取值说明如下：
 
  -   **true**：表示删除成功。
 -   **false**：表示删除失败。 |
-|TraceId|String|0a981dd515966966104121683d\*\*\*\*|调用链ID，用于精确查询调用信息。 |
 
 ## 示例
 
 请求示例
 
 ```
-DELETE /pop/v1/paas/namespace?RegionId=cn-beijing&NamespaceId=cn-beijing%3Atest
+DELETE /pop/v1/paas/namespace?NamespaceId=cn-beijing:test HTTP/1.1
+Host:sae.aliyuncs.com
+Content-Type:application/json
 ```
 
 正常返回示例
@@ -54,24 +56,32 @@ DELETE /pop/v1/paas/namespace?RegionId=cn-beijing&NamespaceId=cn-beijing%3Atest
 `XML`格式
 
 ```
+HTTP/1.1 200 OK
+Content-Type:application/xml
+
 <DeleteNamespaceResponse>
-      <Message>success</Message>
-      <RequestId>91F93257-7A4A-4BD3-9A7E-2F6EAE6D****</RequestId>
-      <TraceId>0a981dd515966966104121683d****</TraceId>
-      <Code>200</Code>
-      <Success>true</Success>
+    <RequestId>91F93257-7A4A-4BD3-9A7E-2F6EAE6D****</RequestId>
+    <Message>success</Message>
+    <TraceId>0a981dd515966966104121683d****</TraceId>
+    <ErrorCode>InvalidNamespaceId.NotFound</ErrorCode>
+    <Code>200</Code>
+    <Success>true</Success>
 </DeleteNamespaceResponse>
 ```
 
 `JSON`格式
 
 ```
+HTTP/1.1 200 OK
+Content-Type:application/json
+
 {
-    "Message": "success",
-    "RequestId": "91F93257-7A4A-4BD3-9A7E-2F6EAE6D****",
-    "TraceId": "0a981dd515966966104121683d****",
-    "Code": 200,
-    "Success": true
+  "RequestId" : "91F93257-7A4A-4BD3-9A7E-2F6EAE6D****",
+  "Message" : "success",
+  "TraceId" : "0a981dd515966966104121683d****",
+  "ErrorCode" : "InvalidNamespaceId.NotFound",
+  "Code" : "200",
+  "Success" : true
 }
 ```
 
@@ -79,9 +89,10 @@ DELETE /pop/v1/paas/namespace?RegionId=cn-beijing&NamespaceId=cn-beijing%3Atest
 
 |HttpCode|错误码|错误信息|描述|
 |--------|---|----|--|
-|404|InvalidNamespaceId.NotFound|The specified NamespaceId does not exist.|指定的NamespaceId不存在。|
 |400|InvalidOperation.NamespaceClusterNotDeleted|The specified NamespaceId contains clusters.|指定的NamespaceId下还有集群。|
 |400|Namespace.AppExists|Please delete the application first.|请先删除应用。|
+|400|System.Upgrading|The system is being upgraded. Please try again later.|系统正在升级，请稍后操作。|
+|404|InvalidNamespaceId.NotFound|The specified NamespaceId does not exist.|指定的NamespaceId不存在。|
 
 访问[错误中心](https://error-center.aliyun.com/status/product/sae)查看更多错误码。
 
