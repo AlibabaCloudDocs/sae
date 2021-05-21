@@ -8,7 +8,7 @@
 
 ## 请求头
 
-该接口使用公共请求头，无特殊请求头。请参见公共请求参数文档。
+该接口使用公共请求头，无特殊请求头。更多信息，请参见[公共请求和返回头](~~126964~~)。
 
 ## 请求语法
 
@@ -27,27 +27,29 @@ POST /pop/v1/sam/namespace/updateNamespaceVpc HTTP/1.1
 
 |名称|类型|示例值|描述|
 |--|--|---|--|
+|RequestId|String|91F93257-7A4A-4BD3-9A7E-2F6EAE6D\*\*\*\*|请求ID。 |
+|Message|String|success|调用结果的附加信息。 |
+|TraceId|String|0a98a02315955564772843261e\*\*\*\*|调用链ID，用于精确查询调用信息。 |
+|ErrorCode|String|success|错误码。 |
 |Code|String|200|接口状态或POP错误码。取值说明如下：
 
  -   2XX：成功。
 -   3XX：重定向。
 -   4XX：请求错误。
 -   5XX：服务器错误。 |
-|ErrorCode|String|success|错误码。 |
-|Message|String|success|调用结果的附加信息。 |
-|RequestId|String|91F93257-7A4A-4BD3-9A7E-2F6EAE6D\*\*\*\*|请求ID。 |
 |Success|Boolean|true|更新VPC信息是否成功。取值说明如下：
 
  -   **true**：表示更新成功。
 -   **false**：表示更新失败。 |
-|TraceId|String|0a98a02315955564772843261e\*\*\*\*|调用链ID，用于精确查询调用信息。 |
 
 ## 示例
 
 请求示例
 
 ```
-POST /pop/v1/sam/namespace/updateNamespaceVpc?RegionId=cn-beijing&NamespaceId=cn-beijing%3Atest&VpcId=vpc-2ze0i263cnn311nvj****
+POST /pop/v1/sam/namespace/updateNamespaceVpc?NamespaceId=cn-beijing:test&VpcId=vpc-2ze0i263cnn311nvj**** HTTP/1.1
+Host:sae.aliyuncs.com
+Content-Type:application/json
 ```
 
 正常返回示例
@@ -55,28 +57,41 @@ POST /pop/v1/sam/namespace/updateNamespaceVpc?RegionId=cn-beijing&NamespaceId=cn
 `XML`格式
 
 ```
-<UpdateNamespaceVpcResponse>.
-      <Message>success</Message>
-      <RequestId>91F93257-7A4A-4BD3-9A7E-2F6EAE6D****</RequestId>
-      <TraceId>0a98a02315955564772843261e****</TraceId>
-      <Code>200</Code>
-      <Success>true</Success>
+HTTP/1.1 200 OK
+Content-Type:application/xml
+
+<UpdateNamespaceVpcResponse>
+    <RequestId>91F93257-7A4A-4BD3-9A7E-2F6EAE6D****</RequestId>
+    <Message>success</Message>
+    <TraceId>0a98a02315955564772843261e****</TraceId>
+    <ErrorCode>success</ErrorCode>
+    <Code>200</Code>
+    <Success>true</Success>
 </UpdateNamespaceVpcResponse>
 ```
 
 `JSON`格式
 
 ```
+HTTP/1.1 200 OK
+Content-Type:application/json
+
 {
-    "Message": "success",
-    "RequestId": "91F93257-7A4A-4BD3-9A7E-2F6EAE6D****",
-    "TraceId": "0a98a02315955564772843261e****",
-    "Code": 200,
-    "Success": true
+  "RequestId" : "91F93257-7A4A-4BD3-9A7E-2F6EAE6D****",
+  "Message" : "success",
+  "TraceId" : "0a98a02315955564772843261e****",
+  "ErrorCode" : "success",
+  "Code" : "200",
+  "Success" : true
 }
 ```
 
 ## 错误码
+
+|HttpCode|错误码|错误信息|描述|
+|--------|---|----|--|
+|400|DeleteFail.NamespaceHasIngress|Ingress detected when deleting the namespace.|删除命名空间时，命名空间存在Ingress。|
+|400|Namespace.AppExists|Please delete the application first.|请先删除应用。|
 
 访问[错误中心](https://error-center.aliyun.com/status/product/sae)查看更多错误码。
 
