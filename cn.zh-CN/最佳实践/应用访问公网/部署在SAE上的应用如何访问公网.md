@@ -20,7 +20,7 @@ keyword: [SAE访问公网, 访问公网, 应用访问公网]
 
 **说明：**
 
--   如果VPC内多个VSwitch下的实例需要出公网，那么针对多个VSwitch都需要配置SNAT。
+-   如果VPC内多个vSwitch下的实例需要出公网，那么针对多个vSwitch都需要配置SNAT。
 -   单个VPC内存在多个应用访问公网，配置代理后仅需绑定1个EIP。
 
 ## 注意事项
@@ -37,7 +37,7 @@ keyword: [SAE访问公网, 访问公网, 应用访问公网]
 
 3.  在**组合购买（NAT网关+弹性公网IP）**页面，设置相关信息，单击**立即购买**。
 
-    参数说明如下。
+    参数说明如下：
 
     |参数|说明|
     |--|--|
@@ -71,7 +71,7 @@ keyword: [SAE访问公网, 访问公网, 应用访问公网]
 
     ![创建SNAT条目02](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/6698501161/p57245.png)
 
-    参数说明如下。
+    参数说明如下：
 
     |参数|说明|
     |--|--|
