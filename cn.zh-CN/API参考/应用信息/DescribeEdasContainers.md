@@ -8,7 +8,7 @@
 
 ## 请求头
 
-该接口使用公共请求头，无特殊请求头。请参见公共请求参数文档。
+该接口使用公共请求头，无特殊请求头。更多信息，请参见[公共请求和返回头](~~126964~~)。
 
 ## 请求语法
 
@@ -18,16 +18,15 @@ GET /pop/v1/sam/resource/edasContainers HTTP/1.1
 
 ## 请求参数
 
+无请求参数
+
 ## 返回数据
 
 |名称|类型|示例值|描述|
 |--|--|---|--|
-|Code|String|200|接口状态或POP错误码。取值说明如下：
-
- -   2XX：成功。
--   3XX：重定向。
--   4XX：请求错误。
--   5XX：服务器错误。 |
+|RequestId|String|91F93257-7A4A-4BD3-9A7E-2F6EAE6D\*\*\*\*|请求ID。 |
+|Message|String|success|调用结果的附加信息。 |
+|TraceId|String|0a98a02315955564772843261e\*\*\*\*|调用链ID，用于精确查询调用信息。 |
 |Data|Array of Data| |组件列表。 |
 |Disabled|Boolean|false|微服务组件是否禁用。取值说明如下：
 
@@ -35,13 +34,16 @@ GET /pop/v1/sam/resource/edasContainers HTTP/1.1
 -   **false**：表示组件未被禁用。 |
 |EdasContainerVersion|String|3.5.3|容器版本。 |
 |ErrorCode|String|success|错误码。 |
-|Message|String|success|调用结果的附加信息。 |
-|RequestId|String|91F93257-7A4A-4BD3-9A7E-2F6EAE6D\*\*\*\*|请求ID。 |
+|Code|String|200|接口状态或POP错误码。取值说明如下：
+
+ -   **2XX**：成功。
+-   **3XX**：重定向。
+-   **4XX**：请求错误。
+-   **5XX**：服务器错误。 |
 |Success|Boolean|true|获取应用微服务容器组件列表是否成功。取值说明如下：
 
  -   **true**：表示获取成功。
 -   **false**：表示获取失败。 |
-|TraceId|String|0a98a02315955564772843261e\*\*\*\*|调用链ID，用于精确查询调用信息。 |
 
 ## 示例
 
@@ -49,7 +51,10 @@ GET /pop/v1/sam/resource/edasContainers HTTP/1.1
 
 ```
 GET /pop/v1/sam/resource/edasContainers HTTP/1.1
-公共请求头
+Host:sae.aliyuncs.com
+Content-Type:application/json
+
+公共请求参数
 ```
 
 正常返回示例
@@ -57,34 +62,40 @@ GET /pop/v1/sam/resource/edasContainers HTTP/1.1
 `XML`格式
 
 ```
+HTTP/1.1 200 OK
+Content-Type:application/xml
+
 <DescribeEdasContainersResponse>
-	  <Data>
-		    <EdasContainerVersion>3.5.3</EdasContainerVersion>
-		    <Disabled>false</Disabled>
-	  </Data>
-	  <Message>success</Message>
-	  <RequestId>91F93257-7A4A-4BD3-9A7E-2F6EAE6D****</RequestId>
-	  <TraceId>0a98a02315955564772843261e****</TraceId>
-	  <Success>true</Success>
-	  <Code>200</Code>
+    <RequestId>91F93257-7A4A-4BD3-9A7E-2F6EAE6D****</RequestId>
+    <Message>success</Message>
+    <TraceId>0a98a02315955564772843261e****</TraceId>
+    <Data>
+        <Disabled>false</Disabled>
+        <EdasContainerVersion>3.5.3</EdasContainerVersion>
+    </Data>
+    <ErrorCode>success</ErrorCode>
+    <Code>200</Code>
+    <Success>true</Success>
 </DescribeEdasContainersResponse>
 ```
 
 `JSON`格式
 
 ```
+HTTP/1.1 200 OK
+Content-Type:application/json
+
 {
-  "Data": [
-    {
-      "EdasContainerVersion": "3.5.3",
-      "Disabled": false
-    }
-  ],
-  "Message": "success",
-  "RequestId": "91F93257-7A4A-4BD3-9A7E-2F6EAE6D****",
-  "TraceId": "0a98a02315955564772843261e****",
-  "Success": true,
-  "Code": 200
+  "RequestId" : "91F93257-7A4A-4BD3-9A7E-2F6EAE6D****",
+  "Message" : "success",
+  "TraceId" : "0a98a02315955564772843261e****",
+  "Data" : [ {
+    "Disabled" : false,
+    "EdasContainerVersion" : "3.5.3"
+  } ],
+  "ErrorCode" : "success",
+  "Code" : "200",
+  "Success" : true
 }
 ```
 
