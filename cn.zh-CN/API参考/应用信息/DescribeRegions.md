@@ -8,7 +8,7 @@
 
 ## 请求头
 
-该接口使用公共请求头，无特殊请求头。请参见公共请求参数文档。
+该接口使用公共请求头，无特殊请求头。更多信息，请参见[公共请求和返回头](~~126964~~)。
 
 ## 请求语法
 
@@ -18,23 +18,25 @@ GET /pop/v1/paas/regionConfig HTTP/1.1
 
 ## 请求参数
 
+无请求参数
+
 ## 返回数据
 
 |名称|类型|示例值|描述|
 |--|--|---|--|
-|Code|Integer|200|接口状态或POP错误码。取值说明如下：
-
- -   2XX：成功。
--   3XX：重定向。
--   4XX：请求错误。
--   5XX：服务器错误。 |
 |Message|String|success|调用结果的附加信息。 |
+|RequestId|String|DDE85827-B0B3-4E56-86E8-17C42009\*\*\*\*|请求ID。 |
 |Regions|Array of Region| |地域列表。 |
 |Region| | | |
 |LocalName|String|华东2（上海）|地域名称。 |
 |RegionEndpoint|String|sae.cn-shanghai.aliyuncs.com|地域地址。 |
 |RegionId|String|cn-shanghai|地域ID。 |
-|RequestId|String|DDE85827-B0B3-4E56-86E8-17C42009\*\*\*\*|请求ID。 |
+|Code|Integer|200|接口状态或POP错误码。取值说明如下：
+
+ -   **2XX**：成功。
+-   **3XX**：重定向。
+-   **4XX**：请求错误。
+-   **5XX**：服务器错误。 |
 
 ## 示例
 
@@ -42,7 +44,10 @@ GET /pop/v1/paas/regionConfig HTTP/1.1
 
 ```
 GET /pop/v1/paas/regionConfig HTTP/1.1
-公共请求头
+Host:sae.aliyuncs.com
+Content-Type:application/json
+
+公共请求参数
 ```
 
 正常返回示例
@@ -50,46 +55,36 @@ GET /pop/v1/paas/regionConfig HTTP/1.1
 `XML`格式
 
 ```
+HTTP/1.1 200 OK
+Content-Type:application/xml
+
 <DescribeRegionsResponse>
-	  <Message>success</Message>
-	  <RequestId>DDE85827-B0B3-4E56-86E8-17C420090D5C</RequestId>
-	  <Regions>
-		    <Region>
-			      <RegionId>cn-shanghai</RegionId>
-			      <RegionEndpoint>sae.cn-shanghai.aliyuncs.com</RegionEndpoint>
-			      <LocalName>华东2（上海）</LocalName>
-		    </Region>
-		    <Region>
-			      <RegionId>cn-hangzhou</RegionId>
-			      <RegionEndpoint>sae.cn-hangzhou.aliyuncs.com</RegionEndpoint>
-			      <LocalName>华东1（杭州）</LocalName>
-		    </Region>
-	  </Regions>
-	  <Code>200</Code>
+    <Message>success</Message>
+    <RequestId>DDE85827-B0B3-4E56-86E8-17C42009****</RequestId>
+    <Regions>
+        <LocalName>华东2（上海）</LocalName>
+        <RegionEndpoint>sae.cn-shanghai.aliyuncs.com</RegionEndpoint>
+        <RegionId>cn-shanghai</RegionId>
+    </Regions>
+    <Code>200</Code>
 </DescribeRegionsResponse>
 ```
 
 `JSON`格式
 
 ```
+HTTP/1.1 200 OK
+Content-Type:application/json
+
 {
-  "Message": "success",
-  "RequestId": "DDE85827-B0B3-4E56-86E8-17C420090D5C",
-  "Regions": {
-    "Region": [
-      {
-        "RegionId": "cn-shanghai",
-        "RegionEndpoint": "sae.cn-shanghai.aliyuncs.com",
-        "LocalName": "华东2（上海）"
-      },
-      {
-        "RegionId": "cn-hangzhou",
-        "RegionEndpoint": "sae.cn-hangzhou.aliyuncs.com",
-        "LocalName": "华东1（杭州）"
-      }
-    ]
-  },
-  "Code": 200
+  "Message" : "success",
+  "RequestId" : "DDE85827-B0B3-4E56-86E8-17C42009****",
+  "Regions" : [ {
+    "LocalName" : "华东2（上海）",
+    "RegionEndpoint" : "sae.cn-shanghai.aliyuncs.com",
+    "RegionId" : "cn-shanghai"
+  } ],
+  "Code" : 200
 }
 ```
 
