@@ -23,7 +23,7 @@ GET /pop/v1/sam/changeorder/ListChangeOrders HTTP/1.1
 |AppId|String|Query|是|145341c-9708-4967-b3ec-24933767\*\*\*\*|应用ID。 |
 |CurrentPage|Integer|Query|否|1|当前分页。 |
 |PageSize|Integer|Query|否|20|分页大小。 |
-|Key|String|Query|否|test|模糊查询值。 |
+|Key|String|Query|否|test|针对发布单的**部署描述**的模糊查询值。 |
 |CoType|String|Query|否|CoCreateApp|变更单类型。 |
 |CoStatus|String|Query|否|2|变更单状态。取值说明如下：
 
@@ -38,26 +38,13 @@ GET /pop/v1/sam/changeorder/ListChangeOrders HTTP/1.1
 
 |名称|类型|示例值|描述|
 |--|--|---|--|
-|Code|String|200|接口状态或POP错误码。取值说明如下：
-
- -   2XX：成功。
--   3XX：重定向。
--   4XX：请求错误。
--   5XX：服务器错误。 |
-|Data|Struct| |变更单列表信息。 |
+|RequestId|String|65E1F-43BA-4D0C-8E61-E4D1337F\*\*\*\*|请求ID。 |
+|Message|String|success|调用结果的附加信息。 |
+|TraceId|String|0bb6f815638568884597879d\*\*\*\*|调用链ID，用于精确查询调用信息。 |
+|Data|Object| |变更单列表信息。 |
+|CurrentPage|Integer|1|当前分页。 |
+|TotalSize|Integer|1|变更单总数。 |
 |ChangeOrderList|Array of ChangeOrder| |变更单列表信息。 |
-|AppId|String|164341c-9708-4967-b3ec-24933767\*\*\*\*|应用ID。 |
-|BatchCount|Integer|1|分批数。 |
-|BatchType|String|auto|分批类型。 |
-|ChangeOrderId|String|7fa5c0-9ebb-4bb4-b383-1f885447b109|变更单ID。 |
-|CoType|String|创建应用|变更单类型。 |
-|CoTypeCode|String|CoCreateApp|变更单类型CODE。 |
-|CreateTime|String|2019-07-11 15:54:49|创建时间。 |
-|CreateUserId|String|sae-beta-test|阿里云账号名称。 |
-|Description|String|版本：1.0 \| 镜像名称：nginx|描述信息。 |
-|FinishTime|String|2019-07-11 20:12:58|结束时间。 |
-|GroupId|String|c9ecd2-cf6c-46c3-9f20-525de202cf79|分组ID。 |
-|Source|String|console|变更单操作入口来源。 |
 |Status|Integer|2|变更单状态。取值说明如下：
 
  -   **0**：准备。
@@ -66,25 +53,40 @@ GET /pop/v1/sam/changeorder/ListChangeOrders HTTP/1.1
 -   **3**：执行失败。
 -   **6**：终止。
 -   **10**：系统异常执行失败。 |
+|FinishTime|String|2019-07-11 20:12:58|结束时间。 |
+|CreateTime|String|2019-07-11 15:54:49|创建时间。 |
 |UserId|String|sae-beta-test|阿里云账号名称。 |
-|CurrentPage|Integer|1|当前分页。 |
+|Source|String|console|变更单操作入口来源。 |
+|BatchCount|Integer|1|分批数。 |
+|CreateUserId|String|sae-beta-test|阿里云账号名称。 |
+|CoTypeCode|String|CoCreateApp|变更单类型CODE。 |
+|ChangeOrderId|String|7fa5c0-9ebb-4bb4-b383-1f885447b109|变更单ID。 |
+|BatchType|String|auto|分批类型。 |
+|GroupId|String|c9ecd2-cf6c-46c3-9f20-525de202cf79|分组ID。 |
+|Description|String|版本：1.0 \| 镜像名称：nginx|描述信息。 |
+|CoType|String|创建应用|变更单类型。 |
+|AppId|String|164341c-9708-4967-b3ec-24933767\*\*\*\*|应用ID。 |
 |PageSize|Integer|20|分页大小。 |
-|TotalSize|Integer|1|变更单总数。 |
 |ErrorCode|String|success|错误码。 |
-|Message|String|success|调用结果的附加信息。 |
-|RequestId|String|65E1F-43BA-4D0C-8E61-E4D1337F\*\*\*\*|请求ID。 |
+|Code|String|200|接口状态或POP错误码。取值说明如下：
+
+ -   **2XX**：成功。
+-   **3XX**：重定向。
+-   **4XX**：请求错误。
+-   **5XX**：服务器错误。 |
 |Success|Boolean|true|获取变更单列表是否成功。取值说明如下：
 
  -   **true**：表示获取成功。
 -   **false**：表示获取失败。 |
-|TraceId|String|0bb6f815638568884597879d\*\*\*\*|调用链ID，用于精确查询调用信息。 |
 
 ## 示例
 
 请求示例
 
 ```
-GET /pop/v1/sam/changeorder/ListChangeOrders?RegionId=cn-beijing&AppId=145341c-9708-4967-b3ec-24933767****
+GET /pop/v1/sam/changeorder/ListChangeOrders?AppId=145341c-9708-4967-b3ec-24933767****&CurrentPage=1&PageSize=20&Key=test&CoType=CoCreateApp&CoStatus=2 HTTP/1.1
+Host:sae.aliyuncs.com
+Content-Type:application/json
 ```
 
 正常返回示例
@@ -92,66 +94,74 @@ GET /pop/v1/sam/changeorder/ListChangeOrders?RegionId=cn-beijing&AppId=145341c-9
 `XML`格式
 
 ```
+HTTP/1.1 200 OK
+Content-Type:application/xml
+
 <ListChangeOrdersResponse>
-	  <RequestId>65E1F-43BA-4D0C-8E61-E4D1337F****</RequestId>
-	  <Message>success</Message>
-	  <TraceId>0bb6f815638568884597879d****</TraceId>
-	  <Data>
-    	    <PageSize>20</PageSize>
-    	    <CurrentPage>1</CurrentPage>
-    	    <ChangeOrderList>
-        	      <Status>2</Status>
-        	      <Description>版本：1.0 | 镜像名称：nginx</Description>
-        	      <CreateTime>2019-07-11 15:54:49</CreateTime>
-        	      <ChangeOrderId>7fa5c0-9ebb-4bb4-b383-1f885447b109</ChangeOrderId>
-        	      <CreateUserId>sae-beta-test</CreateUserId>
-        	      <Source>console</Source>
-        	      <BatchType>auto</BatchType>
-        	      <GroupId>c9ecd2-cf6c-46c3-9f20-525de202cf79</GroupId>
-        	      <FinishTime>2019-07-11 20:12:58</FinishTime>
-        	      <CoTypeCode>CoCreateApp</CoTypeCode>
-        	      <AppId>164341c-9708-4967-b3ec-24933767****</AppId>
-        	      <UserId>sae-beta-test</UserId>
-        	      <CoType>创建应用</CoType>
-        	      <BatchCount>1</BatchCount>
-    	    </ChangeOrderList>
-    	    <TotalSize>1</TotalSize>
-	  </Data>
-	  <Code>200</Code>
-	  <Success>true</Success>
+    <RequestId>65E1F-43BA-4D0C-8E61-E4D1337F****</RequestId>
+    <Message>success</Message>
+    <TraceId>0bb6f815638568884597879d****</TraceId>
+    <Data>
+        <CurrentPage>1</CurrentPage>
+        <TotalSize>1</TotalSize>
+        <ChangeOrderList>
+            <Status>2</Status>
+            <FinishTime>2019-07-11 20:12:58</FinishTime>
+            <CreateTime>2019-07-11 15:54:49</CreateTime>
+            <UserId>sae-beta-test</UserId>
+            <Source>console</Source>
+            <BatchCount>1</BatchCount>
+            <CreateUserId>sae-beta-test</CreateUserId>
+            <CoTypeCode>CoCreateApp</CoTypeCode>
+            <ChangeOrderId>7fa5c0-9ebb-4bb4-b383-1f885447b109</ChangeOrderId>
+            <BatchType>auto</BatchType>
+            <GroupId>c9ecd2-cf6c-46c3-9f20-525de202cf79</GroupId>
+            <Description>版本：1.0 | 镜像名称：nginx</Description>
+            <CoType>创建应用</CoType>
+            <AppId>164341c-9708-4967-b3ec-24933767****</AppId>
+        </ChangeOrderList>
+        <PageSize>20</PageSize>
+    </Data>
+    <ErrorCode>success</ErrorCode>
+    <Code>200</Code>
+    <Success>true</Success>
 </ListChangeOrdersResponse>
 ```
 
 `JSON`格式
 
 ```
+HTTP/1.1 200 OK
+Content-Type:application/json
+
 {
-    "RequestId": "65E1F-43BA-4D0C-8E61-E4D1337F****",
-    "Message": "success",
-    "TraceId": "0bb6f815638568884597879d****",
-    "Data": {
-        "PageSize": 20,
-        "CurrentPage": 1,
-        "ChangeOrderList": {
-            "Status": 2,
-            "Description": "版本：1.0 | 镜像名称：nginx",
-            "CreateTime": "2019-07-11 15:54:49",
-            "ChangeOrderId": "7fa5c0-9ebb-4bb4-b383-1f885447b109",
-            "CreateUserId": "sae-beta-test",
-            "Source": "console",
-            "BatchType": "auto",
-            "GroupId": "c9ecd2-cf6c-46c3-9f20-525de202cf79",
-            "FinishTime": "2019-07-11 20:12:58",
-            "CoTypeCode": "CoCreateApp",
-            "AppId": "164341c-9708-4967-b3ec-24933767****",
-            "UserId": "sae-beta-test",
-            "CoType": "创建应用",
-            "BatchCount": 1
-        },
-        "TotalSize": 1
-    },
-    "Code": 200,
-    "Success": true
+  "RequestId" : "65E1F-43BA-4D0C-8E61-E4D1337F****",
+  "Message" : "success",
+  "TraceId" : "0bb6f815638568884597879d****",
+  "Data" : {
+    "CurrentPage" : 1,
+    "TotalSize" : 1,
+    "ChangeOrderList" : [ {
+      "Status" : 2,
+      "FinishTime" : "2019-07-11 20:12:58",
+      "CreateTime" : "2019-07-11 15:54:49",
+      "UserId" : "sae-beta-test",
+      "Source" : "console",
+      "BatchCount" : 1,
+      "CreateUserId" : "sae-beta-test",
+      "CoTypeCode" : "CoCreateApp",
+      "ChangeOrderId" : "7fa5c0-9ebb-4bb4-b383-1f885447b109",
+      "BatchType" : "auto",
+      "GroupId" : "c9ecd2-cf6c-46c3-9f20-525de202cf79",
+      "Description" : "版本：1.0 | 镜像名称：nginx",
+      "CoType" : "创建应用",
+      "AppId" : "164341c-9708-4967-b3ec-24933767****"
+    } ],
+    "PageSize" : 20
+  },
+  "ErrorCode" : "success",
+  "Code" : "200",
+  "Success" : true
 }
 ```
 
