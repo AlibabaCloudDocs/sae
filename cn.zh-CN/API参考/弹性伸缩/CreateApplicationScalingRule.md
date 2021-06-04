@@ -8,6 +8,7 @@
 -   您最多可以为1条定时弹性策略，创建20条单天内触发时间点。
 -   弹性策略启用时，请勿手动执行应用生命周期管理操作，例如应用扩缩、部署应用、更改规格、重启应用或停止应用。如果您需要对应用执行该类操作，那么请停用弹性策略后，再手动执行操作。
 -   如果当前应用处于扩容、缩容、部署（单批、分批或灰度）、更改规格、重启或停止等过程中，那么该应用暂时无法添加或者启动弹性策略。
+-   如果单个应用需要弹出超过50个实例，需提交[工单](https://workorder.console.aliyun.com/#/ticket/createIndex)申请白名单。
 
 ## 调试
 
@@ -61,8 +62,8 @@ POST /pop/v1/sam/scale/applicationScalingRule HTTP/1.1
 |--|--|---|--|
 |RequestId|String|91F93257-7A4A-4BD3-9A7E-2F6EAE6D\*\*\*\*|请求ID。 |
 |TraceId|String|0a98a02315955564772843261e\*\*\*\*|调用链ID，用于精确查询调用信息。 |
-|Data|object| |返回结果。 |
-|Timer|object| |定时弹性伸缩。 |
+|Data|Object| |返回结果。 |
+|Timer|Object| |定时弹性伸缩。 |
 |EndDate|String|2021-04-25|短期结束日期。若为**null**，则为长期。 |
 |BeginDate|String|2021-03-25|短期开始日期。若为**null**，则为长期。 |
 |Schedules|Array of Schedule| |单天内触发时间点。 |
@@ -89,6 +90,8 @@ POST /pop/v1/sam/scale/applicationScalingRule HTTP/1.1
 POST /pop/v1/sam/scale/applicationScalingRule?AppId=7171a6ca-d1cd-4928-8642-7d5cfe69****&ScalingRuleName=timer-0800-2100&ScalingRuleType=timing&ScalingRuleTimer={"beginDate":null,"endDate":null,"period":"* * *","schedules":[{"atTime":"08:00","targetReplicas":10},{"atTime":"20:00","targetReplicas":3}]} HTTP/1.1
 Host:sae.aliyuncs.com
 Content-Type:application/json
+
+公共请求参数
 ```
 
 正常返回示例
