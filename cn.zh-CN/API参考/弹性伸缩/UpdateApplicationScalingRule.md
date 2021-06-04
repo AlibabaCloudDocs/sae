@@ -2,6 +2,10 @@
 
 调用UpdateApplicationScalingRule接口更新应用弹性伸缩策略。
 
+## 使用须知
+
+如果单个应用需要弹出超过50个实例，需提交[工单](https://workorder.console.aliyun.com/#/ticket/createIndex)申请白名单。
+
 ## 调试
 
 [您可以在OpenAPI Explorer中直接运行该接口，免去您计算签名的困扰。运行成功后，OpenAPI Explorer可以自动生成SDK代码示例。](https://api.aliyun.com/#product=sae&api=UpdateApplicationScalingRule&type=ROA&version=2019-05-06)
@@ -51,8 +55,8 @@ PUT /pop/v1/sam/scale/applicationScalingRule HTTP/1.1
 |--|--|---|--|
 |RequestId|String|91F93257-7A4A-4BD3-9A7E-2F6EAE6D\*\*\*\*|请求ID。 |
 |TraceId|String|0a98a02315955564772843261e\*\*\*\*|调用链ID，用于精确查询调用信息。 |
-|Data|object| |返回结果。 |
-|Timer|object| |定时弹性伸缩。 |
+|Data|Object| |返回结果。 |
+|Timer|Object| |定时弹性伸缩。 |
 |EndDate|String|2021-04-25|短期结束日期。若为**null**，则为长期。 |
 |BeginDate|String|2021-03-25|短期开始日期。若为**null**，则为长期。 |
 |Schedules|Array of Schedule| |单天内触发时间点。 |
@@ -79,6 +83,8 @@ PUT /pop/v1/sam/scale/applicationScalingRule HTTP/1.1
 PUT /pop/v1/sam/scale/applicationScalingRule?AppId=7171a6ca-d1cd-4928-8642-7d5cfe69****&ScalingRuleName=timer-0800-2100&ScalingRuleTimer={"beginDate":null,"endDate":null,"period":"* * *","schedules":[{"atTime":"08:00","targetReplicas":10},{"atTime":"20:00","targetReplicas":3}]} HTTP/1.1
 Host:sae.aliyuncs.com
 Content-Type:application/json
+
+公共请求参数
 ```
 
 正常返回示例
@@ -166,7 +172,7 @@ Content-Type:application/json
 |400|NoComputeResourceQuota.App.Exceed|You can create %s instances for each application. Please submit a ticket to raise the quota.|每个应用只允许创建%s个实例，请提交工单增加计算资源额度。|
 |400|NoComputeResourceQuota.User.Exceed|Your account is limited to create %s instances. Please submit a ticket to raise the quota.|您的账户限额%s个实例，请提交工单增加计算资源额度。|
 |400|System.Upgrading|The system is being upgraded. Please try again later.|系统正在升级，请稍后操作。|
-|400|OperationDenied.SDKNotSupported|Metrics is not supported in SDK|SDK 未开放指标弹性规则|
+|400|OperationDenied.SDKNotSupported|Metrics is not supported in SDK|SDK未开放指标弹性规则。|
 
 访问[错误中心](https://error-center.aliyun.com/status/product/sae)查看更多错误码。
 
