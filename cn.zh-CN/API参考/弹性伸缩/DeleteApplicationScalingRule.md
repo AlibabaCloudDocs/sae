@@ -1,6 +1,6 @@
 # DeleteApplicationScalingRule
 
-调用CreateApplicationScalingRule接口删除应用弹性伸缩策略。
+调用DeleteApplicationScalingRule接口删除应用弹性伸缩策略。
 
 ## 调试
 
