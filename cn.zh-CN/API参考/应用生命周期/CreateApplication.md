@@ -20,13 +20,13 @@ POST /pop/v1/sam/app/createApplication HTTP/1.1
 
 |名称|类型|位置|是否必选|示例值|描述|
 |--|--|--|----|---|--|
-|AppName|String|Query|是|test|应用名称。允许数字、字母以及短划线（-）组合。必须以字母开始，最大长度36个字符。 |
+|AppName|String|Query|是|test|应用名称。允许数字、字母以及短划线（-）组合。必须以字母开始，不超过36个字符。 |
 |NamespaceId|String|Query|否|cn-beijing:test|SAE命名空间ID。仅支持名称为小写字母加短划线（-）的命名空间，必须以字母开始。
 
  命名空间可通过调用[DescribeNamespaceList](~~126547~~)接口获取。 |
 |AppDescription|String|Query|否|This is a test description.|应用描述信息。不超过1024个字符。 |
 |VpcId|String|Query|否|vpc-bp1aevy8sofi8mh1q\*\*\*\*|SAE命名空间对应的VPC。在SAE中，一个命名空间只能对应一个VPC，且不能修改。第一次在命名空间内创建SAE应用将形成绑定关系。多个命名空间可以对应一个VPC。不填则默认为命名空间绑定的VPC ID。 |
-|VSwitchId|String|Query|否|vsw-bp12mw1f8k3jgygk9\*\*\*\*|应用实例弹性网卡所在的虚拟交换机。该交换机必须位于上述VPC内。该交换机与SAE命名空间同样存在绑定关系。不填则默认为命名空间绑定的VSwitch ID。 |
+|VSwitchId|String|Query|否|vsw-bp12mw1f8k3jgygk9\*\*\*\*|应用实例弹性网卡所在的虚拟交换机。该交换机必须位于上述VPC内。该交换机与SAE命名空间同样存在绑定关系。不填则默认为命名空间绑定的vSwitch ID。 |
 |PackageType|String|Query|是|FatJar|应用包类型。支持**FatJar**、**War**和**Image**。 |
 |PackageVersion|String|Query|否|1.0.0|部署包的版本号。当**Package Type**为**War**和**FatJar**时必填。 |
 |PackageUrl|String|Query|否|http://myoss.oss-cn-hangzhou.aliyuncs.com/my-buc/2019-06-30/sae-test.jar|部署包地址。只有**FatJar**或**War**类型的应用可以配置部署包地址。 |
@@ -55,8 +55,8 @@ POST /pop/v1/sam/app/createApplication HTTP/1.1
 |Replicas|Integer|Query|是|1|初始实例数。 |
 |Command|String|Query|否|sleep|镜像启动命令。该命令必须为容器内存在的可执行的对象。例如：sleep。设置该命令将导致镜像原本的启动命令失效。 |
 |CommandArgs|String|Query|否|1d|镜像启动命令参数。上述启动命令所需参数。例如：1d |
-|Envs|String|Query|否|\[\{"name":"envtmp","value":"0"\}\]|容器环境变量参数。例如： \[\{"name":"envtmp","value":"0"\}\] |
-|CustomHostAlias|String|Query|否|\[\{"hostName":"samplehost","ip":"127.0.0.1"\}\]|容器内自定义host映射。例如： \[\{"hostName":"samplehost","ip":"127.0.0.1"\}\] |
+|Envs|String|Query|否|\[\{"name":"envtmp","value":"0"\}\]|容器环境变量参数。 |
+|CustomHostAlias|String|Query|否|\[\{"hostName":"samplehost","ip":"127.0.0.1"\}\]|容器内自定义host映射。 |
 |JarStartOptions|String|Query|否|-Xms4G -Xmx4G|JAR包启动应用选项。应用默认启动命令：**$JAVA\_HOME/bin/java $JarStartOptions -jar $CATALINA\_OPTS "$package\_path" $JarStartArgs** |
 |JarStartArgs|String|Query|否|custom-args|JAR包启动应用参数。应用默认启动命令：**$JAVA\_HOME/bin/java $JarStartOptions -jar $CATALINA\_OPTS "$package\_path" $JarStartArgs** |
 |Liveness|String|Query|否|\{"exec":\{"command":\["sh","-c","cat /home/admin/start.sh"\]\},"initialDelaySeconds":30,"periodSeconds":30,"timeoutSeconds":2\}|容器健康检查，健康检查失败的容器将被关闭并恢复。目前仅支持容器内下发命令的方式。例如：\{"exec":\{"command":\["sh","-c","cat /home/admin/start.sh"\]\},"initialDelaySeconds":30,"periodSeconds":30,"timeoutSeconds":2\}
@@ -79,7 +79,7 @@ POST /pop/v1/sam/app/createApplication HTTP/1.1
 |Timezone|String|Query|否|Asia/Shanghai|时区默认为**Asia/Shanghai**。 |
 |SlsConfigs|String|Query|否|\[\{\\"logDir\\":\\"/root/logs/hsf.log\\"\}\]|文件日志采集配置。
 
- -   使用SAE自动创建的SLS资源：\{\\"logDir\\":\\"/root/logs/hsf.log\\"\}。
+ -   使用SAE自动创建的SLS资源：\[\{\\"logDir\\":\\"/root/logs/hsf.log\\"\}\]。
 -   使用自定义的SLS资源：\[\{\\"projectName\\":\\"test-sls\\",\\"logDir\\":\\"/tmp/readiness.txt\\",\\"logstoreName\\":\\"logstore\\","logtailName":"testLogtail"\}\]。
     -   **projectName**：配置SLS上的Project名称。
     -   **logDir**：配置收集日志文件的路径。
@@ -95,7 +95,7 @@ POST /pop/v1/sam/app/createApplication HTTP/1.1
 |SecurityGroupId|String|Query|否|sg-wz969ngg2e49q5i4\*\*\*\*|安全组ID。 |
 |AutoConfig|Boolean|Query|否|true|是否自动配置网络环境。取值说明如下：
 
- -   **true**：创建应用时SAE自动配置网络环境。**NamespaceId**、**VpcId**、**VSwitchId**和**SecurityGroupId**的取值将被忽略。
+ -   **true**：创建应用时SAE自动配置网络环境。**NamespaceId**、**VpcId**、**vSwitchId**和**SecurityGroupId**的取值将被忽略。
 -   **false**：创建应用时SAE手动配置网络环境。 |
 |TerminationGracePeriodSeconds|Integer|Query|否|30|优雅下线超时时间，默认为30，单位为秒。取值范围为1~60。 |
 |PhpArmsConfigLocation|String|Query|否|/usr/local/etc/php/conf.d/arms.ini|PHP应用监控挂载路径，需要您保证PHP服务器一定会加载这个路径的配置文件。
@@ -120,7 +120,7 @@ POST /pop/v1/sam/app/createApplication HTTP/1.1
 |OssAkId|String|FormData|否|xxxxxx|OSS读写的AccessKey ID。 |
 |OssAkSecret|String|FormData|否|xxxxxx|OSS读写的AccessKey Secret。 |
 
-**OssMountDescs**的详细描述，请参见[DescribeApplicationConfig](~~125723~~)。
+关于**OssMountDescs**的更多信息，请参见[DescribeApplicationConfig](~~125723~~)。
 
 ## 返回数据
 
@@ -154,6 +154,8 @@ Host:sae.aliyuncs.com
 Content-Type:application/json
 
 ConfigMapMountDesc=[{"configMapId":16,"key":"test","mountPath":"/tmp"}]&PhpConfig=k1=v1&OssMountDescs=[{"bucketName": "oss-bucket", "bucketPath": "data/user.data", "mountPath": "/usr/data/user.data", "readOnly": true}]&OssAkId=xxxxxx&OssAkSecret=xxxxxx
+
+公共请求参数
 ```
 
 正常返回示例
