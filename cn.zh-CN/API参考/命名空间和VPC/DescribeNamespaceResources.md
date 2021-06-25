@@ -39,14 +39,14 @@ GET /pop/v1/sam/namespace/describeNamespaceResources HTTP/1.1
 |NamespaceName|String|test|命名空间名称。 |
 |LastChangeOrderStatus|String|success|命名空间最后一次发布单状态。 |
 |VpcName|String|test|VPC名称。 |
-|VSwitchId|String|vsw-2ze559r1z1bpwqxwp\*\*\*\*|VSwitch ID。 |
+|VSwitchId|String|vsw-2ze559r1z1bpwqxwp\*\*\*\*|vSwitch ID。 |
 |Description|String|decs|命名空间描述信息。 |
 |LastChangeOrderRunning|Boolean|true|命名空间是否有发布单运行。取值说明如下：
 
  -   **true**：表示有发布单运行。
 -   **false**：表示没有发布单运行。 |
 |AppCount|Long|1|应用个数。 |
-|VSwitchName|String|test|VSwitch名称。 |
+|VSwitchName|String|test|vSwitch名称。 |
 |NotificationExpired|Boolean|true|发布单通知是否过期。取值说明如下：
 
  -   **true**：表示发布单已过期。
@@ -55,10 +55,10 @@ GET /pop/v1/sam/namespace/describeNamespaceResources HTTP/1.1
 |ErrorCode|String|success|错误码。 |
 |Code|String|200|接口状态或POP错误码。取值说明如下：
 
- -   2XX：成功。
--   3XX：重定向。
--   4XX：请求错误。
--   5XX：服务器错误。 |
+ -   **2XX**：成功。
+-   **3XX**：重定向。
+-   **4XX**：请求错误。
+-   **5XX**：服务器错误。 |
 |Success|Boolean|true|查询命名空间资源信息是否成功。取值说明如下：
 
  -   **true**：表示查询成功。
@@ -72,6 +72,8 @@ GET /pop/v1/sam/namespace/describeNamespaceResources HTTP/1.1
 GET /pop/v1/sam/namespace/describeNamespaceResources?NamespaceId=cn-shanghai:test HTTP/1.1
 Host:sae.aliyuncs.com
 Content-Type:application/json
+
+公共请求参数
 ```
 
 正常返回示例
