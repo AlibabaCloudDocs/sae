@@ -38,7 +38,7 @@ GET /pop/v1/sam/namespace/describeNamespaceList HTTP/1.1
 |TraceId|String|ac1a0b2215622920113732501e\*\*\*\*|调用链ID，用于精确查询调用信息。 |
 |Data|Array of RegionList| |命名空间列表。 |
 |VpcId|String|vpc-2ze0i263cnn311nvj\*\*\*\*|VPC ID。 |
-|VSwitchId|String|vsw-2ze559r1z1bpwqxwp\*\*\*\*|VSwitch ID。 |
+|VSwitchId|String|vsw-2ze559r1z1bpwqxwp\*\*\*\*|vSwitch ID。 |
 |Custom|Boolean|true|是否返回自定义命名空间。取值说明如下：
 
  -   **true**：表示返回自定义命名空间。
@@ -73,6 +73,8 @@ GET /pop/v1/sam/namespace/describeNamespaceList HTTP/1.1
 GET /pop/v1/sam/namespace/describeNamespaceList?ContainCustom=true&HybridCloudExclude=true HTTP/1.1
 Host:sae.aliyuncs.com
 Content-Type:application/json
+
+公共请求参数
 ```
 
 正常返回示例
