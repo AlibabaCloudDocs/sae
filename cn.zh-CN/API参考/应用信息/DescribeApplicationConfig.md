@@ -47,7 +47,7 @@ GET /pop/v1/sam/app/describeApplicationConfig HTTP/1.1
 |Tags|Array of Tag| |标签信息。 |
 |Key|String|k1|标签键。 |
 |Value|String|v1|标签值。 |
-|PackageUrl|String|https://edas-bj.oss-cn-beijing.aliyuncs.com/apps/K8S\_APP\_ID/d4c97c37-aba3-403e-ae1e-6f7d8742\*\*\*\*/hello-edas.war|应用部署包地址。 |
+|PackageUrl|String|https://edas-bj.oss-cn-beijing.aliyuncs.com/apps/K8s\_APP\_ID/d4c97c37-aba3-403e-ae1e-6f7d8742\*\*\*\*/hello-edas.war|应用部署包地址。 |
 |PackageType|String|War|应用部署类型。 |
 |PreStop|String|\{"exec":\{"command":\["cat","/etc/group"\]\}\}|停止前执行的脚本。 |
 |PackageVersion|String|1.0|应用部署包版本。 |
@@ -67,7 +67,7 @@ GET /pop/v1/sam/app/describeApplicationConfig HTTP/1.1
 |MountHost|String|example.com|NAS在当前vSwtich上的挂载点Host。 |
 |TomcatConfig|String|\{"useDefaultConfig":false,"contextInputType":"custom","contextPath":"hello","httpPort":8088,"maxThreads":400,"uriEncoding":"UTF-8","useBodyEncoding":true,"useAdvancedServerXml":false\}|Tomcat文件配置。 |
 |RegionId|String|cn-beijing|地域ID。 |
-|VSwitchId|String|vsw-2ze559r1z1bpwqxwp\*\*\*\*|VSwitch ID。 |
+|VSwitchId|String|vsw-2ze559r1z1bpwqxwp\*\*\*\*|vSwitch ID。 |
 |Cpu|Integer|1000|应用CPU规格，单位：毫核。1核=1000毫核。 |
 |Envs|String|\[\{"name":"TEST\_ENV\_KEY","value":"TEST\_ENV\_VAR"\}\]|环境变量。 |
 |MountDesc|Array of MountDesc| |挂载描述信息。 |
@@ -89,7 +89,7 @@ GET /pop/v1/sam/app/describeApplicationConfig HTTP/1.1
 |bucketName|String|oss-bucket|Bucket名称。 |
 |bucketPath|String|data/user.data|您在OSS创建的目录或OSS对象，如果OSS挂载目录不存在，会触发异常。 |
 |mountPath|String|/usr/data/user.data|您在SAE的容器路径。如果路径已存在，为覆盖关系；如果路径不存在，会新建。 |
-|readOnly|Boolean|true|容器路径是否对挂载目录资源有可读权限，取值如下：
+|readOnly|Boolean|true|容器路径是否对挂载目录资源有可读权限，取值说明如下：
 
  -   **true**：只读权限。
 -   **false**：读写权限。 |
@@ -97,13 +97,13 @@ GET /pop/v1/sam/app/describeApplicationConfig HTTP/1.1
 |Timezone|String|Asia/Shanghai|时区，默认为**Asia/Shanghai**。 |
 |AppDescription|String|示例应用|应用描述信息。 |
 |AcrAssumeRoleArn|String|acs:ram::123456789012\*\*\*\*:role/adminrole|跨账号拉取镜像时所需的RAM角色的ARN。 |
-|EnableGreyTagRoute|Boolean|false|是否启用流量灰度规则。该规则仅适用于Spring Cloud和Dubbo框架的应用。取值如下：
+|EnableGreyTagRoute|Boolean|false|是否启用流量灰度规则。该规则仅适用于Spring Cloud和Dubbo框架的应用。取值说明如下：
 
  -   **true**：启用灰度规则。
 -   **false**：禁用灰度规则。 |
 |MseApplicationId|String|xxxxxxx@xxxxx|对应MSE产品侧应用ID。 |
 |ErrorCode|String|success|错误码。 |
-|Code|String|200|接口状态或POP错误码。
+|Code|String|200|接口状态或POP错误码。取值说明如下：
 
  -   **2XX**：成功。
 -   **3XX**：重定向。
@@ -157,7 +157,7 @@ Content-Type:application/xml
             <Key>k1</Key>
             <Value>v1</Value>
         </Tags>
-        <PackageUrl>https://edas-bj.oss-cn-beijing.aliyuncs.com/apps/K8S_APP_ID/d4c97c37-aba3-403e-ae1e-6f7d8742****/hello-edas.war</PackageUrl>
+        <PackageUrl>https://edas-bj.oss-cn-beijing.aliyuncs.com/apps/K8s_APP_ID/d4c97c37-aba3-403e-ae1e-6f7d8742****/hello-edas.war</PackageUrl>
         <PackageType>War</PackageType>
         <PreStop>{"exec":{"command":["cat","/etc/group"]}}</PreStop>
         <PackageVersion>1.0</PackageVersion>
@@ -241,7 +241,7 @@ Content-Type:application/json
       "Key" : "k1",
       "Value" : "v1"
     } ],
-    "PackageUrl" : "https://edas-bj.oss-cn-beijing.aliyuncs.com/apps/K8S_APP_ID/d4c97c37-aba3-403e-ae1e-6f7d8742****/hello-edas.war",
+    "PackageUrl" : "https://edas-bj.oss-cn-beijing.aliyuncs.com/apps/K8s_APP_ID/d4c97c37-aba3-403e-ae1e-6f7d8742****/hello-edas.war",
     "PackageType" : "War",
     "PreStop" : "{\"exec\":{\"command\":[\"cat\",\"/etc/group\"]}}",
     "PackageVersion" : "1.0",
