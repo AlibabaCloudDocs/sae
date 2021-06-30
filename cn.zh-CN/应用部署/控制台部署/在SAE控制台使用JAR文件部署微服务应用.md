@@ -15,18 +15,18 @@
 
 3.  在**应用基本信息**页签，设置应用相关信息，配置完成后单击**下一步：应用部署配置**。
 
-    ![Application_deployment_basic_information](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/zh-CN/1369788951/p60491.png)
+    ![Application_deployment_basic_information](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/0503534261/p60491.png)
 
     参数说明如下表所示。
 
     |参数名|说明|
     |---|--|
-    |应用名称|输入应用名称。允许数字、字母、下划线（\_）以及短划线（-）组合，仅允许字母开头，最大长度36个字符。|
-    |专有网络配置|选择专有网络的配置方式。    -   **自定义配置**：选中后，您可以为创建的应用选择所需的命名空间、VPC、 VSwitch及安全组。
-    -   **自动配置**：选中后，SAE将自动帮您配置命名空间、VPC、VSwitch及安全组，无需手动选择。 |
-    |命名空间|在下拉菜单中选择创建好的命名空间。仅**自定义配置**专有网络时需要选择。**说明：** 命名空间和VPC是一一映射关系，如果需要修改VPC请单击**命名空间详情页**，在**命名空间详情**页面单击**切换VPC**修改VPC信息。 |
-    |VSwitch|在下拉菜单中选择VSwitch。仅**自定义配置**专有网络时需要选择。VSwitch数量至少需要配置一个，建议不超过3个，且每个VSwitch至少匹配一个应用实例。 |
-    |安全组|在下拉菜单中选择安全组。仅**自定义配置**专有网络时需要选择。**说明：** 如果您的VPC内没有创建安全组，请单击**创建安全组**，根据提示创建安全组，详细说明请参见[创建安全组](/cn.zh-CN/安全/安全组/创建安全组.md)。 |
+    |应用名称|输入应用名称。允许数字、字母、下划线（\_）以及短划线（-）组合，仅允许字母开头，不超过36个字符。|
+    |专有网络配置|选择专有网络的配置方式。    -   **自定义配置**：选中后，您可以为创建的应用选择所需的命名空间、VPC、vSwitch及安全组。
+    -   **自动配置**：选中后，SAE将自动帮您配置命名空间、VPC、vSwitch及安全组，无需手动选择。 |
+    |命名空间|在下拉菜单中选择创建好的命名空间。仅**自定义配置**专有网络时需要选择。**说明：** 命名空间和VPC是一一映射关系，关于修改VPC的更多信息，请参见[切换专有网络VPC和虚拟交换机](/cn.zh-CN/RDS MySQL 数据库/数据库连接/切换专有网络VPC和虚拟交换机.md)。 |
+    |vSwitch|在下拉菜单中选择vSwitch。仅**自定义配置**专有网络时需要选择。vSwitch数量至少需要配置1个，建议不超过3个，且每个vSwitch至少匹配1个应用实例。 |
+    |安全组|在下拉菜单中选择安全组。仅**自定义配置**专有网络时需要选择。**说明：** 如果您的VPC内没有创建安全组，请单击**创建安全组**，根据提示创建安全组。更多信息，请参见[创建安全组](/cn.zh-CN/安全/安全组/创建安全组.md)。 |
     |应用实例数|选择需要创建的实例个数。|
     |VCPU|选择需要创建的实例CPU规格。|
     |内存|选择需要创建的实例内存规格。|
@@ -34,7 +34,7 @@
 
 4.  在**应用部署配置**页签，配置相关参数。
 
-    ![SAEJAR包方式部署](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/zh-CN/6149560061/p68758.png)
+    ![SAEJAR包方式部署](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/6149560061/p68758.png)
 
     参数说明如下表所示：
 
@@ -48,8 +48,9 @@
     |应用运行环境|    -   **标准Java应用运行环境**：适用于Spring Boot或Dubbo应用。
     -   **EDAS-Container-XXX**：适用于HSF应用。
 本文的示例应用为Dubbo应用，因此选择**标准Java应用运行环境**。 |
-    |Java环境|您可以根据需要选择Java环境：    -   **openjdk-XXXXX-jdk-alpine3.9**：基于Alphine操作系统，基础镜像小，实例交互速度快。
-    -   **Open JDK X**：基于CentOS操作系统，基础镜像大，实例交互速度慢。
+    |Java环境|您可以根据需要选择Java环境：    -   **openjdk-XXXXX-jdk-alpine3.9**：基于Alphine操作系统，基础镜像小，实例交付速度快。
+    -   **Open JDK X**：基于CentOS操作系统，基础镜像大，实例交付速度慢。
+    -   **Dragonwell X**：支持最新OpenJDK 8版本，支持应用启动及运行时加速，提升GC效率等，详情请参见[设置启动命令](/cn.zh-CN/应用部署/设置启动命令.md)。
 **说明：** 基于Alphine操作系统的Java环境附带的工具或命令少于基于CentOS操作系统的Java环境，如果您选择了**openjdk-XXXXX-jdk-alpine3.9**，可能会导致Webshell中部分命令无法执行，请根据实际情况选择环境。 |
     |文件上传方式|可选择**上传JAR包**或者**JAR包地址**。    -   **上传JAR包**：单击**选择文件**，选择待部署的JAR文件。
     -   **JAR包地址**：输入JAR文件的存放地址。
@@ -97,13 +98,13 @@ http://aliware-images.oss-cn-hangzhou.aliyuncs.com/demo/sae/spring-boot-consumer
 
     如果**发布的服务**页签上可看到提供者所发布的服务，则说明提供者应用部署成功。
 
-    ![查看发布服务-provider](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/zh-CN/8269788951/p71180.png)
+    ![查看发布服务-provider](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/8269788951/p71180.png)
 
 4.  返回**应用列表**页面并单击消费者应用的名称，在**基本信息**的页面的左侧导航栏单击**服务列表**，查看服务信息。
 
     如果**消费的服务**页签上可看到提供者所发布的服务，则说明消费者应用部署成功。
 
-    ![查看发布服务-consumer](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/zh-CN/8269788951/p71179.png)
+    ![查看发布服务-consumer](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/8269788951/p71179.png)
 
 
 ## 验证微服务调用
@@ -120,11 +121,11 @@ http://aliware-images.oss-cn-hangzhou.aliyuncs.com/demo/sae/spring-boot-consumer
 
     **说明：**
 
-    -   使用SLB会产生额外费用，SLB的计费方式请参见[SLB计费说明](/cn.zh-CN/产品定价/按量计费.md)。
+    -   使用SLB会产生额外费用，SLB的计费方式请参见[SLB计费说明](/cn.zh-CN/传统型负载均衡CLB/CLB产品计费/按量计费.md)。
     -   **容器端口**区域必须填写应用中设置的后端端口。本文示例应用的后端端口为9091。
     等待2分钟~3分钟后，SLB实例将绑定完毕，**公网访问地址**字段后将显示公网SLB访问地址及端口。
 
-    ![pg_basic_info_sc_app_access_settings.png](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/zh-CN/8269788951/p106208.png)
+    ![pg_basic_info_sc_app_access_settings.png](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/8269788951/p106208.png)
 
 5.  在浏览器地址栏中输入以下URL。
 
@@ -152,28 +153,29 @@ http://aliware-images.oss-cn-hangzhou.aliyuncs.com/demo/sae/spring-boot-consumer
 3.  在左侧导航栏按需查看应用监控数据：
 
     -   **应用总览**：选择**应用监控** \> **应用总览**，查看应用的关键性能指标，例如总请求量、平均响应时间等。
-    -   **应用详情**：选择**应用监控** \> **应用详情**，查看更全面的应用监控数据，例如JVM监控、主机监控、异常分析等。
-    -   **接口调用**：选择**应用监控** \> **接口调用**，查看以接口为维度的监控数据，例如调用拓扑图、链路上游、链路下游等。
+    -   **应用详情**：选择**应用监控** \> **应用详情**，查看更全面的应用监控数据，例如JVM监控、主机监控和异常分析等。
+    -   **接口调用**：选择**应用监控** \> **接口调用**，查看以接口为维度的监控数据，例如调用拓扑图、链路上游和链路下游等。
+    -   **高级监控**：选择**应用监控** \> **高级监控**，查看更高性能的监控管理数据，例如应用全局拓扑、异常SQL分析和本地调用堆栈等。
 
 ## 更多信息
 
--   您在SAE部署完应用后，可以对应用进行更新、扩缩容、启停、删除应用等生命周期管理操作，具体操作方式请参见[管理应用生命周期](/cn.zh-CN/应用管理/管理应用生命周期.md)。
--   您在SAE部署完应用后，可以对应用进行自动弹性伸缩、SLB绑定和批量启停等提升应用性能的操作，具体操作方式请参见以下文档：
+-   您在SAE部署完应用后，可以对应用进行更新、扩缩容、启停、删除应用等生命周期管理操作。具体操作，请参见[管理应用生命周期](/cn.zh-CN/应用管理/应用生命周期/管理应用生命周期.md)。
+-   您在SAE部署完应用后，可以对应用进行自动弹性伸缩、SLB绑定和批量启停等提升应用性能的操作。具体操作，请参见以下文档：
     -   [绑定SLB](/cn.zh-CN/应用管理/绑定SLB/为应用绑定SLB.md)
-    -   [配置弹性伸缩策略](/cn.zh-CN/应用管理/配置弹性伸缩策略.md)
-    -   [一键启停应用](/cn.zh-CN/应用管理/一键启停应用.md)
-    -   [配置管理](/cn.zh-CN/应用管理/配置管理/配置管理概述.md)
-    -   [变更实例规格](/cn.zh-CN/应用管理/变更实例规格.md)
--   您在SAE部署完应用后，还可以对应用进行日志管理、监控管理、应用事件查看和变更记录查看等聚焦应用运行状态的操作，具体操作方式请参见以下文档：
-    -   [日志管理](/cn.zh-CN/日志管理/查看实时日志.md)
-    -   [监控管理](/cn.zh-CN/监控管理/基础监控.md)
-    -   [应用事件查看](/cn.zh-CN/应用管理/查看应用事件.md)
-    -   [变更记录查看](/cn.zh-CN/应用管理/查看变更记录.md)
-    -   [使用Webshell诊断应用](/cn.zh-CN/应用管理/使用 Webshell 诊断应用.md)
+    -   [配置弹性伸缩策略](/cn.zh-CN/应用管理/应用实例/配置弹性伸缩策略.md)
+    -   [一键启停应用](/cn.zh-CN/应用管理/应用生命周期/一键启停应用.md)
+    -   [配置管理](/cn.zh-CN/应用管理/ACM配置管理/配置管理概述.md)
+    -   [变更实例规格](/cn.zh-CN/应用管理/应用实例/变更实例规格.md)
+-   您在SAE部署完应用后，还可以对应用进行日志管理、监控管理、应用事件查看和变更记录查看等聚焦应用运行状态的操作。具体操作，请参见以下文档：
+    -   [日志管理](/cn.zh-CN/应用管理/日志管理/查看实时日志.md)
+    -   [监控管理](/cn.zh-CN/监控与报警/监控/基础监控.md)
+    -   [应用事件查看](/cn.zh-CN/应用管理/应用变更记录/查看应用事件.md)
+    -   [变更记录查看](/cn.zh-CN/应用管理/应用变更记录/查看变更记录.md)
+    -   [使用Webshell诊断应用](/cn.zh-CN/应用管理/使用Webshell诊断应用.md)
 
 ## 问题反馈
 
-如果您在使用SAE过程中有任何疑问，欢迎您扫描下面的二维码加入钉钉群进行反馈。
+如果您在使用SAE过程中有任何疑问，欢迎您扫描下面的二维码或搜索钉钉群号23198618，加入钉钉群与我们交流。
 
-![SAE钉钉群2](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/zh-CN/5885359951/p72048.png)
+![SAE钉钉群2](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/1176199061/p72048.png)
 
