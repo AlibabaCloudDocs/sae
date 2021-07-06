@@ -85,7 +85,28 @@ HTTP/1.1 200 OK
 Content-Type:application/xml
 
 <DescribeNamespaceResourcesResponse>
-    <Data/>
+    <RequestId>91F93257-7A4A-4BD3-9A7E-2F6EAE6D****</RequestId>
+    <Message>success</Message>
+    <TraceId>0a98a02315955564772843261e****</TraceId>
+    <Data>
+        <VpcId>vpc-2ze0i263cnn311nvj****</VpcId>
+        <LastChangeOrderId>afedb3c4-63f8-4a3d-aaa3-2c30363f****</LastChangeOrderId>
+        <BelongRegion>cn-shanghai</BelongRegion>
+        <NamespaceId>cn-shangha:test</NamespaceId>
+        <SecurityGroupId>sg-wz969ngg2e49q5i4****</SecurityGroupId>
+        <UserId>test@aliyun.com</UserId>
+        <NamespaceName>test</NamespaceName>
+        <LastChangeOrderStatus>success</LastChangeOrderStatus>
+        <VpcName>test</VpcName>
+        <VSwitchId>vsw-2ze559r1z1bpwqxwp****</VSwitchId>
+        <Description>decs</Description>
+        <LastChangeOrderRunning>true</LastChangeOrderRunning>
+        <AppCount>1</AppCount>
+        <VSwitchName>test</VSwitchName>
+        <NotificationExpired>true</NotificationExpired>
+        <TenantId>838cad95-973f-48fe-830b-2a8546d7****</TenantId>
+    </Data>
+    <ErrorCode>success</ErrorCode>
     <Code>200</Code>
     <Success>true</Success>
 </DescribeNamespaceResourcesResponse>
@@ -98,7 +119,28 @@ HTTP/1.1 200 OK
 Content-Type:application/json
 
 {
-  "Data" : { },
+  "RequestId" : "91F93257-7A4A-4BD3-9A7E-2F6EAE6D****",
+  "Message" : "success",
+  "TraceId" : "0a98a02315955564772843261e****",
+  "Data" : {
+    "VpcId" : "vpc-2ze0i263cnn311nvj****",
+    "LastChangeOrderId" : "afedb3c4-63f8-4a3d-aaa3-2c30363f****",
+    "BelongRegion" : "cn-shanghai",
+    "NamespaceId" : "cn-shangha:test",
+    "SecurityGroupId" : "sg-wz969ngg2e49q5i4****",
+    "UserId" : "test@aliyun.com",
+    "NamespaceName" : "test",
+    "LastChangeOrderStatus" : "success",
+    "VpcName" : "test",
+    "VSwitchId" : "vsw-2ze559r1z1bpwqxwp****",
+    "Description" : "decs",
+    "LastChangeOrderRunning" : true,
+    "AppCount" : 1,
+    "VSwitchName" : "test",
+    "NotificationExpired" : true,
+    "TenantId" : "838cad95-973f-48fe-830b-2a8546d7****"
+  },
+  "ErrorCode" : "success",
   "Code" : "200",
   "Success" : true
 }
