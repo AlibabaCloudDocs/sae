@@ -36,8 +36,8 @@ GET /pop/v1/paas/namespaces HTTP/1.1
 |PageSize|Integer|10|翻页大小。 |
 |Namespaces|Array of Namespace| |命名空间列表。 |
 |NamespaceDescription|String|desc|命名空间描述。 |
-|AccessKey|String|b34dbe3315c64f9f99b58ea447ec\*\*\*\*|AccessKey ID。 |
-|SecretKey|String|G/w6sseK7+nb3S6HBmANDBMD\*\*\*\*|AccessKey Secret。 |
+|AccessKey|String|b34dbe3315c64f9f99b58ea447ec\*\*\*\*|ACM专用AccessKey ID，用于操作ACM某个命名空间内的数据。更多信息，请参见[阿里云AccessKey和ACM专用AccessKey的区别](~~~~)。 |
+|SecretKey|String|G/w6sseK7+nb3S6HBmANDBMD\*\*\*\*|ACM专用AccessKey Secret，用于操作ACM某个命名空间内的数据。更多信息，请参见[阿里云AccessKey和ACM专用AccessKey的区别](~~~~)。 |
 |NamespaceId|String|cn-beijing:test|命名空间ID。 |
 |NamespaceName|String|name|命名空间名称。 |
 |TenantId|String|838cad95-973f-48fe-830b-2a8546d7\*\*\*\*|租户ID。 |
@@ -45,10 +45,10 @@ GET /pop/v1/paas/namespaces HTTP/1.1
 |ErrorCode|String|InvalidParameter.NotEmpty|错误码。 |
 |Code|String|200|接口状态或POP错误码。取值说明如下：
 
- -   2XX：成功。
--   3XX：重定向。
--   4XX：请求错误。
--   5XX：服务器错误。 |
+ -   **2XX**：成功。
+-   **3XX**：重定向。
+-   **4XX**：请求错误。
+-   **5XX**：服务器错误。 |
 |Success|Boolean|true|查询命名空间列表是否成功。取值说明如下：
 
  -   **true**：表示查询成功。
@@ -62,6 +62,8 @@ GET /pop/v1/paas/namespaces HTTP/1.1
 GET /pop/v1/paas/namespaces?CurrentPage=1&PageSize=10 HTTP/1.1
 Host:sae.aliyuncs.com
 Content-Type:application/json
+
+公共请求参数
 ```
 
 正常返回示例
