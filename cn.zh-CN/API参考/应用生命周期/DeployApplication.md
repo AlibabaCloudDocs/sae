@@ -20,7 +20,7 @@ POST /pop/v1/sam/app/deployApplication HTTP/1.1
 
 |名称|类型|位置|是否必选|示例值|描述|
 |--|--|--|----|---|--|
-|AppId|String|Query|否|7171a6ca-d1cd-4928-8642-7d5cfe69\*\*\*\*|需要部署的应用ID。 |
+|AppId|String|Query|是|7171a6ca-d1cd-4928-8642-7d5cfe69\*\*\*\*|需要部署的应用ID。 |
 |Jdk|String|Query|否|Open JDK 8|部署的包依赖的JDK版本。镜像不支持。 |
 |WebContainer|String|Query|否|apache-tomcat-7.0.91|部署的包依赖的Tomcat版本。镜像不支持。 |
 |PackageVersion|String|Query|否|1.0.1|部署的包的版本号，**War**或**FatJar**类型必填。 |
@@ -28,8 +28,14 @@ POST /pop/v1/sam/app/deployApplication HTTP/1.1
 |ImageUrl|String|Query|否|registry.cn-hangzhou.aliyuncs.com/sae\_test/ali\_sae\_test:0.0.1|镜像地址。只有**Image**类型应用可以配置镜像地址。 |
 |Command|String|Query|否|sleep|镜像启动命令。该命令必须为容器内存在的可执行的对象。例如：sleep。设置该命令将导致镜像原本的启动命令失效。 |
 |CommandArgs|String|Query|否|1d|镜像启动命令参数。上述启动命令所需参数。例如：1d。 |
-|Envs|String|Query|否|\[\{"name":"envtmp","value":"0"\}\]|容器环境变量参数。例如：\[\{"name":"envtmp","value":"0"\}\] |
-|CustomHostAlias|String|Query|否|\[\{"hostName":"samplehost","ip":"127.0.0.1"\}\]|容器内自定义Host映射。例如： \[\{"hostName":"samplehost","ip":"127.0.0.1"\}\] |
+|Envs|String|Query|否|\[\{"name":"envtmp","value":"0"\}\]|容器环境变量参数。取值说明如下：
+
+ -   **name**：变量名称。
+-   **value**：变量值或变量引用。 |
+|CustomHostAlias|String|Query|否|\[\{"hostName":"samplehost","ip":"127.0.0.1"\}\]|容器内自定义Host映射。取值说明如下：
+
+ -   **hostName**：主机名称或域名。
+-   **ip**：IP地址 |
 |JarStartOptions|String|Query|否|custom-option|JAR包启动应用选项。应用默认启动命令：**$JAVA\_HOME/bin/java $JarStartOptions -jar $CATALINA\_OPTS "$package\_path" $JarStartArgs** |
 |JarStartArgs|String|Query|否|-Xms4G -Xmx4G|JAR包启动应用参数。应用默认启动命令：**$JAVA\_HOME/bin/java $JarStartOptions -jar $CATALINA\_OPTS "$package\_path" $JarStartArgs** |
 |Liveness|String|Query|否|\{"exec":\{"command":\["sleep","5s"\]\},"initialDelaySeconds":10,"timeoutSeconds":11\}|容器健康检查，健康检查失败的容器将被关闭并恢复。目前仅支持容器内下发命令的方式。例如：\{"exec":\{"command":\["sh","-c","cat /home/admin/start.sh"\]\},"initialDelaySeconds":30,"periodSeconds":30,"timeoutSeconds":2\}
@@ -52,7 +58,7 @@ POST /pop/v1/sam/app/deployApplication HTTP/1.1
  -   例1（灰度1台+后续分2批+自动分批+分批间隔1分钟）：\{"type":"GrayBatchUpdate","batchUpdate":\{"batch":2,"releaseType":"auto","batchWaitTime":1\},"grayUpdate":\{"gray":1\}\}
 -   例2（灰度1台+后续分2批+手动分批）：\{"type":"GrayBatchUpdate","batchUpdate":\{"batch":2,"releaseType":"manual"\},"grayUpdate":\{"gray":1\}\}
 -   例3（分2批+自动分批+分批间隔0分钟）：\{"type":"BatchUpdate","batchUpdate":\{"batch":2,"releaseType":"auto","batchWaitTime":0\}\} |
-|SlsConfigs|String|Query|否|\{"logDir":"/root/logs/hsf/hsf.log"\}\]|文件日志采集配置。
+|SlsConfigs|String|Query|否|\[\{"logDir":"/root/logs/hsf/hsf.log"\}\]|文件日志采集配置。
 
  -   使用SAE自动创建的SLS资源：\[\{\\"logDir\\":\\"/root/logs/hsf.log\\"\}\]。
 -   使用自定义SLS资源：\[\{\\"projectName\\":\\"test-sls\\",\\"logDir\\":\\"/tmp/readiness.txt\\",\\"logstoreName\\":\\"logstore\\","logtailName":"testLogtail"\}\]。
@@ -68,7 +74,7 @@ POST /pop/v1/sam/app/deployApplication HTTP/1.1
 |MountHost|String|Query|否|10d3b4bc9\*\*\*\*.com|NAS在应用VPC内的挂载点。 |
 |MountDesc|String|Query|否|\[\{MountPath: "/tmp", NasPath: "/"\}\]|NAS挂载描述。 |
 |PostStart|String|Query|否|\["/bin/sh","-c","echo hello"\]|容器启动后钩子，在容器被创建后立刻触发执行，通知容器它已经被创建。 |
-|PreStop|String|Query|否|\["/bin/sh","-c","echo hello"\]|容器停止前钩子，在容器被删除前触发，其所对应的Hook Handler必须在删除该容器的请求发送给Docker daemon之前完成。 |
+|PreStop|String|Query|否|\["/bin/sh","-c","echo hello"\]|容器停止前钩子，在容器被删除前触发，其所对应的Hook Handler必须在删除该容器的请求发送给Docker Daemon之前完成。 |
 |ChangeOrderDesc|String|Query|否|启动应用|发布单描述信息。 |
 |WarStartOptions|String|Query|否|-Dxxx=xxx|WAR包部署应用时的JVM参数，非必填项。 |
 |AutoEnableApplicationScalingRule|Boolean|Query|否|true|是否在应用部署后，自动开启弹性伸缩策略。取值说明如下：
@@ -84,7 +90,7 @@ POST /pop/v1/sam/app/deployApplication HTTP/1.1
 |PhpArmsConfigLocation|String|Query|否|/usr/local/etc/php/conf.d/arms.ini|PHP应用监控挂载路径，需要您保证PHP服务器一定会加载这个路径的配置文件。您无需关注配置内容，SAE会自动渲染正确的配置文件。 |
 |PhpConfigLocation|String|Query|否|/usr/local/etc/php/php.ini|PHP应用启动配置挂载路径，需要您保证PHP服务器会使用这个配置文件启动。 |
 |PhpConfig|String|FormData|否|k1=v1|PHP配置文件内容。 |
-|TomcatConfig|String|Query|否|\{"useDefaultConfig":false,"contextInputType":"custom","contextPath":"hello","httpPort":8088,"maxThreads":400,"uriEncoding":"UTF-8","useBodyEncoding":true,"useAdvancedServerXml":false\}|Tomcat文件配置，设置为""或"\{\}"表示删除配置：
+|TomcatConfig|String|Query|否|\{"useDefaultConfig":false,"contextInputType":"custom","contextPath":"hello","httpPort":8088,"maxThreads":400,"uriEncoding":"UTF-8","useBodyEncoding":true,"useAdvancedServerXml":false\}|Tomcat文件配置，设置为""或"\{\}"表示删除配置。取值说明如下：
 
  -   **useDefaultConfig**：是否使用自定义配置，若为**true**，则表示不使用自定义配置；若为**false**，则表示使用自定义配置。若不使用自定义配置，则下面的参数配置将不会生效。
 -   **contextInputType**：选择应用的访问路径。
@@ -93,14 +99,14 @@ POST /pop/v1/sam/app/deployApplication HTTP/1.1
     -   **custom**：需要在下面的自定义路径中填写自定义的路径。
 -   **contextPath**：自定义路径，当**contextInputType**类型为**custom**时，才需要配置此参数。
 -   **httpPort**：端口范围为1024~65535，小于1024的端口需要Root权限才能操作。因为容器配置的是Admin权限，所以请填写大于1024的端口。如果不配置，则默认为8080。
--   **maxThreads**：配置连接池的连接数大小，默认大小是400。
--   **uriEncoding**：Tomcat的编码格式，包括**UTF-8**、**ISO-8859-1**、**GBK和GB2312**。如果不设置则默认为**ISO-8859-1**。
+-   **maxThreads**：配置连接池的连接数大小，默认大小为400。
+-   **uriEncoding**：Tomcat的编码格式，包括**UTF-8**、**ISO-8859-1**、**GBK和GB2312**。如果不设置，则默认为**ISO-8859-1**。
 -   **useBodyEncoding**：是否使用**BodyEncoding for URL**。 |
 |AcrAssumeRoleArn|String|Query|否|acs:ram::123456789012\*\*\*\*:role/adminrole|跨账号拉取镜像时所需的RAM角色的ARN。 |
 |OssMountDescs|String|FormData|否|\[\{"bucketName": "oss-bucket", "bucketPath": "data/user.data", "mountPath": "/usr/data/user.data", "readOnly": true\}\]|OSS挂载描述信息。 |
 |OssAkId|String|FormData|否|xxxxxx|OSS读写的AccessKey ID。 |
 |OssAkSecret|String|FormData|否|xxxxxx|OSS读写的AccessKey Secret。 |
-|EnableGreyTagRoute|Boolean|Query|否|false|是否启用流量灰度规则。该规则仅适用于Spring Cloud和Dubbo框架的应用。取值如下：
+|EnableGreyTagRoute|Boolean|Query|否|false|是否启用流量灰度规则。该规则仅适用于Spring Cloud和Dubbo框架的应用。取值说明如下：
 
  -   **true**：启用灰度规则。
 -   **false**：禁用灰度规则。 |
@@ -116,12 +122,12 @@ POST /pop/v1/sam/app/deployApplication HTTP/1.1
 |ChangeOrderId|String|01db03d3-3ee9-48b3-b3d0-dfce2d88\*\*\*\*|返回的发布单ID，用于查询任务执行状态。 |
 |AppId|String|7171a6ca-d1cd-4928-8642-7d5cfe69\*\*\*\*|应用ID。 |
 |ErrorCode|String|success|错误码。 |
-|Code|String|200|接口状态或POP错误码。
+|Code|String|200|接口状态或POP错误码。取值说明如下：
 
- -   2XX：成功。
--   3XX：重定向。
--   4XX：请求错误。
--   5XX：服务器错误。 |
+ -   **2XX**：成功。
+-   **3XX**：重定向。
+-   **4XX**：请求错误。
+-   **5XX**：服务器错误。 |
 |Success|Boolean|true|部署应用是否成功。取值说明如下：
 
  -   **true**：表示部署成功。
@@ -132,9 +138,11 @@ POST /pop/v1/sam/app/deployApplication HTTP/1.1
 请求示例
 
 ```
-POST /pop/v1/sam/app/deployApplication?AppId=7171a6ca-d1cd-4928-8642-7d5cfe69****&Jdk=Open JDK 8&WebContainer=apache-tomcat-7.0.91&PackageVersion=1.0.1&PackageUrl=http://myoss.oss-cn-hangzhou.aliyuncs.com/my-buc/2019-06-30/sae-test.jar&ImageUrl=registry.cn-hangzhou.aliyuncs.com/sae_test/ali_sae_test:0.0.1&Command=sleep&CommandArgs=1d&Envs=[{"name":"envtmp","value":"0"}]&CustomHostAlias=[{"hostName":"samplehost","ip":"127.0.0.1"}]&JarStartOptions=custom-option&JarStartArgs=-Xms4G -Xmx4G&Liveness={"exec":{"command":["sleep","5s"]},"initialDelaySeconds":10,"timeoutSeconds":11}&Readiness={"exec":{"command":["sleep","6s"]},"initialDelaySeconds":15,"timeoutSeconds":12}&MinReadyInstances=1&BatchWaitTime=10&EdasContainerVersion=3.5.3&UpdateStrategy={"type":"GrayBatchUpdate","batchUpdate":{"batch":2,"releaseType":"auto","batchWaitTime":1},"grayUpdate":{"gray":1}}&SlsConfigs={"logDir":"/root/logs/hsf/hsf.log"}]&Timezone=Asia/Shanghai&NasId=10d3b4****&MountHost=10d3b4bc9****.com&MountDesc=[{MountPath: "/tmp", NasPath: "/"}]&PostStart=["/bin/sh","-c","echo hello"]&PreStop=["/bin/sh","-c","echo hello"]&ChangeOrderDesc=启动应用&WarStartOptions=-Dxxx=xxx&AutoEnableApplicationScalingRule=true&TerminationGracePeriodSeconds=10&EnableAhas=false&PhpArmsConfigLocation=/usr/local/etc/php/conf.d/arms.ini&PhpConfigLocation=/usr/local/etc/php/php.ini&TomcatConfig={"useDefaultConfig":false,"contextInputType":"custom","contextPath":"hello","httpPort":8088,"maxThreads":400,"uriEncoding":"UTF-8","useBodyEncoding":true,"useAdvancedServerXml":false}&AcrAssumeRoleArn=acs:ram::123456789012****:role/adminrole&EnableGreyTagRoute=false HTTP/1.1
+POST /pop/v1/sam/app/deployApplication?AppId=7171a6ca-d1cd-4928-8642-7d5cfe69****&Jdk=Open JDK 8&WebContainer=apache-tomcat-7.0.91&PackageVersion=1.0.1&PackageUrl=http://myoss.oss-cn-hangzhou.aliyuncs.com/my-buc/2019-06-30/sae-test.jar&ImageUrl=registry.cn-hangzhou.aliyuncs.com/sae_test/ali_sae_test:0.0.1&Command=sleep&CommandArgs=1d&Envs=[{"name":"envtmp","value":"0"}]&CustomHostAlias=[{"hostName":"samplehost","ip":"127.0.0.1"}]&JarStartOptions=custom-option&JarStartArgs=-Xms4G -Xmx4G&Liveness={"exec":{"command":["sleep","5s"]},"initialDelaySeconds":10,"timeoutSeconds":11}&Readiness={"exec":{"command":["sleep","6s"]},"initialDelaySeconds":15,"timeoutSeconds":12}&MinReadyInstances=1&BatchWaitTime=10&EdasContainerVersion=3.5.3&UpdateStrategy={"type":"GrayBatchUpdate","batchUpdate":{"batch":2,"releaseType":"auto","batchWaitTime":1},"grayUpdate":{"gray":1}}&SlsConfigs=[{"logDir":"/root/logs/hsf/hsf.log"}]&Timezone=Asia/Shanghai&NasId=10d3b4****&MountHost=10d3b4bc9****.com&MountDesc=[{MountPath: "/tmp", NasPath: "/"}]&PostStart=["/bin/sh","-c","echo hello"]&PreStop=["/bin/sh","-c","echo hello"]&ChangeOrderDesc=启动应用&WarStartOptions=-Dxxx=xxx&AutoEnableApplicationScalingRule=true&TerminationGracePeriodSeconds=10&EnableAhas=false&PhpArmsConfigLocation=/usr/local/etc/php/conf.d/arms.ini&PhpConfigLocation=/usr/local/etc/php/php.ini&TomcatConfig={"useDefaultConfig":false,"contextInputType":"custom","contextPath":"hello","httpPort":8088,"maxThreads":400,"uriEncoding":"UTF-8","useBodyEncoding":true,"useAdvancedServerXml":false}&AcrAssumeRoleArn=acs:ram::123456789012****:role/adminrole&EnableGreyTagRoute=false HTTP/1.1
 Host:sae.aliyuncs.com
 Content-Type:application/json
+
+公共请求参数
 
 ConfigMapMountDesc=[{"configMapId":16,"key":"test","mountPath":"/tmp"}]&PhpConfig=k1=v1&OssMountDescs=[{"bucketName": "oss-bucket", "bucketPath": "data/user.data", "mountPath": "/usr/data/user.data", "readOnly": true}]&OssAkId=xxxxxx&OssAkSecret=xxxxxx
 ```
