@@ -20,7 +20,7 @@ GET /pop/v1/paas/namespace HTTP/1.1
 
 |名称|类型|位置|是否必选|示例值|描述|
 |--|--|--|----|---|--|
-|NamespaceId|String|Query|是|cn-beijing:test|命名空间ID。 |
+|NamespaceId|String|Query|是|cn-beijing:test|命名空间ID。默认命名空间不可查询、更改或删除。 |
 
 ## 返回数据
 
@@ -31,16 +31,16 @@ GET /pop/v1/paas/namespace HTTP/1.1
 |TraceId|String|0a981dd515966966104121683d\*\*\*\*|调用链ID，用于精确查询调用信息。 |
 |Data|Object| |命名空间信息。 |
 |NamespaceDescription|String|desc|命名空间描述。 |
-|NamespaceId|String|cn-beijing:test|命名空间ID。 |
+|NamespaceId|String|cn-beijing:test|命名空间ID。默认命名空间不可查询、更改或删除。 |
 |NamespaceName|String|name|命名空间名称。 |
 |RegionId|String|cn-beijing|地域。 |
 |ErrorCode|String|InvalidParameter.NotEmpty|错误码。 |
 |Code|String|200|接口状态或POP错误码。取值说明如下：
 
- -   2XX：成功。
--   3XX：重定向。
--   4XX：请求错误。
--   5XX：服务器错误。 |
+ -   **2XX**：成功。
+-   **3XX**：重定向。
+-   **4XX**：请求错误。
+-   **5XX**：服务器错误。 |
 |Success|Boolean|true|查询命名空间信息是否成功。取值说明如下：
 
  -   **true**：表示查询成功。
@@ -54,6 +54,8 @@ GET /pop/v1/paas/namespace HTTP/1.1
 GET /pop/v1/paas/namespace?NamespaceId=cn-beijing:test HTTP/1.1
 Host:sae.aliyuncs.com
 Content-Type:application/json
+
+公共请求参数
 ```
 
 正常返回示例
