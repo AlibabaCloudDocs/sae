@@ -21,7 +21,7 @@ POST /pop/v1/sam/namespace/updateNamespaceVpc HTTP/1.1
 |名称|类型|位置|是否必选|示例值|描述|
 |--|--|--|----|---|--|
 |NamespaceId|String|Query|是|cn-beijing:test|命名空间ID。 |
-|VpcId|String|Query|是|vpc-2ze0i263cnn311nvj\*\*\*\*|VPC ID。 |
+|VpcId|String|Query|是|vpc-2ze0i263cnn311nvj\*\*\*\*|VPC ID。用于替换现有的VPC ID。 |
 
 ## 返回数据
 
@@ -33,10 +33,10 @@ POST /pop/v1/sam/namespace/updateNamespaceVpc HTTP/1.1
 |ErrorCode|String|success|错误码。 |
 |Code|String|200|接口状态或POP错误码。取值说明如下：
 
- -   2XX：成功。
--   3XX：重定向。
--   4XX：请求错误。
--   5XX：服务器错误。 |
+ -   **2XX**：成功。
+-   **3XX**：重定向。
+-   **4XX**：请求错误。
+-   **5XX**：服务器错误。 |
 |Success|Boolean|true|更新VPC信息是否成功。取值说明如下：
 
  -   **true**：表示更新成功。
@@ -50,6 +50,8 @@ POST /pop/v1/sam/namespace/updateNamespaceVpc HTTP/1.1
 POST /pop/v1/sam/namespace/updateNamespaceVpc?NamespaceId=cn-beijing:test&VpcId=vpc-2ze0i263cnn311nvj**** HTTP/1.1
 Host:sae.aliyuncs.com
 Content-Type:application/json
+
+公共请求参数
 ```
 
 正常返回示例
