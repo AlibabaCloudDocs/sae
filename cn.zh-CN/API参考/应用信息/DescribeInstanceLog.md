@@ -8,7 +8,7 @@
 
 ## 请求头
 
-该接口使用公共请求头，无特殊请求头。请参见公共请求参数文档。
+该接口使用公共请求头，无特殊请求头。更多信息，请参见[公共请求和返回头](~~126964~~)。
 
 ## 请求语法
 
@@ -26,28 +26,32 @@ GET /pop/v1/sam/instance/describeInstanceLog HTTP/1.1
 
 |名称|类型|示例值|描述|
 |--|--|---|--|
+|RequestId|String|91F93257-7A4A-4BD3-9A7E-2F6EAE6D\*\*\*\*|请求ID。 |
+|Message|String|success|调用结果的附加信息。 |
+|TraceId|String|0a98a02315955564772843261e\*\*\*\*|调用链ID。 |
+|Data|String|hello\\nsae\\n|实例日志信息。 |
+|ErrorCode|String|success|错误码。 |
 |Code|String|200|接口状态或POP错误码。取值说明如下：
 
- -   2XX：成功。
--   3XX：重定向。
--   4XX：请求错误。
--   5XX：服务器错误。 |
-|Data|String|hello\\nedas\\n|实例日志信息。 |
-|ErrorCode|String|success|错误码。 |
-|Message|String|success|调用结果的附加信息。 |
-|RequestId|String|91F93257-7A4A-4BD3-9A7E-2F6EAE6D\*\*\*\*|请求ID。 |
+ -   **2XX**：成功。
+-   **3XX**：重定向。
+-   **4XX**：请求错误。
+-   **5XX**：服务器错误。 |
 |Success|Boolean|true|获取实例日志是否成功。取值说明如下：
 
  -   **true**：表示获取成功。
 -   **false**：表示获取失败。 |
-|TraceId|String|0a98a02315955564772843261e\*\*\*\*|调用链ID。 |
 
 ## 示例
 
 请求示例
 
 ```
-GET /pop/v1/sam/instance/describeInstanceLog?RegionId=cn-beijing&InstanceId=******-d700e680-aa4d-4ec1-afc2-6566b5ff4d7a-85d44d4bfc-*****
+GET /pop/v1/sam/instance/describeInstanceLog?InstanceId=******-d700e680-aa4d-4ec1-afc2-6566b5ff4d7a-85d44d4bfc-***** HTTP/1.1
+Host:sae.aliyuncs.com
+Content-Type:application/json
+
+公共请求参数
 ```
 
 正常返回示例
@@ -55,28 +59,34 @@ GET /pop/v1/sam/instance/describeInstanceLog?RegionId=cn-beijing&InstanceId=****
 `XML`格式
 
 ```
+HTTP/1.1 200 OK
+Content-Type:application/xml
+
 <DescribeInstanceLogResponse>
-      <Message>success</Message>
-      <RequestId>91F93257-7A4A-4BD3-9A7E-2F6EAE6D****</RequestId>
-      <TraceId>0a98a02315955564772843261e****</TraceId>
-      <Data>hello\nedas\n</Data>
-      <ErrorCode>success</ErrorCode>
-      <Code>200</Code>
-      <Success>true</Success>
+    <RequestId>91F93257-7A4A-4BD3-9A7E-2F6EAE6D****</RequestId>
+    <Message>success</Message>
+    <TraceId>0a98a02315955564772843261e****</TraceId>
+    <Data>hello\nsae\n</Data>
+    <ErrorCode>success</ErrorCode>
+    <Code>200</Code>
+    <Success>true</Success>
 </DescribeInstanceLogResponse>
 ```
 
 `JSON`格式
 
 ```
+HTTP/1.1 200 OK
+Content-Type:application/json
+
 {
-    "Message": "success",
-    "RequestId": "91F93257-7A4A-4BD3-9A7E-2F6EAE6D****",
-    "TraceId": "0a98a02315955564772843261e****",
-    "Data": "hello\\nedas\\n",
-    "ErrorCode": "success",
-    "Code": 200,
-    "Success": true
+  "RequestId" : "91F93257-7A4A-4BD3-9A7E-2F6EAE6D****",
+  "Message" : "success",
+  "TraceId" : "0a98a02315955564772843261e****",
+  "Data" : "hello\\nsae\\n",
+  "ErrorCode" : "success",
+  "Code" : "200",
+  "Success" : true
 }
 ```
 
