@@ -33,10 +33,10 @@ GET /pop/v1/paas/regionConfig HTTP/1.1
 |RegionId|String|cn-shanghai|地域ID。 |
 |Code|Integer|200|接口状态或POP错误码。取值说明如下：
 
- -   **2XX**：成功。
--   **3XX**：重定向。
--   **4XX**：请求错误。
--   **5XX**：服务器错误。 |
+ -   **2xx**：成功。
+-   **3xx**：重定向。
+-   **4xx**：请求错误。
+-   **5xx**：服务器错误。 |
 
 ## 示例
 
