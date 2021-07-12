@@ -32,10 +32,10 @@ DELETE /pop/v1/paas/namespace HTTP/1.1
 |ErrorCode|String|InvalidNamespaceId.NotFound|错误码。 |
 |Code|String|200|接口状态或POP错误码。取值说明如下：
 
- -   **2XX**：成功。
--   **3XX**：重定向。
--   **4XX**：请求错误。
--   **5XX**：服务器错误。 |
+ -   **2xx**：成功。
+-   **3xx**：重定向。
+-   **4xx**：请求错误。
+-   **5xx**：服务器错误。 |
 |Success|Boolean|true|删除命名空间是否成功。取值说明如下：
 
  -   **true**：表示删除成功。
