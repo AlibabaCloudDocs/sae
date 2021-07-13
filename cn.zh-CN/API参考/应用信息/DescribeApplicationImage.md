@@ -8,7 +8,7 @@
 
 ## 请求头
 
-该接口使用公共请求头，无特殊请求头。请参见公共请求参数文档。
+该接口使用公共请求头，无特殊请求头。更多信息，请参见[公共请求和返回头](~~126964~~)。
 
 ## 请求语法
 
@@ -27,36 +27,40 @@ GET /pop/v1/sam/container/describeApplicationImage HTTP/1.1
 
 |名称|类型|示例值|描述|
 |--|--|---|--|
-|Code|String|200|接口状态或POP错误码。取值说明如下：
-
- -   2XX：成功。
--   3XX：重定向。
--   4XX：请求错误。
--   5XX：服务器错误。 |
-|Data|Struct| |应用镜像信息。 |
-|CrUrl|String|保留字段|保留字段，暂无特殊含义。 |
+|RequestId|String|91F93257-7A4A-4BD3-9A7E-2F6EAE6D\*\*\*\*|请求ID。 |
+|Message|String|success|调用结果的附加信息。 |
+|TraceId|String|0a98a02315955564772843261e\*\*\*\*|调用链ID，用于精确查询调用信息。 |
+|Data|Object| |应用镜像信息。 |
 |Logo|String|保留字段|保留字段，暂无特殊含义。 |
-|RegionId|String|cn-beijing|地域。 |
-|RepoName|String|demo|镜像仓库名称。 |
-|RepoNamespace|String|demo|镜像命名空间。 |
 |RepoOriginType|String|ALI\_HUB|镜像仓库类型。当前仅支持容器镜像服务。 |
+|CrUrl|String|保留字段|保留字段，暂无特殊含义。 |
 |RepoTag|String|latest|镜像TAG。 |
 |RepoType|String|保留字段|保留字段。 |
+|RepoName|String|demo|镜像仓库名称。 |
+|RepoNamespace|String|demo|镜像命名空间。 |
+|RegionId|String|cn-beijing|地域。 |
 |ErrorCode|String|success|错误码。 |
-|Message|String|success|调用结果的附加信息。 |
-|RequestId|String|91F93257-7A4A-4BD3-9A7E-2F6EAE6D\*\*\*\*|请求ID。 |
+|Code|String|200|接口状态或POP错误码。取值说明如下：
+
+ -   **2xx**：成功。
+-   **3xx**：重定向。
+-   **4xx**：请求错误。
+-   **5xx**：服务器错误。 |
 |Success|Boolean|true|获取应用镜像信息是否成功。取值说明如下：
 
- -   **true**：表示获取信息成功。
--   **false**：表示获取信息失败。 |
-|TraceId|String|0a98a02315955564772843261e\*\*\*\*|调用链ID，用于精确查询调用信息。 |
+ -   **true**：表示获取成功。
+-   **false**：表示获取失败。 |
 
 ## 示例
 
 请求示例
 
 ```
-GET /pop/v1/sam/container/describeApplicationImage?RegionId=cn-beijing&AppId=d700e680-aa4d-4ec1-afc2-6566b5ff****&ImageUrl=registry-vpc.cn-hangzhou.aliyuncs.com%2Fdemo%2Fdemo%3Alatest
+GET /pop/v1/sam/container/describeApplicationImage?AppId=d700e680-aa4d-4ec1-afc2-6566b5ff****&ImageUrl=registry-vpc.cn-hangzhou.aliyuncs.com/demo/demo:latest HTTP/1.1
+Host:sae.aliyuncs.com
+Content-Type:application/json
+
+公共请求参数
 ```
 
 正常返回示例
@@ -64,38 +68,52 @@ GET /pop/v1/sam/container/describeApplicationImage?RegionId=cn-beijing&AppId=d70
 `XML`格式
 
 ```
+HTTP/1.1 200 OK
+Content-Type:application/xml
+
 <DescribeApplicationImageResponse>
-	  <Data>
-		    <RepoName>nginx</RepoName>
-		    <RepoOriginType>ALI_HUB</RepoOriginType>
-		    <RepoNamespace>demo</RepoNamespace>
-		    <RepoTag>latest</RepoTag>
-		    <RegionId>cn-hangzhou</RegionId>
-	  </Data>
-	  <Message>success</Message>
-	  <RequestId>91F93257-7A4A-4BD3-9A7E-2F6EAE6D****</RequestId>
-	  <TraceId>0a98a02315955564772843261e****</TraceId>
-	  <Success>true</Success>
-	  <Code>200</Code>
+    <RequestId>91F93257-7A4A-4BD3-9A7E-2F6EAE6D****</RequestId>
+    <Message>success</Message>
+    <TraceId>0a98a02315955564772843261e****</TraceId>
+    <Data>
+        <Logo>保留字段</Logo>
+        <RepoOriginType>ALI_HUB</RepoOriginType>
+        <CrUrl>保留字段</CrUrl>
+        <RepoTag>latest</RepoTag>
+        <RepoType>保留字段</RepoType>
+        <RepoName>demo</RepoName>
+        <RepoNamespace>demo</RepoNamespace>
+        <RegionId>cn-beijing</RegionId>
+    </Data>
+    <ErrorCode>success</ErrorCode>
+    <Code>200</Code>
+    <Success>true</Success>
 </DescribeApplicationImageResponse>
 ```
 
 `JSON`格式
 
 ```
+HTTP/1.1 200 OK
+Content-Type:application/json
+
 {
-  "Data": {
-    "RepoName": "nginx",
-    "RepoOriginType": "ALI_HUB",
-    "RepoNamespace": "demo",
-    "RepoTag": "latest",
-    "RegionId": "cn-hangzhou"
+  "RequestId" : "91F93257-7A4A-4BD3-9A7E-2F6EAE6D****",
+  "Message" : "success",
+  "TraceId" : "0a98a02315955564772843261e****",
+  "Data" : {
+    "Logo" : "保留字段",
+    "RepoOriginType" : "ALI_HUB",
+    "CrUrl" : "保留字段",
+    "RepoTag" : "latest",
+    "RepoType" : "保留字段",
+    "RepoName" : "demo",
+    "RepoNamespace" : "demo",
+    "RegionId" : "cn-beijing"
   },
-  "Message": "success",
-  "RequestId": "91F93257-7A4A-4BD3-9A7E-2F6EAE6D****",
-  "TraceId": "0a98a02315955564772843261e****",
-  "Success": true,
-  "Code": 200
+  "ErrorCode" : "success",
+  "Code" : "200",
+  "Success" : true
 }
 ```
 
