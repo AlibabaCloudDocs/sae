@@ -32,7 +32,7 @@ GET /pop/v1/sam/resource/components HTTP/1.1
 |--|--|---|--|
 |RequestId|String|91F93257-7A4A-4BD3-9A7E-2F6EAE6D\*\*\*\*|请求ID。 |
 |Message|String|success|附加信息。 |
-|TraceId|String|0a98a02315955564772843261e\*\*\*\*|调用链ID。 |
+|TraceId|String|0a98a02315955564772843261e\*\*\*\*|调用链ID，用于精确查询调用信息。 |
 |Data|Array of Data| |支持的应用组件信息。 |
 |Type|String|JDK|组件类型。 |
 |ComponentKey|String|Open JDK 8|组件ID。 |
@@ -44,10 +44,10 @@ GET /pop/v1/sam/resource/components HTTP/1.1
 |ErrorCode|String|success|错误码。 |
 |Code|String|200|接口状态或POP错误码。取值说明如下：
 
- -   **2XX**：成功。
--   **3XX**：重定向。
--   **4XX**：请求错误。
--   **5XX**：服务器错误。 |
+ -   **2xx**：成功。
+-   **3xx**：重定向。
+-   **4xx**：请求错误。
+-   **5xx**：服务器错误。 |
 |Success|Boolean|true|获取组件版本是否成功。取值说明如下：
 
  -   **true**：表示获取成功。
