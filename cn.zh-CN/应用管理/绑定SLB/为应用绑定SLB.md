@@ -26,7 +26,7 @@ keyword: [SAE SLB, 绑定SLB, SLB]
         -   必须与部署在SAE上的应用所在的实例处于同一个VPC内。
 -   场景二：绑定新建SLB
     1.  [上传已有SSL证书](/cn.zh-CN/传统型负载均衡CLB/CLB用户指南/证书管理/创建证书/概述.md)
-    2.  [创建SLB实例](/cn.zh-CN/传统型负载均衡CLB/CLB快速入门/创建负载均衡实例.md)
+    2.  [创建SLB实例](/cn.zh-CN/传统型负载均衡CLB/CLB快速入门/创建实例.md)
     3.  [在SAE控制台部署应用](/cn.zh-CN/应用部署/控制台部署/在SAE控制台使用WAR包部署Java Web应用.md)
 
 ## 场景一：绑定已有SLB
@@ -37,11 +37,11 @@ keyword: [SAE SLB, 绑定SLB, SLB]
 
 3.  在应用**基本信息**页面默认显示的**基本信息**页签，找到**应用访问设置**区域绑定SLB。
 
-    -   添加私网SLB请单击**添加私网SLB访问**。
-    -   添加公网SLB请单击**添加公网SLB访问**。
+    -   添加私网SLB：单击**添加私网SLB访问**。
+    -   添加公网SLB：单击**添加公网SLB访问**。
     本文以**添加公网SLB访问**为例。
 
-    ![应用访问设置1](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/5565913061/p56572.png)
+    ![应用访问设置1](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/6031816261/p56572.png)
 
     1.  单击**添加公网SLB访问**。
 
@@ -85,7 +85,7 @@ keyword: [SAE SLB, 绑定SLB, SLB]
 
     ![编辑删除SLB](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/5565913061/p57199.png)
 
-3.  在弹出的**编辑私网SLB访问**或**编辑公网SLB访问**对话框，修改所需信息并单击**确认**。
+3.  在弹出的**编辑私网SLB访问**或**编辑公网SLB访问**对话框，修改所需信息并单击**确定**。
 
 
 1.  删除SLB访问设置
@@ -93,7 +93,7 @@ keyword: [SAE SLB, 绑定SLB, SLB]
 
     ![编辑删除SLB](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/5565913061/p57199.png)
 
-3.  单击**确认**，并在**删除私网SLB访问**或者**删除公网SLB访问**对话框，单击**确认**。
+3.  在弹出的**删除私网SLB访问**或者**删除公网SLB访问**对话框，单击**确定**。
 
 
 ## 问题反馈
