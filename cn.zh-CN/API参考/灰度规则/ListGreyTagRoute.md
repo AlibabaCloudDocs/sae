@@ -40,7 +40,7 @@ GET /pop/v1/sam/tagroute/greyTagRouteList HTTP/1.1
 
 |OR
 
-|灰度规则的条件模式，取值说明如下：
+|灰度规则的条件模式。取值说明如下：
 
  -   **AND**：表示与，即同时满足条件列表中的所有条件。
 -   **OR**：表示或，即满足条件列表中的任一条件。 |
@@ -87,7 +87,7 @@ GET /pop/v1/sam/tagroute/greyTagRouteList HTTP/1.1
 
 |cookie
 
-|比较类型，取值说明如下：
+|比较类型。取值说明如下：
 
  -   **param**：表示Parameter。
 -   **cookie**：表示Cookie。
@@ -105,7 +105,7 @@ GET /pop/v1/sam/tagroute/greyTagRouteList HTTP/1.1
 
 |rawvalue
 
-|运算符，取值说明如下：
+|运算符。取值说明如下：
 
  -   **rawvalue**：表示直接比较。
 -   **list**：表示白名单。
@@ -128,7 +128,7 @@ GET /pop/v1/sam/tagroute/greyTagRouteList HTTP/1.1
 
 |OR
 
-|灰度规则的条件模式，取值说明如下：
+|灰度规则的条件模式。取值说明如下：
 
  -   **AND**：表示与，即同时满足条件列表中的所有条件。
 -   **OR**：表示或，即满足条件列表中的任一条件。 |
@@ -217,7 +217,7 @@ GET /pop/v1/sam/tagroute/greyTagRouteList HTTP/1.1
 
 |rawvalue
 
-|运算符，取值说明如下：
+|运算符。取值说明如下：
 
  -   **rawvalue**：表示直接比较。
 -   **list**：表示白名单。
@@ -241,18 +241,18 @@ GET /pop/v1/sam/tagroute/greyTagRouteList HTTP/1.1
 |Description|String|test|规则描述。 |
 |ScRules|Array of scRule| |Spring Cloud灰度规则。 |
 |path|String|/path|Spring Cloud应用灰度规则对应的路径。 |
-|condition|String|OR|灰度规则的条件模式，取值说明如下：
+|condition|String|OR|灰度规则的条件模式。取值说明如下：
 
  -   **AND**：表示与，即同时满足条件列表中的所有条件。
 -   **OR**：表示或，即满足条件列表中的任一条件。 |
 |items|Array of item| |条件列表。 |
-|type|String|cookie|比较类型，取值说明如下：
+|type|String|cookie|比较类型。取值说明如下：
 
  -   **param**：表示Parameter。
 -   **cookie**：表示Cookie。
 -   **header**：表示Header。 |
 |name|String|test|参数名。 |
-|operator|String|rawvalue|运算符，取值说明如下：
+|operator|String|rawvalue|运算符。取值说明如下：
 
  -   **rawvalue**：表示直接比较。
 -   **list**：表示白名单。
@@ -267,7 +267,7 @@ GET /pop/v1/sam/tagroute/greyTagRouteList HTTP/1.1
 |group|String|DUBBO|灰度规则对应的Dubbo服务的分组。 |
 |version|String|1.0.0|Dubbo服务版本。 |
 |methodName|String|echo|Dubbo服务的方法名。 |
-|condition|String|OR|灰度规则的条件模式，取值说明如下：
+|condition|String|OR|灰度规则的条件模式。取值说明如下：
 
  -   **AND**：表示与，即同时满足条件列表中的所有条件。
 -   **OR**：表示或，即满足条件列表中的任一条件。 |
@@ -283,7 +283,7 @@ GET /pop/v1/sam/tagroute/greyTagRouteList HTTP/1.1
 -   **.get\("key"\)**：表示当前参数是一个Map，获取key对应的值，相当于args0.get\("key"\)。
 
 **说明：** 关于参数值获取表达式的更多信息，请参见[Spring Expression Language \(SpEL\)](https://docs.spring.io/spring-integration/docs/current/reference/html/spel.html)。 |
-|operator|String|rawvalue|运算符，取值说明如下：
+|operator|String|rawvalue|运算符。取值说明如下：
 
  -   **rawvalue**：表示直接比较。
 -   **list**：表示白名单。
@@ -298,10 +298,10 @@ GET /pop/v1/sam/tagroute/greyTagRouteList HTTP/1.1
 |ErrorCode|String|success|错误码。 |
 |Code|String|200|接口状态或POP错误码。取值说明如下：
 
- -   **2XX**：成功。
--   **3XX**：重定向。
--   **4XX**：请求错误。
--   **5XX**：服务器错误。 |
+ -   **2xx**：成功。
+-   **3xx**：重定向。
+-   **4xx**：请求错误。
+-   **5xx**：服务器错误。 |
 |Success|Boolean|true|查询变更单信息是否成功。取值说明如下：
 
  -   **true**：表示查询成功。
@@ -348,6 +348,7 @@ Content-Type:application/xml
                     <operator>rawvalue</operator>
                     <value>test</value>
                     <cond>==</cond>
+                    <expr>N/A</expr>
                 </items>
             </ScRules>
             <DubboRules>
@@ -362,6 +363,8 @@ Content-Type:application/xml
                     <operator>rawvalue</operator>
                     <value>test</value>
                     <cond>==</cond>
+                    <type>N/A</type>
+                    <name>N/A</name>
                 </items>
             </DubboRules>
             <CreateTime>1619007592013</CreateTime>
@@ -400,7 +403,8 @@ Content-Type:application/json
           "name" : "test",
           "operator" : "rawvalue",
           "value" : "test",
-          "cond" : "=="
+          "cond" : "==",
+          "expr" : "N/A"
         } ]
       } ],
       "DubboRules" : [ {
@@ -414,7 +418,9 @@ Content-Type:application/json
           "expr" : ".name",
           "operator" : "rawvalue",
           "value" : "test",
-          "cond" : "=="
+          "cond" : "==",
+          "type" : "N/A",
+          "name" : "N/A"
         } ]
       } ],
       "CreateTime" : 1619007592013,
