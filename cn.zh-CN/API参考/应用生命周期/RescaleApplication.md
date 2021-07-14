@@ -39,10 +39,10 @@ PUT /pop/v1/sam/app/rescaleApplication HTTP/1.1
 |ErrorCode|String|success|错误码。 |
 |Code|String|200|接口状态或POP错误码。取值说明如下：
 
- -   **2XX**：成功。
--   **3XX**：重定向。
--   **4XX**：请求错误。
--   **5XX**：服务器错误。 |
+ -   **2xx**：成功。
+-   **3xx**：重定向。
+-   **4xx**：请求错误。
+-   **5xx**：服务器错误。 |
 |Success|Boolean|true|应用扩缩是否成功。取值说明如下：
 
  -   **true**：表示扩缩成功。
