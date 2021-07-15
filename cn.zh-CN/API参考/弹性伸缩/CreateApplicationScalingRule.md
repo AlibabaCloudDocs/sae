@@ -6,7 +6,7 @@
 
 -   您最多可以为1个应用创建5条弹性策略。
 -   您最多可以为1条定时弹性策略，创建20条单天内触发时间点。
--   弹性策略启用时，请勿手动执行应用生命周期管理操作，例如应用扩缩、部署应用、更改规格、重启应用或停止应用。如果您需要对应用执行该类操作，那么请停用弹性策略后，再手动执行操作。
+-   弹性策略启用时，请勿手动执行应用生命周期管理操作，例如应用扩缩容、部署应用、更改规格、重启应用或停止应用。如果您需要对应用执行该类操作，那么请停用弹性策略后，再手动执行操作。
 -   如果当前应用处于扩容、缩容、部署（单批、分批或灰度）、更改规格、重启或停止等过程中，那么该应用暂时无法添加或者启动弹性策略。
 -   如果单个应用需要弹出超过50个实例，需提交[工单](https://workorder.console.aliyun.com/#/ticket/createIndex)申请白名单。
 
@@ -35,7 +35,9 @@ POST /pop/v1/sam/scale/applicationScalingRule HTTP/1.1
 |ScalingRuleType|String|Query|是|timing|弹性策略类型。取值说明如下：
 
  -   **timing**：定时弹性 |
-|ScalingRuleTimer|String|Query|否|\{"beginDate":null,"endDate":null,"period":"\* \* \*","schedules":\[\{"atTime":"08:00","targetReplicas":10\},\{"atTime":"20:00","targetReplicas":3\}\]\}|定时弹性策略的配置。参数说明如下：
+|ScalingRuleTimer|String|Query|否|\{"beginDate":null,"endDate":null,"period":"\* \* \*","schedules":\[\{"atTime":"08:00","targetReplicas":10\},\{"atTime":"20:00","targetReplicas":3\}\]\}|定时弹性策略的配置。当您选择定时弹性策略或使用SDK设置时，该参数必选。如果需要使用监控指标弹性，可通过控制台设置。具体操作，请参见[配置弹性伸缩策略](~~134120~~)。
+
+ 参数说明如下：
 
  -   **beginDate**和**endDate**：**beginDate**为起始日期，**endDate**为结束日期，用于配置定时弹性伸缩策略的时间。取值说明如下：
     -   当取值均为**null**时，表示长期执行，为默认值。
@@ -103,33 +105,27 @@ Content-Type:application/json
 HTTP/1.1 200 OK
 Content-Type:application/xml
 
-<RequestId>91F93257-7A4A-4BD3-9A7E-2F6EAE6D****</RequestId>
-<TraceId>0a98a02315955564772843261e****</TraceId>
-<Data>
-    <Timer>
-        <EndDate>2021-04-25</EndDate>
-        <BeginDate>2021-03-25</BeginDate>
-        <Schedules>
-            <AtTime>08:00</AtTime>
-            <TargetReplicas>3</TargetReplicas>
-        </Schedules>
-        <Schedules>
-            <AtTime>21:00</AtTime>
-            <TargetReplicas>1</TargetReplicas>
-        </Schedules>
-        <Period>* * *</Period>
-    </Timer>
-    <UpdateTime>1616642248938</UpdateTime>
-    <AppId>7171a6ca-d1cd-4928-8642-7d5cfe69****</AppId>
-    <CreateTime>1616642248938</CreateTime>
-    <LastDisableTime>1616642248938</LastDisableTime>
-    <ScaleRuleEnabled>true</ScaleRuleEnabled>
-    <ScaleRuleType>timing</ScaleRuleType>
-    <Metric>
-        <Metrics/>
-    </Metric>
-    <ScaleRuleName>timer-0800-2100</ScaleRuleName>
-</Data>
+<CreateApplicationScalingRuleResponse>
+    <RequestId>91F93257-7A4A-4BD3-9A7E-2F6EAE6D****</RequestId>
+    <TraceId>0a98a02315955564772843261e****</TraceId>
+    <Data>
+        <Timer>
+            <EndDate>2021-04-25</EndDate>
+            <BeginDate>2021-03-25</BeginDate>
+            <Schedules>
+                <AtTime>08:00</AtTime>
+                <TargetReplicas>3</TargetReplicas>
+            </Schedules>
+            <Period>* * *</Period>
+        </Timer>
+        <UpdateTime>1616642248938</UpdateTime>
+        <AppId>7171a6ca-d1cd-4928-8642-7d5cfe69****</AppId>
+        <CreateTime>1616642248938</CreateTime>
+        <ScaleRuleEnabled>true</ScaleRuleEnabled>
+        <ScaleRuleType>timing</ScaleRuleType>
+        <ScaleRuleName>timer-0800-2100</ScaleRuleName>
+    </Data>
+</CreateApplicationScalingRuleResponse>
 ```
 
 `JSON`格式
@@ -143,24 +139,19 @@ Content-Type:application/json
   "TraceId" : "0a98a02315955564772843261e****",
   "Data" : {
     "Timer" : {
+      "EndDate" : "2021-04-25",
+      "BeginDate" : "2021-03-25",
       "Schedules" : [ {
         "AtTime" : "08:00",
         "TargetReplicas" : 3
-      }, {
-        "AtTime" : "21:00",
-        "TargetReplicas" : 1
       } ],
       "Period" : "* * *"
     },
     "UpdateTime" : 1616642248938,
     "AppId" : "7171a6ca-d1cd-4928-8642-7d5cfe69****",
     "CreateTime" : 1616642248938,
-    "LastDisableTime" : 1616642248938,
     "ScaleRuleEnabled" : true,
     "ScaleRuleType" : "timing",
-    "Metric" : {
-      "Metrics" : [ { } ]
-    },
     "ScaleRuleName" : "timer-0800-2100"
   }
 }
