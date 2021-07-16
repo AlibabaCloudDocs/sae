@@ -8,7 +8,7 @@
 
 ## 请求头
 
-该接口使用公共请求头，无特殊请求头。请参见公共请求参数文档。
+该接口使用公共请求头，无特殊请求头。更多信息，请参见[公共请求和返回头](~~126964~~)。
 
 ## 请求语法
 
@@ -21,38 +21,52 @@ POST /pop/v1/sam/app/slb HTTP/1.1
 |名称|类型|位置|是否必选|示例值|描述|
 |--|--|--|----|---|--|
 |AppId|String|Query|是|0099b7be-5f5b-4512-a7fc-56049ef1\*\*\*\*|需要绑定SLB的目标应用ID。 |
-|Internet|String|Query|否|\[\{"port":80,"targetPort":8080,"protocol":"TCP"\}\]|绑定公网SLB。例如：\[\{"port":80,"targetPort":8080,"protocol":"TCP"\}\]，表示将容器的8080端口通过SLB的80端口暴露服务，协议为TCP。 |
-|Intranet|String|Query|否|\[\{"port":80,"targetPort":8080,"protocol":"TCP"\}\]|绑定私网SLB。例如：\[\{"port":80,"targetPort":8080,"protocol":"TCP"\}\]，表示将容器的8080端口通过SLB的80端口暴露服务，协议为TCP。 |
-|InternetSlbId|String|Query|否|lb-bp1tg0k6d9nqaw7l1\*\*\*\*|使用指定的已购买的公网SLB，目前只支持非共享型实例。 |
-|IntranetSlbId|String|Query|否|lb-bp1tg0k6d9nqaw7l1\*\*\*\*|使用指定的已购买的私网SLB，目前只支持非共享型实例。 |
+|Internet|String|Query|否|\[\{"port":80,"targetPort":8080,"protocol":"TCP"\}\]|绑定公网SLB。例如：\[\{"port":80,"targetPort":8080,"protocol":"TCP"\}\]，表示通过TCP协议，将容器的8080端口通过SLB的80端口暴露服务。取值说明如下：
+
+ -   **port**：SLB端口。
+-   **targetPort**：容器端口。
+-   **protocol**：网络协议。支持**TCP**、**HTTP**和**HTTPS**。
+-   **httpsCertId**：SSL证书。仅限选择**HTTPS**时需配置SSL证书。 |
+|Intranet|String|Query|否|\[\{"port":80,"targetPort":8080,"protocol":"TCP"\}\]|绑定私网SLB。例如：\[\{"port":80,"targetPort":8080,"protocol":"TCP"\}\]，表示通过TCP协议，将容器的8080端口通过SLB的80端口暴露服务。取值说明如下：
+
+ -   **port**：SLB端口。
+-   **targetPort**：容器端口。
+-   **protocol**：网络协议。支持**TCP**、**HTTP**和**HTTPS**。
+-   **httpsCertId**：SSL证书。仅限选择**HTTPS**时需配置SSL证书。 |
+|InternetSlbId|String|Query|否|lb-bp1tg0k6d9nqaw7l1\*\*\*\*|使用指定的已购买的公网SLB，支持非共享型实例。 |
+|IntranetSlbId|String|Query|否|lb-bp1tg0k6d9nqaw7l1\*\*\*\*|使用指定的已购买的私网SLB，支持非共享型实例。 |
 
 ## 返回数据
 
 |名称|类型|示例值|描述|
 |--|--|---|--|
-|Code|String|200|接口状态或POP错误码。
-
- -   2XX：成功。
--   3XX：重定向。
--   4XX：请求错误。
--   5XX：服务器错误。 |
-|Data|Struct| |返回结果。 |
+|RequestId|String|91F93257-7A4A-4BD3-9A7E-2F6EAE6D\*\*\*\*|请求ID。 |
+|Message|String|success|调用结果的附加信息。 |
+|TraceId|String|0a98a02315955564772843261e\*\*\*\*|调用链ID，可用于精确查询调用信息。 |
+|Data|Object| |返回结果。 |
 |ChangeOrderId|String|01db03d3-3ee9-48b3-b3d0-dfce2d88\*\*\*\*|返回的发布单ID，用于查询任务执行状态。 |
 |ErrorCode|String|success|错误码。 |
-|Message|String|success|调用结果的附加信息。 |
-|RequestId|String|91F93257-7A4A-4BD3-9A7E-2F6EAE6D\*\*\*\*|请求ID。 |
+|Code|String|200|接口状态或POP错误码。取值说明如下：
+
+ -   **2xx**：成功。
+-   **3xx**：重定向。
+-   **4xx**：请求错误。
+-   **5xx**：服务器错误。 |
 |Success|Boolean|true|绑定SLB是否成功。取值说明如下：
 
  -   **true**：表示绑定成功。
 -   **false**：表示绑定失败。 |
-|TraceId|String|0a98a02315955564772843261e\*\*\*\*|调用链ID，可用于精确查询调用信息。 |
 
 ## 示例
 
 请求示例
 
 ```
-POST /pop/v1/sam/app/listApplications?RegionId=cn-beijing&AppId=0099b7be-5f5b-4512-a7fc-56049ef1****
+POST /pop/v1/sam/app/slb?AppId=0099b7be-5f5b-4512-a7fc-56049ef1****&Internet=[{"port":80,"targetPort":8080,"protocol":"TCP"}]&Intranet=[{"port":80,"targetPort":8080,"protocol":"TCP"}]&InternetSlbId=lb-bp1tg0k6d9nqaw7l1****&IntranetSlbId=lb-bp1tg0k6d9nqaw7l1**** HTTP/1.1
+Host:sae.aliyuncs.com
+Content-Type:application/json
+
+公共请求参数
 ```
 
 正常返回示例
@@ -60,30 +74,38 @@ POST /pop/v1/sam/app/listApplications?RegionId=cn-beijing&AppId=0099b7be-5f5b-45
 `XML`格式
 
 ```
+HTTP/1.1 200 OK
+Content-Type:application/xml
+
 <BindSlbResponse>
-      <RequestId>91F93257-7A4A-4BD3-9A7E-2F6EAE6D****</RequestId>
-      <Message>success</Message>
-      <TraceId>0a98a02315955564772843261e****</TraceId>
-      <Data>
-            <ChangeOrderId>01db03d3-3ee9-48b3-b3d0-dfce2d88****</ChangeOrderId>
-      </Data>
-      <Code>200</Code>
-      <Success>true</Success>
+    <RequestId>91F93257-7A4A-4BD3-9A7E-2F6EAE6D****</RequestId>
+    <Message>success</Message>
+    <TraceId>0a98a02315955564772843261e****</TraceId>
+    <Data>
+        <ChangeOrderId>01db03d3-3ee9-48b3-b3d0-dfce2d88****</ChangeOrderId>
+    </Data>
+    <ErrorCode>success</ErrorCode>
+    <Code>200</Code>
+    <Success>true</Success>
 </BindSlbResponse>
 ```
 
 `JSON`格式
 
 ```
+HTTP/1.1 200 OK
+Content-Type:application/json
+
 {
-    "RequestId": "91F93257-7A4A-4BD3-9A7E-2F6EAE6D****",
-    "Message": "success",
-    "TraceId": "0a98a02315955564772843261e****",
-    "Data": {
-        "ChangeOrderId": "01db03d3-3ee9-48b3-b3d0-dfce2d88****"
-    },
-    "Code": 200,
-    "Success": true
+  "RequestId" : "91F93257-7A4A-4BD3-9A7E-2F6EAE6D****",
+  "Message" : "success",
+  "TraceId" : "0a98a02315955564772843261e****",
+  "Data" : {
+    "ChangeOrderId" : "01db03d3-3ee9-48b3-b3d0-dfce2d88****"
+  },
+  "ErrorCode" : "success",
+  "Code" : "200",
+  "Success" : true
 }
 ```
 
@@ -94,12 +116,12 @@ POST /pop/v1/sam/app/listApplications?RegionId=cn-beijing&AppId=0099b7be-5f5b-45
 |400|InvalidApplication.NotFound|The current application does not exist.|找不到当前应用。|
 |400|InvalidParameter.NotEmpty|You must specify the parameter %s.|不合法的参数：%s不能为空。|
 |400|InvalidParameter.Obviously|The specified parameter is invalid \{%s\}.|不合法的参数\{%s\}。|
-|400|Slb.NotFound|The SLB instance does not exist: slbId \[%s\]|SLB不存在：slbId\[%s\]。|
+|400|Slb.NotFound|The SLB instance does not exist: slbId \[%s\]|SLB不存在: slbId\[%s\]|
 |400|SlbAppVSwitch.NotMatch|The SLB instance does not match the VSwitch of the current application.|SLB与应用VSwitch不匹配。|
 |400|SlbHttpsCert.NotConsistent|The HTTPS listening certificate for each listener must match.|SLB设置HTTPS监听证书配置必须一致。|
 |400|SlbHttpsCert.NotFound|You must configure the certificate before you configure HTTPS listening for the SLB instance.|SLB设置HTTPS监听必须有证书配置。|
-|400|SlbListenerPort.NotAvailable|The SLB listening port is unavailable: slbId \[%s\], port \[%s\]|SLB监听端口被占用：slbId\[%s\], port\[%s\]。|
-|400|SlbListenerType.Invalid|An SLB listener type error occurred. Only HTTPS and TCP are supported.|SLB监听类型异常，只支持HTTPS和TCP类型。|
+|400|SlbListenerPort.NotAvailable|The SLB listening port is unavailable: slbId \[%s\], port \[%s\]|SLB监听端口被占用: slbId\[%s\], port\[%s\]|
+|400|SlbListenerType.Invalid|An SLB listener type error occurred. Only HTTPS and TCP are supported.|SLB监听类型异常，只支持HTTPS\|TCP类型。|
 |400|SlbSpec.NotSupport|Shared performance SLB instances are not supported.|不支持性能共享型SLB实例。|
 |400|SlbType.Invalid|An SLB network type error occurred.|SLB网络类型异常。|
 |400|SSLCert.NotFound|The specified SSL certificate cannot be found.|找不到对应的SSL证书。|
