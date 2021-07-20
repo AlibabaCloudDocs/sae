@@ -39,13 +39,13 @@ PUT /pop/v1/paas/namespace HTTP/1.1
 |ErrorCode|String|InvalidNamespaceId.NotFound|错误码。 |
 |Code|String|200|接口状态或POP错误码。取值说明如下：
 
- -   2XX：成功。
--   3XX：重定向。
--   4XX：请求错误。
--   5XX：服务器错误。 |
+-   **2xx**：成功。
+-   **3xx**：重定向。
+-   **4xx**：请求错误。
+-   **5xx**：服务器错误。 |
 |Success|Boolean|true|更新命名空间信息是否成功。取值说明如下：
 
- -   **true**：表示更新成功。
+-   **true**：表示更新成功。
 -   **false**：表示更新失败。 |
 
 ## 示例
@@ -56,6 +56,8 @@ PUT /pop/v1/paas/namespace HTTP/1.1
 PUT /pop/v1/paas/namespace?NamespaceId=cn-beijing:test&NamespaceName=name&NamespaceDescription=desc HTTP/1.1
 Host:sae.aliyuncs.com
 Content-Type:application/json
+
+公共请求参数
 ```
 
 正常返回示例
