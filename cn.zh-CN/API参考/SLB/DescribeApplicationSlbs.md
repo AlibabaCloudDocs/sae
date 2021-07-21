@@ -45,7 +45,12 @@ GET /pop/v1/sam/app/slb HTTP/1.1
 |IntranetSlbId|String|lb-uf6xc7wybefehnv45\*\*\*\*|内网SLB ID。 |
 |IntranetIp|String|192.168.0.0|内网SLB地址。 |
 |ErrorCode|String|success|错误码。 |
-|Code|String|200|接口状态或POP错误码。 |
+|Code|String|200|接口状态或POP错误码。取值说明如下：
+
+ -   **2xx**：成功。
+-   **3xx**：重定向。
+-   **4xx**：请求错误。
+-   **5xx**：服务器错误。 |
 |Success|Boolean|true|获取应用SLB配置信息是否成功。取值说明如下：
 
  -   **true**：表示获取成功。
@@ -59,6 +64,8 @@ GET /pop/v1/sam/app/slb HTTP/1.1
 GET /pop/v1/sam/app/slb?AppId=017f39b8-dfa4-4e16-a84b-1dcee4b1**** HTTP/1.1
 Host:sae.aliyuncs.com
 Content-Type:application/json
+
+公共请求参数
 ```
 
 正常返回示例
