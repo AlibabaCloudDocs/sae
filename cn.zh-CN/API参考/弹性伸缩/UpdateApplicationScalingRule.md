@@ -28,10 +28,13 @@ PUT /pop/v1/sam/scale/applicationScalingRule HTTP/1.1
 |ScalingRuleName|String|Query|是|timer-0800-2100|自定义的弹性伸缩策略名。必须以小写字母开头，仅可包含小写字母、数字及短划线（-），不超过32个字符。
 
  **说明：** 伸缩策略创建成功后，不可修改策略名。 |
-|ScalingRuleTimer|String|Query|否|\{"beginDate":null,"endDate":null,"period":"\* \* \*","schedules":\[\{"atTime":"08:00","targetReplicas":10\},\{"atTime":"20:00","targetReplicas":3\}\]\}|定时弹性策略的配置。参数说明如下：
+|ScalingRuleTimer|String|Query|否|\{"beginDate":null,"endDate":null,"period":"\* \* \*","schedules":\[\{"atTime":"08:00","targetReplicas":10\},\{"atTime":"20:00","targetReplicas":3\}\]\}|定时弹性策略的配置。当您选择定时弹性策略或使用SDK设置时，该参数必选。如果需要使用监控指标弹性，可通过控制台设置。具体操作，请参见[配置弹性伸缩策略](~~134120~~)。
 
- -   **beginDate**：长期，适用于不需要指定执行定时弹性伸缩策略的结束日期时的场景。取值：**null**。
--   **endDate**：短期，适用于需要指定执行定时弹性伸缩策略的起止日期时的场景。取值示例：**2021-03-25**。
+ 参数说明如下：
+
+ -   **beginDate**和**endDate**：**beginDate**为起始日期，**endDate**为结束日期，用于配置定时弹性伸缩策略的时间。取值说明如下：
+    -   当取值均为**null**时，表示长期执行，为默认值。
+    -   当取值为具体日期时，例如**beginDate**为**2021-03-25**，**endDate**为**2021-04-25**，表示执行有效期为1个月。
 -   **period**：执行定时弹性伸缩策略的周期。取值说明如下：
     -   **\* \* \***：每天指定时间执行定时策略。
     -   **\* \* Fri,Mon**：每周指定天数的指定时间执行定时策略，支持选择多星期几，GMT+8时区。取值说明如下：
@@ -95,33 +98,27 @@ Content-Type:application/json
 HTTP/1.1 200 OK
 Content-Type:application/xml
 
-<RequestId>91F93257-7A4A-4BD3-9A7E-2F6EAE6D****</RequestId>
-<TraceId>0a98a02315955564772843261e****</TraceId>
-<Data>
-    <Timer>
-        <EndDate/>
-        <BeginDate/>
-        <Schedules>
-            <AtTime>08:00</AtTime>
-            <TargetReplicas>3</TargetReplicas>
-        </Schedules>
-        <Schedules>
-            <AtTime>21:00</AtTime>
-            <TargetReplicas>1</TargetReplicas>
-        </Schedules>
-        <Period>* * *</Period>
-    </Timer>
-    <UpdateTime>1616642248938</UpdateTime>
-    <AppId>7171a6ca-d1cd-4928-8642-7d5cfe69****</AppId>
-    <CreateTime>1616642248938</CreateTime>
-    <LastDisableTime>1616642248938</LastDisableTime>
-    <ScaleRuleEnabled>true</ScaleRuleEnabled>
-    <ScaleRuleType>timing</ScaleRuleType>
-    <Metric>
-        <Metrics/>
-    </Metric>
-    <ScaleRuleName>timer-0800-2100</ScaleRuleName>
-</Data>
+<UpdateApplicationScalingRuleResponse>
+    <RequestId>91F93257-7A4A-4BD3-9A7E-2F6EAE6D****</RequestId>
+    <TraceId>0a98a02315955564772843261e****</TraceId>
+    <Data>
+        <Timer>
+            <EndDate>2021-04-25</EndDate>
+            <BeginDate>2021-03-25</BeginDate>
+            <Schedules>
+                <AtTime>08:00</AtTime>
+                <TargetReplicas>3</TargetReplicas>
+            </Schedules>
+            <Period>* * *</Period>
+        </Timer>
+        <UpdateTime>1616642248938</UpdateTime>
+        <AppId>7171a6ca-d1cd-4928-8642-7d5cfe69****</AppId>
+        <CreateTime>1616642248938</CreateTime>
+        <ScaleRuleEnabled>true</ScaleRuleEnabled>
+        <ScaleRuleType>timing</ScaleRuleType>
+        <ScaleRuleName>timer-0800-2100</ScaleRuleName>
+    </Data>
+</UpdateApplicationScalingRuleResponse>
 ```
 
 `JSON`格式
@@ -135,24 +132,19 @@ Content-Type:application/json
   "TraceId" : "0a98a02315955564772843261e****",
   "Data" : {
     "Timer" : {
+      "EndDate" : "2021-04-25",
+      "BeginDate" : "2021-03-25",
       "Schedules" : [ {
         "AtTime" : "08:00",
         "TargetReplicas" : 3
-      }, {
-        "AtTime" : "21:00",
-        "TargetReplicas" : 1
       } ],
       "Period" : "* * *"
     },
     "UpdateTime" : 1616642248938,
     "AppId" : "7171a6ca-d1cd-4928-8642-7d5cfe69****",
     "CreateTime" : 1616642248938,
-    "LastDisableTime" : 1616642248938,
     "ScaleRuleEnabled" : true,
     "ScaleRuleType" : "timing",
-    "Metric" : {
-      "Metrics" : [ { } ]
-    },
     "ScaleRuleName" : "timer-0800-2100"
   }
 }
