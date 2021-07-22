@@ -8,7 +8,7 @@
 
 ## 请求头
 
-该接口使用公共请求头，无特殊请求头。请参见公共请求参数文档。
+该接口使用公共请求头，无特殊请求头。更多信息，请参见[公共请求和返回头](~~126964~~)。
 
 ## 请求语法
 
@@ -26,46 +26,53 @@ GET /pop/v1/sam/ingress/Ingress HTTP/1.1
 
 |名称|类型|示例值|描述|
 |--|--|---|--|
-|Code|String|200|接口状态或POP错误码。取值说明如下：
-
- -   2XX：成功。
--   3XX：重定向。
--   4XX：请求错误。
--   5XX：服务器错误。 |
-|Data|Struct| |返回结果。 |
-|CertId|String|13623\*\*\*\*809\_16cad216b32\_845\_-419427029|证书ID。 |
-|DefaultRule|Struct| |默认规则。 |
-|AppId|String|395b60e4-0550-458d-9c54-a265d036\*\*\*\*|默认规则的应用。 |
-|AppName|String|app1|默认规则的应用名称。 |
-|ContainerPort|Integer|8080|默认规则应用的后端端口。 |
-|Description|String|ingress-sae-test|Ingress描述信息。 |
-|Id|Long|87|Ingress ID。 |
-|ListenerPort|Integer|443|SLB监听端口。 |
-|Name|String|sae-test|Ingress名称 |
+|RequestId|String|91F93257-7A4A-4BD3-9A7E-2F6EAE6D\*\*\*\*|请求ID。 |
+|Message|String|success|调用结果的附加信息。 |
+|TraceId|String|0a981dd515966966104121683d\*\*\*\*|调用链ID，用于精确查询调用信息。 |
+|Data|Object| |返回结果。 |
+|SlbId|String|lb-uf62\*\*\*\*6d13tq2u5|SLB ID。 |
 |NamespaceId|String|cn-beijing:sae-test|命名空间ID。 |
+|Description|String|ingress-sae-test|Ingress描述信息。 |
+|ListenerPort|Integer|443|SLB监听端口。 |
+|SlbType|String|internet|SLB类型。取值说明如下：
+
+ -   **internet**：公网。
+-   **intranet**：私网。 |
+|CertId|String|13623\*\*\*\*809\_16cad216b32\_845\_-419427029|证书ID。 |
+|Name|String|sae-test|Ingress名称。 |
+|DefaultRule|Object| |默认规则。 |
+|ContainerPort|Integer|8080|默认规则应用的后端端口。 |
+|AppName|String|app1|默认规则的应用名称。 |
+|AppId|String|395b60e4-0550-458d-9c54-a265d036\*\*\*\*|默认规则的应用。 |
 |Rules|Array of Rule| |转发规则。 |
-|AppId|String|395b60e4-0550-458d-9c54-a265d036\*\*\*\*|目标应用ID。 |
 |AppName|String|app1|目标应用名称。 |
 |ContainerPort|Integer|8080|应用后端端口。 |
 |Domain|String|edas.site|应用域名。 |
+|AppId|String|395b60e4-0550-458d-9c54-a265d036\*\*\*\*|目标应用ID。 |
 |Path|String|/path1|URL路径。 |
-|SlbId|String|lb-uf62\*\*\*\*6d13tq2u5|SLB ID。 |
-|SlbType|String|internet|SLB类型。 |
+|Id|Long|87|Ingress ID。 |
 |ErrorCode|String|success|错误码。 |
-|Message|String|success|调用结果的附加信息。 |
-|RequestId|String|91F93257-7A4A-4BD3-9A7E-2F6EAE6D\*\*\*\*|请求ID。 |
+|Code|String|200|接口状态或POP错误码。取值说明如下：
+
+ -   **2xx**：成功。
+-   **3xx**：重定向。
+-   **4xx**：请求错误。
+-   **5xx**：服务器错误。 |
 |Success|Boolean|true|查询Ingress详情是否成功。取值说明如下：
 
  -   **true**：表示查询成功。
 -   **false**：表示查询失败。 |
-|TraceId|String|0a981dd515966966104121683d\*\*\*\*|调用链ID，用于精确查询调用信息。 |
 
 ## 示例
 
 请求示例
 
 ```
-GET /pop/v1/sam/ingress/Ingress?RegionId=cn-beijing&IngressId=87
+GET /pop/v1/sam/ingress/Ingress?IngressId=87 HTTP/1.1
+Host:sae.aliyuncs.com
+Content-Type:application/json
+
+公共请求参数
 ```
 
 正常返回示例
@@ -73,68 +80,76 @@ GET /pop/v1/sam/ingress/Ingress?RegionId=cn-beijing&IngressId=87
 `XML`格式
 
 ```
+HTTP/1.1 200 OK
+Content-Type:application/xml
+
 <DescribeIngressResponse>
-      <Message>success</Message>
-      <RequestId>91F93257-7A4A-4BD3-9A7E-2F6EAE6D****</RequestId>
-      <TraceId>0a981dd515966966104121683d****</TraceId>
-      <Data>
-            <SlbId>lb-uf62****6d13tq2u5</SlbId>
-            <DefaultRule>
-                  <AppId>395b60e4-0550-458d-9c54-a265d036****</AppId>
-                  <ContainerPort>8080</ContainerPort>
-                  <AppName>app1</AppName>
-            </DefaultRule>
-            <ListenerPort>443</ListenerPort>
-            <Description>ingress-sae-test</Description>
-            <CertId>13623****809_16cad216b32_845_-419427029</CertId>
-            <NamespaceId>cn-beijing:sae-test</NamespaceId>
-            <Id>87</Id>
-            <Rules>
-                  <Path>/path1</Path>
-                  <ContainerPort>8080</ContainerPort>
-                  <AppId>395b60e4-0550-458d-9c54-a265d036****</AppId>
-                  <Domain>edas.site</Domain>
-                  <AppName>app1</AppName>
-            </Rules>
-            <SlbType>internet</SlbType>
-            <Name>sae-test</Name>
-      </Data>
-      <Code>200</Code>
-      <Success>true</Success>
+    <RequestId>91F93257-7A4A-4BD3-9A7E-2F6EAE6D****</RequestId>
+    <Message>success</Message>
+    <TraceId>0a981dd515966966104121683d****</TraceId>
+    <Data>
+        <SlbId>lb-uf62****6d13tq2u5</SlbId>
+        <NamespaceId>cn-beijing:sae-test</NamespaceId>
+        <Description>ingress-sae-test</Description>
+        <ListenerPort>443</ListenerPort>
+        <SlbType>internet</SlbType>
+        <CertId>13623****809_16cad216b32_845_-419427029</CertId>
+        <Name>sae-test</Name>
+        <DefaultRule>
+            <ContainerPort>8080</ContainerPort>
+            <AppName>app1</AppName>
+            <AppId>395b60e4-0550-458d-9c54-a265d036****</AppId>
+        </DefaultRule>
+        <Rules>
+            <AppName>app1</AppName>
+            <ContainerPort>8080</ContainerPort>
+            <Domain>edas.site</Domain>
+            <AppId>395b60e4-0550-458d-9c54-a265d036****</AppId>
+            <Path>/path1</Path>
+        </Rules>
+        <Id>87</Id>
+    </Data>
+    <ErrorCode>success</ErrorCode>
+    <Code>200</Code>
+    <Success>true</Success>
 </DescribeIngressResponse>
 ```
 
 `JSON`格式
 
 ```
+HTTP/1.1 200 OK
+Content-Type:application/json
+
 {
-    "Message": "success",
-    "RequestId": "91F93257-7A4A-4BD3-9A7E-2F6EAE6D****",
-    "TraceId": "0a981dd515966966104121683d****",
-    "Data": {
-        "SlbId": "lb-uf62****6d13tq2u5",
-        "DefaultRule": {
-            "AppId": "395b60e4-0550-458d-9c54-a265d036****",
-            "ContainerPort": 8080,
-            "AppName": "app1"
-        },
-        "ListenerPort": 443,
-        "Description": "ingress-sae-test",
-        "CertId": "13623****809_16cad216b32_845_-419427029",
-        "NamespaceId": "cn-beijing:sae-test",
-        "Id": 87,
-        "Rules": {
-            "Path": "/path1",
-            "ContainerPort": 8080,
-            "AppId": "395b60e4-0550-458d-9c54-a265d036****",
-            "Domain": "edas.site",
-            "AppName": "app1"
-        },
-        "SlbType": "internet",
-        "Name": "sae-test"
+  "RequestId" : "91F93257-7A4A-4BD3-9A7E-2F6EAE6D****",
+  "Message" : "success",
+  "TraceId" : "0a981dd515966966104121683d****",
+  "Data" : {
+    "SlbId" : "lb-uf62****6d13tq2u5",
+    "NamespaceId" : "cn-beijing:sae-test",
+    "Description" : "ingress-sae-test",
+    "ListenerPort" : 443,
+    "SlbType" : "internet",
+    "CertId" : "13623****809_16cad216b32_845_-419427029",
+    "Name" : "sae-test",
+    "DefaultRule" : {
+      "ContainerPort" : 8080,
+      "AppName" : "app1",
+      "AppId" : "395b60e4-0550-458d-9c54-a265d036****"
     },
-    "Code": 200,
-    "Success": true
+    "Rules" : [ {
+      "AppName" : "app1",
+      "ContainerPort" : 8080,
+      "Domain" : "edas.site",
+      "AppId" : "395b60e4-0550-458d-9c54-a265d036****",
+      "Path" : "/path1"
+    } ],
+    "Id" : 87
+  },
+  "ErrorCode" : "success",
+  "Code" : "200",
+  "Success" : true
 }
 ```
 
