@@ -11,13 +11,13 @@
 
 ## 为什么托管到SAE
 
-原依赖Eureka、Consul、ZooKeeper等组件实现服务注册与发现的Spring Cloud应用，如果需要部署至SAE，仅需将原服务注册与发现中心和配置中心替换为Alibaba Nacos Discovery，无需修改任何业务代码。
+原依赖Eureka、Consul、ZooKeeper和Redis等组件实现服务注册与发现的Spring Cloud应用，如果需要部署至SAE，仅需将原服务注册与发现中心和配置中心替换为Alibaba Nacos Discovery，无需修改任何业务代码。
 
-SAE服务注册中心具有Spring Cloud Alibaba Nacos Discovery所有功能，SAE服务注册中心可以完全代替ZooKeeper和Redis等，作为您微服务应用的服务注册中心。
+SAE服务注册中心具有Spring Cloud Alibaba Nacos Discovery所有功能，SAE服务注册中心可以完全代替Eureka、Consul、ZooKeeper和Redis等，作为您微服务应用的服务注册中心。
 
 将Spring Cloud应用托管到SAE，您仅需关注Spring Cloud应用自身的逻辑，无需再关注注册中心和配置中心的搭建和维护，托管后还可以使用SAE提供的弹性伸缩、一键批量启停、应用监控等功能，大幅度降低开发和运维成本。
 
-如果您仍决定使用自建的Nacos作为服务注册中心，请参见[如何搭建Nacos为服务注册中心（不推荐）](/cn.zh-CN/最佳实践/自建 Nacos 服务注册中心/（不推荐）自建Nacos服务注册中心.md)。
+如果您仍决定使用自建的Nacos作为服务注册中心，请参见[如何搭建Nacos为服务注册中心（不推荐）](/cn.zh-CN/最佳实践/自建Nacos服务注册中心/自建Nacos服务注册中心.md)。
 
 ## 步骤一：获取Demo
 
@@ -26,7 +26,7 @@ eureka-service-provider和eureka-service-consumer是SAE提供的微服务Demo应
 -   Provider应用：[eureka-service-provider](https://aliware-images.oss-cn-hangzhou.aliyuncs.com/SAE/Demo/eureka-service-provider.zip)
 -   Consumer应用：[eureka-service-consumer](https://aliware-images.oss-cn-hangzhou.aliyuncs.com/SAE/Demo/eureka-service-consumer.zip)
 
-## 步骤二：修改应用的服务注册与发现配置
+## 步骤二：修改Provider应用的服务注册与发现配置
 
 将云原生的Provider应用托管到SAE中，需要在应用程序中修改pom依赖，并指定Nacos Server的IP地址。
 
@@ -83,7 +83,7 @@ eureka-service-provider和eureka-service-consumer是SAE提供的微服务Demo应
     spring.cloud.nacos.discovery.server-addr=127.0.0.1:8848                            
     ```
 
-    其中`127.0.0.1`为Nacos Server的IP地址。如果Nacos Server部署在其他机器上，则需要修改为对应的IP地址。如果有其它需求，可以参见[配置项参考](#section_07h_l2l_rvu)在`application.properties`文件中增加所需配置。
+    其中`127.0.0.1`为Nacos Server的IP地址。如果Nacos Server部署在其他机器上，则需要修改为对应的IP地址。如果有其它需求，请参见[配置项参考](#section_07h_l2l_rvu)在`application.properties`文件中增加所需配置。
 
 3.  查询应用服务。
 
@@ -96,9 +96,14 @@ eureka-service-provider和eureka-service-consumer是SAE提供的微服务Demo应
         如果**服务列表**中显示**service-provider**，且在详情中可以查询该服务的详情，那么表示服务注册成功。
 
 
-## 步骤三：修改应用的服务注册与发现配置
+## 步骤三：修改Consumer应用的服务注册与发现配置
 
 将云原生的Consumer应用托管到SAE中，需要在应用程序中修改pom依赖，并指定Nacos Server的IP地址。
+
+**说明：** 以下情况下需要指定Nacos Server的IP地址：
+
+-   本地测试时，本地测试通过后再部署到SAE中。
+-   SAE的服务注册中心为自建的Nacos。
 
 1.  添加pom依赖。
 
@@ -148,7 +153,7 @@ eureka-service-provider和eureka-service-consumer是SAE提供的微服务Demo应
     spring.cloud.nacos.discovery.server-addr=127.0.0.1:8848                            
     ```
 
-    其中`127.0.0.1`为Nacos Server的IP地址。如果Nacos Server部署在其他机器上，则需要修改为对应的IP地址。如果有其它需求，可以参见[配置项参考](#section_07h_l2l_rvu)在`application.properties`文件中增加所需配置。
+    其中`127.0.0.1`为Nacos Server的IP地址。如果Nacos Server部署在其他机器上，则需要修改为对应的IP地址。如果有其它需求，请参见[配置项参考](#section_07h_l2l_rvu)在`application.properties`文件中增加所需配置。
 
 3.  查询应用服务。
 
@@ -170,7 +175,7 @@ eureka-service-provider和eureka-service-consumer是SAE提供的微服务Demo应
 
 示例：以Windows系统为例，当显示以下结果时，表示Provider与Consumer业务调用成功。
 
-![结果验证](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/zh-CN/1463698951/p70441.png)
+![结果验证](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/1463698951/p70441.png)
 
 ## 步骤五：将应用部署到SAE
 
@@ -194,7 +199,7 @@ eureka-service-provider和eureka-service-consumer是SAE提供的微服务Demo应
      </build>                        
     ```
 
-2.  将编译好的Provider和Consumer应用包部署至SAE，具体操作请参见[部署微服务应用到SAE](https://help.aliyun.com/document_detail/97761.html)。
+2.  将编译好的Provider和Consumer应用包部署至SAE。具体操作，请参见[部署微服务应用到SAE](/cn.zh-CN/应用部署/控制台部署/在SAE控制台使用JAR文件部署微服务应用.md)。
 
     **说明：**
 
@@ -207,7 +212,7 @@ eureka-service-provider和eureka-service-consumer是SAE提供的微服务Demo应
 
     -   使用自建Nacos时请确保SAE的网络与自建Nacos的网络互通。
     -   使用自建Nacos为服务注册中心，在部署应用时建议使用镜像方式或者JAR包方式，并配置启动参数`-Dnacos.use.endpoint.parsing.rule=false`和`-Dnacos.use.cloud.namespace.parsing=false`。
-        -   如采用镜像方式，请将`-Dnacos.use.endpoint.parsing.rule=false`和`-Dnacos.use.cloud.namespace.parsing=false`配置在镜像文件中。Docker镜像制作方法参见[制作应用容器Docker镜像](/cn.zh-CN/应用部署/制作应用容器Docker镜像.md)。
+        -   如采用镜像方式，请将`-Dnacos.use.endpoint.parsing.rule=false`和`-Dnacos.use.cloud.namespace.parsing=false`配置在镜像文件中。关于Docker镜像制作方法，请参见[制作应用容器Docker镜像](/cn.zh-CN/应用部署/制作应用容器Docker镜像.md)。
         -   如采用JAR包方式，请在控制台**启动命令设置**区域的**options设置**文本框输入`-Dnacos.use.endpoint.parsing.rule=false -Dnacos.use.cloud.namespace.parsing=false`。
 
 ## 步骤六：结果验证
@@ -236,27 +241,27 @@ eureka-service-provider和eureka-service-consumer是SAE提供的微服务Demo应
 |接入点|spring.cloud.nacos.discovery.enpoint|UTF-8|地域的某个服务的入口域名，通过此域名可以动态地获取服务端地址，此配置在部署到SAE时无需填写。|
 |是否集成Ribbon|ribbon.nacos.enabled|true|一般不需要修改。|
 
-更多关于Spring Cloud Alibaba Nacos Discovery的信息请参见开源版本的[Spring Cloud Alibaba Nacos Discovery](https://github.com/spring-cloud-incubator/spring-cloud-alibaba/wiki/Nacos-discovery)文档。
+更多关于Spring Cloud Alibaba Nacos Discovery的信息，请参见开源版本的[Spring Cloud Alibaba Nacos Discovery](https://github.com/spring-cloud-incubator/spring-cloud-alibaba/wiki/Nacos-discovery)文档。
 
 ## 更多信息
 
--   您在SAE部署完应用后，可以对应用进行更新、扩缩容、启停、删除应用等生命周期管理操作，具体操作方式请参见[管理应用生命周期](/cn.zh-CN/应用管理/管理应用生命周期.md)。
--   您在SAE部署完应用后，可以对应用进行自动弹性伸缩、SLB绑定和批量启停等提升应用性能的操作，具体操作方式请参见以下文档：
+-   您在SAE部署完应用后，可以对应用进行更新、扩缩容、启停、删除应用等生命周期管理操作。具体操作，请参见[管理应用生命周期](/cn.zh-CN/应用管理/应用生命周期/管理应用生命周期.md)。
+-   您在SAE部署完应用后，可以对应用进行自动弹性伸缩、SLB绑定和批量启停等提升应用性能的操作。具体操作，请参见以下文档：
     -   [绑定SLB](/cn.zh-CN/应用管理/绑定SLB/为应用绑定SLB.md)
-    -   [配置弹性伸缩策略](/cn.zh-CN/应用管理/配置弹性伸缩策略.md)
-    -   [一键启停应用](/cn.zh-CN/应用管理/一键启停应用.md)
-    -   [配置管理](/cn.zh-CN/应用管理/配置管理/配置管理概述.md)
-    -   [变更实例规格](/cn.zh-CN/应用管理/变更实例规格.md)
--   您在SAE部署完应用后，还可以对应用进行日志管理、监控管理、应用事件查看和变更记录查看等聚焦应用运行状态的操作，具体操作方式请参见以下文档：
-    -   [日志管理](/cn.zh-CN/日志管理/查看实时日志.md)
-    -   [监控管理](/cn.zh-CN/监控管理/基础监控.md)
-    -   [应用事件查看](/cn.zh-CN/应用管理/查看应用事件.md)
-    -   [变更记录查看](/cn.zh-CN/应用管理/查看变更记录.md)
-    -   [使用Webshell诊断应用](/cn.zh-CN/应用管理/使用 Webshell 诊断应用.md)
+    -   [配置弹性伸缩策略](/cn.zh-CN/应用管理/应用实例/配置弹性伸缩策略.md)
+    -   [一键启停应用](/cn.zh-CN/应用管理/应用生命周期/一键启停应用.md)
+    -   [配置管理](/cn.zh-CN/应用管理/ACM配置管理/配置管理概述.md)
+    -   [变更实例规格](/cn.zh-CN/应用管理/应用实例/变更实例规格.md)
+-   您在SAE部署完应用后，还可以对应用进行日志管理、监控管理、应用事件查看和变更记录查看等聚焦应用运行状态的操作。具体操作，请参见以下文档：
+    -   [日志管理](/cn.zh-CN/应用管理/日志管理/查看实时日志.md)
+    -   [监控管理](/cn.zh-CN/监控与报警/监控/基础监控.md)
+    -   [应用事件查看](/cn.zh-CN/应用管理/应用变更记录/查看应用事件.md)
+    -   [变更记录查看](/cn.zh-CN/应用管理/应用变更记录/查看变更记录.md)
+    -   [使用Webshell诊断应用](/cn.zh-CN/应用管理/使用Webshell诊断应用.md)
 
 ## 问题反馈
 
-如果您在使用SAE过程中有任何疑问，欢迎您扫描下面的二维码加入钉钉群进行反馈。
+如果您在使用SAE过程中有任何疑问，欢迎您扫描下面的二维码或搜索钉钉群号23198618，加入钉钉群与我们交流。
 
-![SAE钉钉群2](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/zh-CN/9515823061/p72048.png)
+![SAE钉钉群2](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/1176199061/p72048.png)
 
